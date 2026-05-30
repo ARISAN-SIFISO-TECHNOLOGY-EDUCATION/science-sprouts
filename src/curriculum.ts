@@ -169,7 +169,7 @@ export const ACTIVITIES: LearningActivity[] = [
   {
     id: 'mm.slg.a.engage',
     objectiveId: 'mm.solids_liquids_gases',
-    band: 'A',
+    band: 'A5',
     fiveEStage: 'engage',
     kind: 'sensory_play',
     generatorKey: 'caregiverPrompt',
@@ -221,21 +221,21 @@ export const ACTIVITIES: LearningActivity[] = [
 
   // ── ll.parts_of_plant  ·  Band A + B ─────────────────────────────────────
 
-  { id: 'll.pop.a.engage',  objectiveId: 'll.parts_of_plant', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30,  caregiverPrompt: 'Point to the roots, stem, leaves, and flower on a real plant!' },
+  { id: 'll.pop.a.engage',  objectiveId: 'll.parts_of_plant', band: 'A5', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30,  caregiverPrompt: 'Point to the roots, stem, leaves, and flower on a real plant!' },
   { id: 'll.pop.b.explore', objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'explore',  kind: 'game',         generatorKey: 'tapToReveal',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'll.pop.b.explain', objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'll.pop.b.evaluate',objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
 
   // ── ll.food_chains  ·  Band A + B ────────────────────────────────────────
 
-  { id: 'll.fc.a.engage',   objectiveId: 'll.food_chains', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
+  { id: 'll.fc.a.engage',   objectiveId: 'll.food_chains', band: 'A5', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
   { id: 'll.fc.b.explore',  objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'explore',  kind: 'game',         generatorKey: 'chainSequence',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'll.fc.b.explain',  objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'll.fc.b.evaluate', objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
 
   // ── ec.light_shadows  ·  Band A + B ──────────────────────────────────────
 
-  { id: 'ec.ls.a.engage',   objectiveId: 'ec.light_shadows', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
+  { id: 'ec.ls.a.engage',   objectiveId: 'ec.light_shadows', band: 'A5', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
   { id: 'ec.ls.b.explore',  objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'explore',  kind: 'simulation',   generatorKey: 'shadowSim',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'ec.ls.b.explain',  objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
   { id: 'ec.ls.b.evaluate', objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
@@ -245,7 +245,7 @@ export const ACTIVITIES: LearningActivity[] = [
   {
     id: 'll.non_living.a.engage',
     objectiveId: 'll.non_living',
-    band: 'A',
+    band: 'A5',
     fiveEStage: 'engage',
     kind: 'sensory_play',
     generatorKey: 'caregiverPrompt',
@@ -334,10 +334,28 @@ export function getActivitiesInOrder(objectiveId: string): LearningActivity[] {
 // ── Band metadata ─────────────────────────────────────────────────────────────
 
 export const BAND_META = {
-  A: {
+  A3: {
+    label: 'Tiny Explorers',
+    ageRange: 'Age 3',
+    description: 'Sensory play with a grown-up',
+    color: 'bg-rose-400',
+    shadow: 'shadow-[0_6px_0_#FB7185]',
+    textColor: 'text-rose-600',
+    bgLight: 'bg-rose-50',
+  },
+  A4: {
+    label: 'Young Discoverers',
+    ageRange: 'Age 4',
+    description: 'Simple hands-on exploration',
+    color: 'bg-orange-400',
+    shadow: 'shadow-[0_6px_0_#FB923C]',
+    textColor: 'text-orange-600',
+    bgLight: 'bg-orange-50',
+  },
+  A5: {
     label: 'Little Explorers',
-    ageRange: 'Ages 3–5',
-    description: 'Short activities done with a grown-up',
+    ageRange: 'Age 5',
+    description: 'Structured discovery activities',
     color: 'bg-sky-400',
     shadow: 'shadow-[0_6px_0_#0EA5E9]',
     textColor: 'text-sky-600',

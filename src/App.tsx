@@ -80,7 +80,7 @@ type ActivityDef = {
  */
 const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> = {
   'mm.float_sink': {
-    A: [
+    A5: [
       { id: 'fs.a.engage',       label: 'Try with water!', fiveE: '① EXPLORE',     voiceHint: 'A caregiver-led sensory activity' },
     ],
     B: [
@@ -94,7 +94,7 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
 
   'll.parts_of_plant': {
-    A: [{ id: 'll.pop.a.engage',   label: 'Find a plant!',    fiveE: '① EXPLORE', voiceHint: 'Caregiver-led: name each part on a real plant' }],
+    A5: [{ id: 'll.pop.a.engage',   label: 'Find a plant!',    fiveE: '① EXPLORE', voiceHint: 'Caregiver-led: name each part on a real plant' }],
     B: [
       { id: 'll.pop.b.explore',  label: 'Discover parts',   fiveE: '① EXPLORE', voiceHint: 'Tap each part to find out what it does' },
       { id: 'll.pop.b.explain',  label: 'What each does',   fiveE: '② EXPLAIN', voiceHint: 'Roots, leaves, flowers — their jobs' },
@@ -103,7 +103,7 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
 
   'll.food_chains': {
-    A: [{ id: 'll.fc.a.engage',   label: 'Who eats who?',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led food chain story' }],
+    A5: [{ id: 'll.fc.a.engage',   label: 'Who eats who?',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led food chain story' }],
     B: [
       { id: 'll.fc.b.explore',  label: 'Build the chain',  fiveE: '① EXPLORE', voiceHint: 'Arrange the chain in order — who eats who?' },
       { id: 'll.fc.b.explain',  label: 'How chains work',  fiveE: '② EXPLAIN', voiceHint: 'Producers, herbivores, carnivores' },
@@ -112,7 +112,7 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
 
   'ec.light_shadows': {
-    A: [{ id: 'ec.ls.a.engage',   label: 'Make shadows!',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led outdoor shadow play' }],
+    A5: [{ id: 'ec.ls.a.engage',   label: 'Make shadows!',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led outdoor shadow play' }],
     B: [
       { id: 'ec.ls.b.explore',  label: 'Watch shadows',    fiveE: '① EXPLORE', voiceHint: 'See how shadow changes with torch position' },
       { id: 'ec.ls.b.explain',  label: 'Why shadows form', fiveE: '② EXPLAIN', voiceHint: 'Light travels straight — objects block it' },
@@ -121,7 +121,7 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
 
   'mm.solids_liquids_gases': {
-    A: [
+    A5: [
       { id: 'mm.slg.a.engage',   label: 'Hard or Liquid?',  fiveE: '① EXPLORE', voiceHint: 'A caregiver-led hands-on hunt' },
     ],
     B: [
@@ -132,7 +132,7 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
 
   'll.non_living': {
-    A: [
+    A5: [
       { id: 'll.non_living.a.engage', label: 'Alive or Not?', fiveE: '① EXPLORE', voiceHint: 'A caregiver-led outdoor explore' },
     ],
     B: [
@@ -185,6 +185,83 @@ const STRAND_ICON: Record<string, React.ReactNode> = {
   matter_and_materials: <FlaskConical size={20} />,
   energy_and_change:    <Zap size={20} />,
   earth_and_beyond:     <Globe size={20} />,
+};
+
+// ── Band UI lookup — replaces all ternary chains ──────────────────────────────
+// One place to update colours when a new band is added.
+
+const BAND_UI: Record<Band, {
+  emoji: string;
+  bannerBg: string;       // topic-list band banner background + border
+  iconBg: string;         // avatar circle inside banner
+  labelText: string;      // band name colour
+  subtitleText: string;   // age range + description colour
+  pillBg: string;         // "Select Age Group" pill
+  nextBorder: string;     // activity card border when it's the NEXT step
+  nextAccent: string;     // activity card icon bg + GO badge when NEXT
+  doneBg: string;         // full class string for a DONE activity card
+  goBadge: string;        // GO → badge bg
+}> = {
+  A3: {
+    emoji: '👶',
+    bannerBg:    'bg-rose-50 border-rose-200',
+    iconBg:      'bg-rose-200',
+    labelText:   'text-rose-700',
+    subtitleText:'text-rose-500',
+    pillBg:      'bg-rose-100 border-rose-300 text-rose-700',
+    nextBorder:  'border-rose-300',
+    nextAccent:  'bg-rose-400 shadow-[0_4px_0_#FB7185]',
+    doneBg:      'bg-rose-50 border-rose-200 text-rose-700',
+    goBadge:     'bg-rose-400',
+  },
+  A4: {
+    emoji: '🌼',
+    bannerBg:    'bg-orange-50 border-orange-200',
+    iconBg:      'bg-orange-200',
+    labelText:   'text-orange-700',
+    subtitleText:'text-orange-500',
+    pillBg:      'bg-orange-100 border-orange-300 text-orange-700',
+    nextBorder:  'border-orange-300',
+    nextAccent:  'bg-orange-400 shadow-[0_4px_0_#FB923C]',
+    doneBg:      'bg-orange-50 border-orange-200 text-orange-700',
+    goBadge:     'bg-orange-400',
+  },
+  A5: {
+    emoji: '🌟',
+    bannerBg:    'bg-sky-50 border-sky-200',
+    iconBg:      'bg-sky-200',
+    labelText:   'text-sky-700',
+    subtitleText:'text-sky-500',
+    pillBg:      'bg-sky-100 border-sky-300 text-sky-700',
+    nextBorder:  'border-sky-300',
+    nextAccent:  'bg-sky-400 shadow-[0_4px_0_#0EA5E9]',
+    doneBg:      'bg-sky-50 border-sky-200 text-sky-700',
+    goBadge:     'bg-sky-400',
+  },
+  B: {
+    emoji: '🧒',
+    bannerBg:    'bg-green-50 border-green-200',
+    iconBg:      'bg-green-200',
+    labelText:   'text-green-700',
+    subtitleText:'text-green-500',
+    pillBg:      'bg-green-100 border-green-300 text-green-700',
+    nextBorder:  'border-green-300',
+    nextAccent:  'bg-green-500 shadow-[0_4px_0_#16A34A]',
+    doneBg:      'bg-green-50 border-green-200 text-green-700',
+    goBadge:     'bg-green-500',
+  },
+  C: {
+    emoji: '👦',
+    bannerBg:    'bg-indigo-50 border-indigo-200',
+    iconBg:      'bg-indigo-200',
+    labelText:   'text-indigo-700',
+    subtitleText:'text-indigo-500',
+    pillBg:      'bg-indigo-100 border-indigo-300 text-indigo-700',
+    nextBorder:  'border-indigo-300',
+    nextAccent:  'bg-indigo-500 shadow-[0_4px_0_#4338CA]',
+    doneBg:      'bg-indigo-50 border-indigo-200 text-indigo-700',
+    goBadge:     'bg-indigo-500',
+  },
 };
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -306,19 +383,12 @@ export default function App() {
     const completed = mastery?.completedActivityIds ?? [];
     const bandActs  = ALL_BAND_ACTIVITIES[selectedObjective]?.[band] ?? [];
 
-    // Band accent colours
-    const nextBg     = band === 'A' ? 'bg-sky-400 shadow-[0_4px_0_#0EA5E9]'
-                     : band === 'C' ? 'bg-indigo-500 shadow-[0_4px_0_#4338CA]'
-                     :                'bg-green-500 shadow-[0_4px_0_#16A34A]';
-    const nextBorder = band === 'A' ? 'border-sky-300'
-                     : band === 'C' ? 'border-indigo-300'
-                     :                'border-green-300';
-    const doneBg     = band === 'A' ? 'bg-sky-50  border-sky-200   text-sky-700'
-                     : band === 'C' ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
-                     :                'bg-green-50 border-green-200 text-green-700';
-    const goBadge    = band === 'A' ? 'bg-sky-400'
-                     : band === 'C' ? 'bg-indigo-500'
-                     :                'bg-green-500';
+    // Band accent colours — from lookup table
+    const ui         = BAND_UI[band];
+    const nextBg     = ui.nextAccent;
+    const nextBorder = ui.nextBorder;
+    const doneBg     = ui.doneBg;
+    const goBadge    = ui.goBadge;
 
     return (
       <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
@@ -456,6 +526,8 @@ export default function App() {
 
   // ── Topic list view (home) ──────────────────────────────────────────────────
 
+  const homeUi = BAND_UI[band];
+
   return (
     <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
       <AnimatePresence mode="wait">
@@ -501,55 +573,25 @@ export default function App() {
           {/* ── Band banner ─────────────────────────────────────────────── */}
           <button
             onClick={() => setScreen('bandSelect')}
-            className={cn(
-              'w-full flex items-center gap-4 p-4 rounded-2xl mb-5 text-left',
-              'border-2 transition-all hover:brightness-95',
-              band === 'A' ? 'bg-sky-50   border-sky-200'
-            : band === 'B' ? 'bg-green-50  border-green-200'
-            :                'bg-indigo-50 border-indigo-200'
-            )}
+            className={cn('w-full flex items-center gap-4 p-4 rounded-2xl mb-5 text-left border-2 transition-all hover:brightness-95', homeUi.bannerBg)}
             aria-label="Change age band"
           >
-            <div className={cn(
-              'w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0',
-              band === 'A' ? 'bg-sky-200'
-            : band === 'B' ? 'bg-green-200'
-            :                'bg-indigo-200'
-            )}>
-              {band === 'A' ? '👶' : band === 'B' ? '🧒' : '👦'}
+            <div className={cn('w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0', homeUi.iconBg)}>
+              {homeUi.emoji}
             </div>
 
             <div className="flex-1 min-w-0">
-              <p className={cn(
-                'font-display font-black text-lg leading-tight',
-                band === 'A' ? 'text-sky-700'
-              : band === 'B' ? 'text-green-700'
-              :                'text-indigo-700'
-              )}>
+              <p className={cn('font-display font-black text-lg leading-tight', homeUi.labelText)}>
                 {bandMeta.label}
               </p>
-              <p className={cn(
-                'text-sm font-bold',
-                band === 'A' ? 'text-sky-500'
-              : band === 'B' ? 'text-green-500'
-              :                'text-indigo-500'
-              )}>
+              <p className={cn('text-sm font-bold', homeUi.subtitleText)}>
                 {bandMeta.ageRange} · {bandMeta.description}
               </p>
             </div>
 
-            <div className={cn(
-              'flex-shrink-0 px-3 py-2 rounded-xl border-2 text-center',
-              band === 'A' ? 'bg-sky-100   border-sky-300   text-sky-700'
-            : band === 'B' ? 'bg-green-100 border-green-300 text-green-700'
-            :                'bg-indigo-100 border-indigo-300 text-indigo-700'
-            )}>
-              <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">
-                Select
-              </p>
-              <p className="text-[10px] font-black uppercase tracking-widest leading-none">
-                Age Group
-              </p>
+            <div className={cn('flex-shrink-0 px-3 py-2 rounded-xl border-2 text-center', homeUi.pillBg)}>
+              <p className="text-[10px] font-black uppercase tracking-widest leading-none mb-0.5">Select</p>
+              <p className="text-[10px] font-black uppercase tracking-widest leading-none">Age</p>
             </div>
           </button>
 
@@ -562,6 +604,21 @@ export default function App() {
           </p>
 
           <div className="space-y-3 flex-1">
+            {availableObjectives.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <span className="text-5xl mb-4">🌱</span>
+                <p className="font-display font-black text-gray-500 text-lg">Coming soon!</p>
+                <p className="text-sm text-gray-400 mt-2 max-w-xs">
+                  We are growing brand-new activities for {bandMeta.ageRange}. Check back soon!
+                </p>
+                <button
+                  onClick={() => setScreen('bandSelect')}
+                  className="mt-6 px-6 py-3 bg-green-500 shadow-[0_4px_0_#16A34A] text-white font-display font-black rounded-2xl text-sm btn-press"
+                >
+                  Choose a different age
+                </button>
+              </div>
+            )}
             {availableObjectives.map(obj => {
               const mastery    = profile.masteryByObjective[obj.id];
               const completed  = mastery?.completedActivityIds ?? [];

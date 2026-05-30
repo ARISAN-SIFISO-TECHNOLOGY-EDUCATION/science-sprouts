@@ -11,7 +11,12 @@ export type Strand =
   | 'earth_and_beyond';
 
 /** Developmental band — maps to age range and SA curriculum phase. */
-export type Band = 'A' | 'B' | 'C'; // A:3-5 | B:6-9 | C:10-12
+export type Band =
+  | 'A3'   // Age 3   — ECD sensory play, caregiver-led only
+  | 'A4'   // Age 4   — ECD simple exploration, caregiver-led
+  | 'A5'   // Age 5   — Pre-Grade R structured discovery
+  | 'B'    // Ages 6–9  — Foundation + Intermediate Phase
+  | 'C';   // Ages 10–12 — Senior Phase primary
 
 /** The 5E instructional model stages. */
 export type FiveE = 'engage' | 'explore' | 'explain' | 'elaborate' | 'evaluate';
