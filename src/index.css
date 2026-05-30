@@ -1,0 +1,65 @@
+/* Google Fonts must come first (before @import "tailwindcss") */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-brand-sky:    #38BDF8;   /* Band A: playful sky blue */
+  --color-brand-green:  #22C55E;   /* Band B: nature green */
+  --color-brand-indigo: #6366F1;   /* Band C: inquiry indigo */
+  --color-brand-cream:  #FAFAF7;   /* background */
+  --color-brand-orange: #FB923C;   /* accent / correct */
+  --color-brand-teal:   #14B8A6;   /* secondary accent */
+  --color-text-dark:    #1C2333;
+
+  /* Custom font families accessible as font-display / font-body */
+  --font-display: 'Nunito', sans-serif;
+  --font-body:    'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-brand-cream);
+  color: var(--color-text-dark);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ── Custom utilities (Tailwind v4 syntax) ───────────────────────────────── */
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility btn-press {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  &:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+}
+
+/* Voice bubble — shared chrome for narration prompts */
+@utility voice-bubble {
+  background-color: white;
+  border-radius: 1.5rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 2px solid #e0f2fe;
+  color: var(--color-brand-sky);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.375;
+}
+
+/* Dashed section divider */
+@utility dashed-divider {
+  border-bottom: 2px dashed #E5E7EB;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; }
