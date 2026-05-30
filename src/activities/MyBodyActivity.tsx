@@ -62,13 +62,16 @@ export default function MyBodyActivity({ onComplete, onExit }: Props) {
   }, []);
 
   function tapPart(part: BodyPart) {
-    speak(part.voice);
+    const isLast = tapped.size + 1 >= BODY_PARTS.length;
+
+    // For the last tap, wait until the voice finishes before advancing.
+    // Using onEnd instead of a fixed setTimeout prevents the CaregiverCard
+    // from mounting mid-sentence and cancelling the speech.
+    speak(part.voice, 0.85, isLast ? () => setPhase('card') : undefined);
+
     setGlowing(part.id);
     setTapped(prev => new Set([...prev, part.id]));
     setTimeout(() => setGlowing(null), 900);
-    if (tapped.size + 1 >= BODY_PARTS.length) {
-      setTimeout(() => setPhase('card'), 1200);
-    }
   }
 
   return (
@@ -154,7 +157,12 @@ export default function MyBodyActivity({ onComplete, onExit }: Props) {
 function CaregiverCard({ onComplete, onExit }: { onComplete: () => void; onExit: () => void }) {
   const remaining = useCountdown(90, onComplete);
   const pct = (remaining / 90) * 100;
-  useEffect(() => { speak(CARD_VOICE); }, []);
+  // Small delay so the AnimatePresence enter transition finishes
+  // before starting the card voice — prevents any overlap.
+  useEffect(() => {
+    const t = setTimeout(() => speak(CARD_VOICE), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   const PROMPTS = [
     { emoji: '👃', text: 'Touch your NOSE' },

@@ -87,12 +87,11 @@ export default function WeatherActivity({ onComplete, onExit }: Props) {
 
   function goTo(newIdx: number) {
     const w = WEATHER[newIdx];
+    const isNewAndLast = !visited.has(w.id) && visited.size + 1 >= WEATHER.length;
     setIdx(newIdx);
     setVisited(prev => new Set([...prev, w.id]));
-    speak(w.voice);
-    if (visited.size + 1 >= WEATHER.length && !visited.has(w.id)) {
-      setTimeout(() => setPhase('card'), 1800);
-    }
+    // For the last-ever weather visit, wait until voice finishes then show card.
+    speak(w.voice, 0.85, isNewAndLast ? () => setPhase('card') : undefined);
   }
 
   function prev() { goTo((idx - 1 + WEATHER.length) % WEATHER.length); }
@@ -242,7 +241,10 @@ export default function WeatherActivity({ onComplete, onExit }: Props) {
 function CaregiverCard({ onComplete, onExit }: { onComplete: () => void; onExit: () => void }) {
   const remaining = useCountdown(90, onComplete);
   const pct = (remaining / 90) * 100;
-  useEffect(() => { speak(CARD_VOICE); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => speak(CARD_VOICE), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <motion.div key="card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}

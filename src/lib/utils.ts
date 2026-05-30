@@ -98,12 +98,20 @@ export async function playNarration(
  * Convenience wrapper: speak English text only via Web Speech (no file).
  * Used for dynamic/generated text that will never have a pre-recorded file.
  * NEVER called with isiZulu text.
+ *
+ * @param onEnd  Optional callback fired when speech finishes naturally.
+ *               Use this to trigger state transitions AFTER the voice
+ *               completes, instead of using a fixed setTimeout.
  */
-export function speak(text: string, rate = 0.85): void {
-  if (!('speechSynthesis' in window)) return;
+export function speak(text: string, rate = 0.85, onEnd?: () => void): void {
+  if (!('speechSynthesis' in window)) {
+    onEnd?.();   // no speech available — advance immediately
+    return;
+  }
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
   utter.rate = rate;
   utter.lang = 'en-ZA';
+  if (onEnd) utter.onend = onEnd;
   window.speechSynthesis.speak(utter);
 }

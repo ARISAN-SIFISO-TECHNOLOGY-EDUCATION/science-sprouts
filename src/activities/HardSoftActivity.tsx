@@ -60,13 +60,11 @@ export default function HardSoftActivity({ onComplete, onExit }: Props) {
 
   function tapItem(item: SortItem) {
     if (item.id in sorted) return;
-    speak(item.voice);
+    const isLast = Object.keys(sorted).length + 1 >= ITEMS.length;
+    speak(item.voice, 0.85, isLast ? () => setPhase('card') : undefined);
     setAnimating(item.id);
     setSorted(prev => ({ ...prev, [item.id]: item.type }));
     setTimeout(() => setAnimating(null), 700);
-    if (Object.keys(sorted).length + 1 >= ITEMS.length) {
-      setTimeout(() => setPhase('card'), 1000);
-    }
   }
 
   const hardItems = ITEMS.filter(i => sorted[i.id] === 'hard');
@@ -189,7 +187,10 @@ export default function HardSoftActivity({ onComplete, onExit }: Props) {
 function CaregiverCard({ onComplete, onExit }: { onComplete: () => void; onExit: () => void }) {
   const remaining = useCountdown(90, onComplete);
   const pct = (remaining / 90) * 100;
-  useEffect(() => { speak(CARD_VOICE); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => speak(CARD_VOICE), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <motion.div key="card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
