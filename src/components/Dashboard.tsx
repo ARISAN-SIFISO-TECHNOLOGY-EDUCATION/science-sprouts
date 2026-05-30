@@ -68,10 +68,35 @@ export default function Dashboard({ profile, onUpdate, onClose }: DashboardProps
 
         {/* Band selector */}
         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
-          Age Band
+          Age Group
         </p>
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          {(['A', 'B', 'C'] as Band[]).map(band => {
+
+        {/* Ages 3–5 row */}
+        <div className="grid grid-cols-3 gap-2 mb-2">
+          {(['A3', 'A4', 'A5'] as Band[]).map(band => {
+            const m = BAND_META[band];
+            const active = profile.selectedBand === band;
+            return (
+              <button
+                key={band}
+                onClick={() => handleBandChange(band)}
+                className={cn(
+                  'p-3 rounded-2xl border-2 text-center transition-all',
+                  active
+                    ? `${m.bgLight} border-current ${m.textColor} shadow-md`
+                    : 'border-gray-100 bg-gray-50 text-gray-500'
+                )}
+              >
+                <p className="font-display font-black text-sm">{m.ageRange}</p>
+                <p className="text-[10px] opacity-70 leading-tight">{m.description}</p>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Ages 6–9 and 10–12 row */}
+        <div className="grid grid-cols-2 gap-2 mb-6">
+          {(['B', 'C'] as Band[]).map(band => {
             const m = BAND_META[band];
             const active = profile.selectedBand === band;
             return (
