@@ -252,6 +252,18 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Age 7 (B7) — Pack v1 (remaining 9 topics) ────────────────────────────
+
+  { id: 'll.animal_homes',  strand: 'life_and_living',      topic: 'Animal Homes',            title: 'Each animal lives in a special home',  capsRef: 'CAPS Gr 2: Life & Living',      band: 'B7', prerequisites: [], anchoringPhenomenon: 'Why does a fish live in water and a bird in a tree?', languages: ['en', 'zu'] },
+  { id: 'll.food_sources',  strand: 'life_and_living',      topic: 'Food from Plants & Animals', title: 'Our food comes from plants and animals', capsRef: 'CAPS Gr 2: Life & Living',   band: 'B7', prerequisites: [], anchoringPhenomenon: 'Does your food come from a plant or an animal?', languages: ['en', 'zu'] },
+  { id: 'll.senses_safety', strand: 'life_and_living',      topic: 'Senses & Safety',         title: 'Keep your senses safe',                capsRef: 'CAPS Gr 2: Life & Living',      band: 'B7', prerequisites: [], anchoringPhenomenon: 'How do we protect our eyes, ears and skin?',      languages: ['en', 'zu'] },
+  { id: 'mm.states_change', strand: 'matter_and_materials', topic: 'Solids, Liquids & Gases', title: 'Heat changes water between states',    capsRef: 'CAPS Gr 2: Matter & Materials', band: 'B7', prerequisites: [], anchoringPhenomenon: 'What happens to ice when it gets hot?',           languages: ['en', 'zu'] },
+  { id: 'mm.mixtures',      strand: 'matter_and_materials', topic: 'Mixtures',                title: 'Some mixtures can be separated again', capsRef: 'CAPS Gr 2: Matter & Materials', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Can we get clean water back from sandy water?',   languages: ['en', 'zu'] },
+  { id: 'ec.energy_sources',strand: 'energy_and_change',    topic: 'Energy from Food & Sun',  title: 'Living things get energy to grow & move', capsRef: 'CAPS Gr 2: Energy & Change', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Where do plants and people get their energy?',     languages: ['en', 'zu'] },
+  { id: 'ec.wind',          strand: 'energy_and_change',    topic: 'Wind Moves Things',       title: 'Wind is a force that moves things',    capsRef: 'CAPS Gr 2: Energy & Change',    band: 'B7', prerequisites: [], anchoringPhenomenon: 'Why does wind move paper but not a brick?',       languages: ['en', 'zu'] },
+  { id: 'eb.water_sources', strand: 'earth_and_beyond',     topic: 'Water Sources',           title: 'Tap water travels from rain to our homes', capsRef: 'CAPS Gr 2: Earth & Beyond', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Where does the water in your tap come from?',     languages: ['en', 'zu'] },
+  { id: 'eb.soil',          strand: 'earth_and_beyond',     topic: 'Soil Types',              title: 'Different soils hold different amounts of water', capsRef: 'CAPS Gr 2: Earth & Beyond', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Which soil holds the most water — sand, loam or clay?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -447,6 +459,18 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'mm.abs.b7.do', objectiveId: 'mm.absorbent', band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'absorbent', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Fair test at home: which cloth dries faster?' },
   { id: 'ec.mag.b7.do', objectiveId: 'ec.magnets',   band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'magnets',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 480, caregiverPrompt: 'Test a fridge magnet on 5 things at home.' },
   { id: 'll.gro.b7.do', objectiveId: 'll.growth',    band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'growth',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 480, caregiverPrompt: 'Measure how tall you are. Check again next month!' },
+
+  // ── Age 7 Pack v1 — remaining 9 activities ──────────────────────────────
+
+  { id: 'll.ah.b7.do',  objectiveId: 'll.animal_homes',  band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'animalHomes',  config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Find where ants or birds live near you.' },
+  { id: 'll.fs.b7.do',  objectiveId: 'll.food_sources',  band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'foodSources',  config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'What did you eat? Plant or animal?' },
+  { id: 'll.ss.b7.do',  objectiveId: 'll.senses_safety', band: 'B7', fiveEStage: 'explore', kind: 'quiz',       generatorKey: 'sensesSafety', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'When do you wear a hat or sunglasses?' },
+  { id: 'mm.sc.b7.do',  objectiveId: 'mm.states_change', band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'statesChange', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Watch an ice cube melt in a cup. Time it!' },
+  { id: 'mm.mix.b7.do', objectiveId: 'mm.mixtures',      band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'mixtures',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Mix soil + water. Let it settle. Pour the water off.' },
+  { id: 'ec.en.b7.do',  objectiveId: 'ec.energy_sources',band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'energySources',config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'What food gave you energy to play today?' },
+  { id: 'ec.wind.b7.do',objectiveId: 'ec.wind',          band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'wind',         config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Make a paper windmill. Test it outside.' },
+  { id: 'eb.wat.b7.do', objectiveId: 'eb.water_sources', band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'waterSources', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Trace water from the tap back to its source.' },
+  { id: 'eb.soil.b7.do',objectiveId: 'eb.soil',          band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'soilTypes',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Collect 3 soils. Drop water on each.' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 

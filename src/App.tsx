@@ -57,6 +57,15 @@ import EarthSpinRecordActivity      from './activities/EarthSpinRecordActivity';
 import AbsorbentMaterialsActivity from './activities/AbsorbentMaterialsActivity';
 import MagnetsActivity            from './activities/MagnetsActivity';
 import GrowthActivity             from './activities/GrowthActivity';
+import AnimalHomesActivity        from './activities/AnimalHomesActivity';
+import FoodSourcesActivity        from './activities/FoodSourcesActivity';
+import SensesSafetyActivity       from './activities/SensesSafetyActivity';
+import StatesChangeActivity       from './activities/StatesChangeActivity';
+import MixturesActivity           from './activities/MixturesActivity';
+import EnergySourcesActivity      from './activities/EnergySourcesActivity';
+import WindActivity               from './activities/WindActivity';
+import WaterSourcesActivity       from './activities/WaterSourcesActivity';
+import SoilTypesActivity          from './activities/SoilTypesActivity';
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 import FiveSensesActivity      from './activities/FiveSensesActivity';
@@ -177,6 +186,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'll.growth': {
     B7: [{ id: 'll.gro.b7.do', label: 'Growth Graph', fiveE: '① MEASURE & PLOT', voiceHint: 'Measure the plant and plot a graph' }],
   },
+  'll.animal_homes': {
+    B7: [{ id: 'll.ah.b7.do', label: 'Animal Homes', fiveE: '① MATCH & REASON', voiceHint: 'Match each animal to its home' }],
+  },
+  'll.food_sources': {
+    B7: [{ id: 'll.fs.b7.do', label: 'Food Sorter', fiveE: '① CLASSIFY', voiceHint: 'Plant food or animal food?' }],
+  },
+  'll.senses_safety': {
+    B7: [{ id: 'll.ss.b7.do', label: 'Stay Safe!', fiveE: '① CHOOSE & REASON', voiceHint: 'Pick the safe choice each time' }],
+  },
+  'mm.states_change': {
+    B7: [{ id: 'mm.sc.b7.do', label: 'Heat Lab', fiveE: '① HEAT & OBSERVE', voiceHint: 'Heat ice into water, then steam' }],
+  },
+  'mm.mixtures': {
+    B7: [{ id: 'mm.mix.b7.do', label: 'Mixture Lab', fiveE: '① INVESTIGATE', voiceHint: 'Can you separate sand from water?' }],
+  },
+  'ec.energy_sources': {
+    B7: [{ id: 'ec.en.b7.do', label: 'Energy Match', fiveE: '① MATCH & REASON', voiceHint: 'Where does each living thing get energy?' }],
+  },
+  'ec.wind': {
+    B7: [{ id: 'ec.wind.b7.do', label: 'Wind Lab', fiveE: '① FAIR TEST', voiceHint: 'Same wind — what moves, paper or brick?' }],
+  },
+  'eb.water_sources': {
+    B7: [{ id: 'eb.wat.b7.do', label: 'Water Journey', fiveE: '① EXPLORE & TRACE', voiceHint: 'Follow water from rain to your tap' }],
+  },
+  'eb.soil': {
+    B7: [{ id: 'eb.soil.b7.do', label: 'Soil Lab', fiveE: '① FAIR TEST', voiceHint: 'Which soil holds the most water?' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -293,6 +329,15 @@ const ACTIVITY_REGISTRY: Record<
   'mm.abs.b7.do':            AbsorbentMaterialsActivity,
   'ec.mag.b7.do':            MagnetsActivity,
   'll.gro.b7.do':            GrowthActivity,
+  'll.ah.b7.do':             AnimalHomesActivity,
+  'll.fs.b7.do':             FoodSourcesActivity,
+  'll.ss.b7.do':             SensesSafetyActivity,
+  'mm.sc.b7.do':             StatesChangeActivity,
+  'mm.mix.b7.do':            MixturesActivity,
+  'ec.en.b7.do':             EnergySourcesActivity,
+  'ec.wind.b7.do':           WindActivity,
+  'eb.wat.b7.do':            WaterSourcesActivity,
+  'eb.soil.b7.do':           SoilTypesActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
