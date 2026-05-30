@@ -50,6 +50,44 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Age 5 (A5) — MVP topics ──────────────────────────────────────────────
+
+  {
+    id: 'll.five_senses',
+    strand: 'life_and_living',
+    topic: '5 Senses',
+    title: 'I use my senses to learn about the world',
+    capsRef: 'CAPS Gr R: Life & Living',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Close your eyes — can you still hear, smell, and touch?',
+    languages: ['en', 'zu'],
+  },
+
+  {
+    id: 'mm.wet_dry',
+    strand: 'matter_and_materials',
+    topic: 'Wet vs Dry',
+    title: 'Water changes how things feel',
+    capsRef: 'CAPS Gr R: Matter & Materials',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'What happens to dry paper when it touches water?',
+    languages: ['en', 'zu'],
+  },
+
+  {
+    id: 'eb.day_night',
+    strand: 'earth_and_beyond',
+    topic: 'Day & Night',
+    title: 'The sky changes from day to night',
+    capsRef: 'CAPS Gr R: Earth & Beyond',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Where does the sun go when it gets dark?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -205,6 +243,12 @@ export const ACTIVITIES: LearningActivity[] = [
       'Heavy-for-its-size things tend to sink.',
     ],
   },
+
+  // ── Age 5 (A5) MVP activities — single 4-phase activity per topic ───────
+
+  { id: 'll.5s.a5.engage',  objectiveId: 'll.five_senses', band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'fiveSenses', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Close your eyes. Can you hear 3 sounds?' },
+  { id: 'mm.wd.a5.engage',  objectiveId: 'mm.wet_dry',     band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'wetDry',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Wash a face cloth. Where does it dry?' },
+  { id: 'eb.dn.a5.engage',  objectiveId: 'eb.day_night',   band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'dayNight',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Tonight, find 3 stars in the sky!' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 

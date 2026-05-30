@@ -39,6 +39,11 @@ import MyBodyActivity   from './activities/MyBodyActivity';
 import HardSoftActivity from './activities/HardSoftActivity';
 import WeatherActivity  from './activities/WeatherActivity';
 
+// Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
+import FiveSensesActivity from './activities/FiveSensesActivity';
+import WetDryActivity     from './activities/WetDryActivity';
+import DayNightActivity   from './activities/DayNightActivity';
+
 // Matter & Materials — Solids, Liquids & Gases
 import SolidsLiquidsGasesBandA    from './activities/SolidsLiquidsGasesBandA';
 import SolidsLiquidsGasesExplore  from './activities/SolidsLiquidsGasesExplore';
@@ -96,6 +101,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     C: [
       { id: 'fs.c.investigate',  label: 'Investigate',     fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
     ],
+  },
+
+  // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
+  'll.five_senses': {
+    A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
+  },
+  'mm.wet_dry': {
+    A5: [{ id: 'mm.wd.a5.engage', label: 'Wet or Dry?', fiveE: '① EXPLORE', voiceHint: 'Predict what water does, then test it!' }],
+  },
+  'eb.day_night': {
+    A5: [{ id: 'eb.dn.a5.engage', label: 'Day & Night', fiveE: '① EXPLORE', voiceHint: 'Move the sun — watch day turn to night' }],
   },
 
   // Ages 3–4 — same activities for both A3 and A4
@@ -178,6 +194,9 @@ const ACTIVITY_REGISTRY: Record<
   'll.mb.a.engage':          MyBodyActivity,
   'mm.hs.a.engage':          HardSoftActivity,
   'eb.wx.a.engage':          WeatherActivity,
+  'll.5s.a5.engage':         FiveSensesActivity,
+  'mm.wd.a5.engage':         WetDryActivity,
+  'eb.dn.a5.engage':         DayNightActivity,
   'll.pop.a.engage':         PartsOfPlantBandA,
   'll.pop.b.explore':        PartsOfPlantExplore,
   'll.pop.b.explain':        PartsOfPlantExplain,
