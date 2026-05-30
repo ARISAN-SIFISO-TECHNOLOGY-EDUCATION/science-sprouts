@@ -126,6 +126,21 @@ export const ACTIVITIES: LearningActivity[] = [
     ],
   },
 
+  // ── mm.solids_liquids_gases  ·  Band A ───────────────────────────────────
+
+  {
+    id: 'mm.slg.a.engage',
+    objectiveId: 'mm.solids_liquids_gases',
+    band: 'A',
+    fiveEStage: 'engage',
+    kind: 'sensory_play',
+    generatorKey: 'caregiverPrompt',
+    config: { phenomenon: 'hard_vs_pours', caregiverLed: true },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 30,
+    caregiverPrompt: 'Pick up a stone — it is hard and keeps its shape (SOLID). Now pour water — it flows (LIQUID).',
+  },
+
   // ── mm.solids_liquids_gases  ·  Band B ───────────────────────────────────
 
   {
@@ -164,6 +179,21 @@ export const ACTIVITIES: LearningActivity[] = [
     assets: { audioByLang: { en: [], zu: [] } },
     estimatedSeconds: 120,
     hints: ['Does it keep its shape?', 'Does it fill its container completely?'],
+  },
+
+  // ── ll.non_living  ·  Band A ──────────────────────────────────────────────
+
+  {
+    id: 'll.non_living.a.engage',
+    objectiveId: 'll.non_living',
+    band: 'A',
+    fiveEStage: 'engage',
+    kind: 'sensory_play',
+    generatorKey: 'caregiverPrompt',
+    config: { phenomenon: 'alive_or_not', caregiverLed: true },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 30,
+    caregiverPrompt: 'The dog moves, eats, and breathes — it is ALIVE! The rock just sits there — it is NOT alive.',
   },
 
   // ── ll.non_living  ·  Band B ──────────────────────────────────────────────
