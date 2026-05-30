@@ -50,6 +50,48 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
+
+  {
+    id: 'll.my_body',
+    strand: 'life_and_living',
+    topic: 'My Body',
+    title: 'I have body parts — and so does everyone else!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A3',
+    prerequisites: [],
+    anchoringPhenomenon: 'Can you touch your nose? Can you touch mummy\'s nose?',
+    languages: ['en', 'zu'],
+  },
+
+  // ── Ages 3–4 (A3/A4) — Matter & Materials ────────────────────────────────
+
+  {
+    id: 'mm.hard_soft',
+    strand: 'matter_and_materials',
+    topic: 'Hard vs Soft',
+    title: 'Some things are hard and some things are soft!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A3',
+    prerequisites: [],
+    anchoringPhenomenon: 'Is a spoon hard or soft? What about a pillow?',
+    languages: ['en', 'zu'],
+  },
+
+  // ── Ages 3–4 (A3/A4) — Earth & Beyond ───────────────────────────────────
+
+  {
+    id: 'eb.weather',
+    strand: 'earth_and_beyond',
+    topic: 'Weather',
+    title: 'The sky changes — sunny, cloudy, rainy!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A3',
+    prerequisites: [],
+    anchoringPhenomenon: 'Look outside — is it sunny or rainy today?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Life & Living ─────────────────────────────────────────────────────────
 
   {
@@ -163,6 +205,12 @@ export const ACTIVITIES: LearningActivity[] = [
       'Heavy-for-its-size things tend to sink.',
     ],
   },
+
+  // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
+
+  { id: 'll.mb.a.engage',  objectiveId: 'll.my_body',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'tapBodyParts', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Touch your nose! Touch mummy\'s nose!' },
+  { id: 'mm.hs.a.engage',  objectiveId: 'mm.hard_soft', band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'sortTwoBoxes', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Find 1 hard thing and 1 soft thing in your room!' },
+  { id: 'eb.wx.a.engage',  objectiveId: 'eb.weather',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'weatherExplore', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Look outside — is it sunny, cloudy, or rainy?' },
 
   // ── mm.solids_liquids_gases  ·  Band A ───────────────────────────────────
 

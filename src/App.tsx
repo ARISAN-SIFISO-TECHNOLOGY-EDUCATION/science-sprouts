@@ -34,6 +34,11 @@ import FloatSinkEvaluate from './activities/FloatSinkEvaluate';
 import FloatSinkBandA    from './activities/FloatSinkBandA';
 import FloatSinkBandC    from './activities/FloatSinkBandC';
 
+// Ages 3–4 topics (A3 + A4 share same components)
+import MyBodyActivity   from './activities/MyBodyActivity';
+import HardSoftActivity from './activities/HardSoftActivity';
+import WeatherActivity  from './activities/WeatherActivity';
+
 // Matter & Materials — Solids, Liquids & Gases
 import SolidsLiquidsGasesBandA    from './activities/SolidsLiquidsGasesBandA';
 import SolidsLiquidsGasesExplore  from './activities/SolidsLiquidsGasesExplore';
@@ -91,6 +96,20 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     C: [
       { id: 'fs.c.investigate',  label: 'Investigate',     fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
     ],
+  },
+
+  // Ages 3–4 — same activities for both A3 and A4
+  'll.my_body': {
+    A3: [{ id: 'll.mb.a.engage', label: 'My Body!',   fiveE: '① EXPLORE', voiceHint: 'Tap 6 body parts — head, eyes, mouth, hands, tummy, feet' }],
+    A4: [{ id: 'll.mb.a.engage', label: 'My Body!',   fiveE: '① EXPLORE', voiceHint: 'Tap 6 body parts — head, eyes, mouth, hands, tummy, feet' }],
+  },
+  'mm.hard_soft': {
+    A3: [{ id: 'mm.hs.a.engage', label: 'Hard or Soft?', fiveE: '① EXPLORE', voiceHint: 'Sort 4 things into hard and soft boxes' }],
+    A4: [{ id: 'mm.hs.a.engage', label: 'Hard or Soft?', fiveE: '① EXPLORE', voiceHint: 'Sort 4 things into hard and soft boxes' }],
+  },
+  'eb.weather': {
+    A3: [{ id: 'eb.wx.a.engage', label: 'Weather!',    fiveE: '① EXPLORE', voiceHint: 'Explore sunny, cloudy, and rainy weather' }],
+    A4: [{ id: 'eb.wx.a.engage', label: 'Weather!',    fiveE: '① EXPLORE', voiceHint: 'Explore sunny, cloudy, and rainy weather' }],
   },
 
   'll.parts_of_plant': {
@@ -156,6 +175,9 @@ const ACTIVITY_REGISTRY: Record<
   'fs.b.explain':       FloatSinkExplain,
   'fs.b.evaluate':      FloatSinkEvaluate,
   'fs.c.investigate':   FloatSinkBandC,
+  'll.mb.a.engage':          MyBodyActivity,
+  'mm.hs.a.engage':          HardSoftActivity,
+  'eb.wx.a.engage':          WeatherActivity,
   'll.pop.a.engage':         PartsOfPlantBandA,
   'll.pop.b.explore':        PartsOfPlantExplore,
   'll.pop.b.explain':        PartsOfPlantExplain,
