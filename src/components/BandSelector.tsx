@@ -52,6 +52,22 @@ const OLDER_BANDS: {
     buttonShadow: 'shadow-[0_6px_0_#65A30D]',
   },
   {
+    band: 'B7',
+    emoji: '🧪',
+    bullets: [
+      'Runs fair tests — change just one thing',
+      'Reads short sentences (audio optional)',
+      'Fills bar charts with real numbers',
+      'Earns Fair Tester & Data Recorder badges',
+    ],
+    accentBg:     'bg-emerald-50',
+    accentBorder: 'border-emerald-200',
+    accentText:   'text-emerald-700',
+    accentIcon:   'bg-emerald-100',
+    buttonBg:     'bg-emerald-500',
+    buttonShadow: 'shadow-[0_6px_0_#059669]',
+  },
+  {
     band: 'B',
     emoji: '🧒',
     bullets: [

@@ -216,6 +216,42 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.weather_seasons',  strand: 'earth_and_beyond',     topic: 'Weather & Seasons',title: 'We can watch and record the weather',     capsRef: 'CAPS Gr 1: Earth & Beyond',     band: 'B6', prerequisites: [], anchoringPhenomenon: 'What is the weather each day this week?',         languages: ['en', 'zu'] },
   { id: 'eb.day_night_spin',   strand: 'earth_and_beyond',     topic: 'Day & Night',      title: 'The Earth spins to give day and night',   capsRef: 'CAPS Gr 1: Earth & Beyond',     band: 'B6', prerequisites: [], anchoringPhenomenon: 'Why does it get dark at night?',                  languages: ['en', 'zu'] },
 
+  // ── Age 7 (B7) — Foundation Phase Gr 2 MVP ───────────────────────────────
+
+  {
+    id: 'mm.absorbent',
+    strand: 'matter_and_materials',
+    topic: 'Absorbent Materials',
+    title: 'A fair test: which cloth holds the most water?',
+    capsRef: 'CAPS Gr 2: Matter & Materials',
+    band: 'B7',
+    prerequisites: [],
+    anchoringPhenomenon: 'Same size cloths, same water — which soaks up the most?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'ec.magnets',
+    strand: 'energy_and_change',
+    topic: 'Magnets Attract',
+    title: 'Test what a magnet sticks to',
+    capsRef: 'CAPS Gr 2: Energy & Change',
+    band: 'B7',
+    prerequisites: [],
+    anchoringPhenomenon: 'Does a magnet stick to metal, wood, or plastic?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'll.growth',
+    strand: 'life_and_living',
+    topic: 'Growth',
+    title: 'Measure how living things grow over time',
+    capsRef: 'CAPS Gr 2: Life & Living',
+    band: 'B7',
+    prerequisites: [],
+    anchoringPhenomenon: 'How much taller is the plant after one week?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -405,6 +441,12 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'ec.mv.b6.do',  objectiveId: 'ec.movement',         band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'movement',        config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Push a light toy, then a heavy one.' },
   { id: 'eb.ws.b6.do',  objectiveId: 'eb.weather_seasons',  band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'weatherChart',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Watch the sky for 3 mornings. Draw it.' },
   { id: 'eb.dns.b6.do', objectiveId: 'eb.day_night_spin',   band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'earthSpin',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Spin near a lamp — day and night!' },
+
+  // ── Age 7 (B7) MVP activities — predict → fair test → chart → explain ───
+
+  { id: 'mm.abs.b7.do', objectiveId: 'mm.absorbent', band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'absorbent', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Fair test at home: which cloth dries faster?' },
+  { id: 'ec.mag.b7.do', objectiveId: 'ec.magnets',   band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'magnets',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 480, caregiverPrompt: 'Test a fridge magnet on 5 things at home.' },
+  { id: 'll.gro.b7.do', objectiveId: 'll.growth',    band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'growth',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 480, caregiverPrompt: 'Measure how tall you are. Check again next month!' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
@@ -618,9 +660,18 @@ export const BAND_META = {
     textColor: 'text-lime-700',
     bgLight: 'bg-lime-50',
   },
+  B7: {
+    label: 'Junior Investigators',
+    ageRange: 'Age 7',
+    description: 'Fair tests & bar charts',
+    color: 'bg-emerald-500',
+    shadow: 'shadow-[0_6px_0_#059669]',
+    textColor: 'text-emerald-700',
+    bgLight: 'bg-emerald-50',
+  },
   B: {
     label: 'Science Adventurers',
-    ageRange: 'Ages 7–9',
+    ageRange: 'Ages 8–9',
     description: 'Explore, experiment, discover!',
     color: 'bg-green-500',
     shadow: 'shadow-[0_6px_0_#16A34A]',

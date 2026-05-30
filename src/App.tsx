@@ -53,6 +53,11 @@ import MovementRecordActivity       from './activities/MovementRecordActivity';
 import WeatherChartRecordActivity   from './activities/WeatherChartRecordActivity';
 import EarthSpinRecordActivity      from './activities/EarthSpinRecordActivity';
 
+// Age 7 topics (B7 — Predict → Fair Test → Bar Chart → Badge)
+import AbsorbentMaterialsActivity from './activities/AbsorbentMaterialsActivity';
+import MagnetsActivity            from './activities/MagnetsActivity';
+import GrowthActivity             from './activities/GrowthActivity';
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 import FiveSensesActivity      from './activities/FiveSensesActivity';
 import WetDryActivity          from './activities/WetDryActivity';
@@ -160,6 +165,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
   'eb.day_night_spin': {
     B6: [{ id: 'eb.dns.b6.do', label: 'Spinning Earth', fiveE: '① EXPLORE & REASON', voiceHint: 'Spin the Earth — why is it night?' }],
+  },
+
+  // Age 7 MVP — Predict → Fair Test → Bar Chart → Badge (Foundation Phase Gr 2)
+  'mm.absorbent': {
+    B7: [{ id: 'mm.abs.b7.do', label: 'Absorb Lab', fiveE: '① FAIR TEST', voiceHint: 'Which cloth holds the most water?' }],
+  },
+  'ec.magnets': {
+    B7: [{ id: 'ec.mag.b7.do', label: 'Magnet Lab', fiveE: '① TEST & RECORD', voiceHint: 'What does a magnet stick to?' }],
+  },
+  'll.growth': {
+    B7: [{ id: 'll.gro.b7.do', label: 'Growth Graph', fiveE: '① MEASURE & PLOT', voiceHint: 'Measure the plant and plot a graph' }],
   },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
@@ -274,6 +290,9 @@ const ACTIVITY_REGISTRY: Record<
   'll.mb.a.engage':          MyBodyActivity,
   'mm.hs.a.engage':          HardSoftActivity,
   'eb.wx.a.engage':          WeatherActivity,
+  'mm.abs.b7.do':            AbsorbentMaterialsActivity,
+  'ec.mag.b7.do':            MagnetsActivity,
+  'll.gro.b7.do':            GrowthActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
@@ -389,6 +408,18 @@ const BAND_UI: Record<Band, {
     nextAccent:  'bg-lime-500 shadow-[0_4px_0_#65A30D]',
     doneBg:      'bg-lime-50 border-lime-200 text-lime-700',
     goBadge:     'bg-lime-500',
+  },
+  B7: {
+    emoji: '🧪',
+    bannerBg:    'bg-emerald-50 border-emerald-200',
+    iconBg:      'bg-emerald-200',
+    labelText:   'text-emerald-700',
+    subtitleText:'text-emerald-600',
+    pillBg:      'bg-emerald-100 border-emerald-300 text-emerald-700',
+    nextBorder:  'border-emerald-300',
+    nextAccent:  'bg-emerald-500 shadow-[0_4px_0_#059669]',
+    doneBg:      'bg-emerald-50 border-emerald-200 text-emerald-700',
+    goBadge:     'bg-emerald-500',
   },
   B: {
     emoji: '🧒',
