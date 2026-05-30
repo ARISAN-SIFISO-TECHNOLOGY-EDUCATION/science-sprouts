@@ -41,7 +41,18 @@ export const DEFAULT_PROFILE: LearnerProfile = {
 export async function getProfile(): Promise<LearnerProfile> {
   const db = await initDB();
   const stored = await db.get(PROFILE_STORE, 'current');
-  return stored ?? { ...DEFAULT_PROFILE, createdAt: new Date().toISOString() };
+  if (!stored) return { ...DEFAULT_PROFILE, createdAt: new Date().toISOString() };
+
+  // ── Migration: Band 'A' (legacy) → 'A5' ──────────────────────────────────
+  // Before the A3/A4/A5 split, the single Band A was stored as 'A'.
+  // Any profile written before that change needs upgrading.
+  const VALID_BANDS: string[] = ['A3', 'A4', 'A5', 'B', 'C'];
+  if (!VALID_BANDS.includes(stored.selectedBand)) {
+    stored.selectedBand = 'A5';
+    await db.put(PROFILE_STORE, stored, 'current');
+  }
+
+  return stored as LearnerProfile;
 }
 
 export async function saveProfile(profile: LearnerProfile): Promise<void> {
