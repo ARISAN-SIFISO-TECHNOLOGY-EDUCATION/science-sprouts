@@ -94,9 +94,9 @@ export default function Dashboard({ profile, onUpdate, onClose }: DashboardProps
           })}
         </div>
 
-        {/* Ages 6–9 and 10–12 row */}
-        <div className="grid grid-cols-2 gap-2 mb-6">
-          {(['B', 'C'] as Band[]).map(band => {
+        {/* Age 6, Ages 7–9, Ages 10–12 row */}
+        <div className="grid grid-cols-3 gap-2 mb-6">
+          {(['B6', 'B', 'C'] as Band[]).map(band => {
             const m = BAND_META[band];
             const active = profile.selectedBand === band;
             return (

@@ -86,6 +86,32 @@ export async function awardStar(objectiveId: string, activityId: string): Promis
   return profile;
 }
 
+/**
+ * Award a named badge to an objective (Age 6+ "I did it" reward).
+ * Idempotent — a badge is only added once. Returns the updated profile.
+ */
+export async function awardBadge(objectiveId: string, badge: string): Promise<LearnerProfile> {
+  const profile = await getProfile();
+
+  const mastery = profile.masteryByObjective[objectiveId] ?? {
+    objectiveId,
+    state: 'exploring',
+    stars: 0,
+    badges: [],
+    completedActivityIds: [],
+    updatedAt: '',
+  };
+
+  if (!mastery.badges.includes(badge)) {
+    mastery.badges.push(badge);
+    mastery.updatedAt = new Date().toISOString();
+    profile.masteryByObjective[objectiveId] = mastery;
+    await saveProfile(profile);
+  }
+
+  return profile;
+}
+
 export async function updateBand(band: Band): Promise<LearnerProfile> {
   const profile = await getProfile();
   profile.selectedBand = band;

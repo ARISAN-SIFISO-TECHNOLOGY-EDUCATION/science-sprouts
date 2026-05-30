@@ -36,6 +36,22 @@ const OLDER_BANDS: {
   buttonShadow: string;
 }[] = [
   {
+    band: 'B6',
+    emoji: '🔬',
+    bullets: [
+      'First real science: predict, test & record',
+      'Reads simple 3-word sentences (audio helps)',
+      'Fill in their first data tables',
+      'Earn Observer & Scientist badges',
+    ],
+    accentBg:     'bg-lime-50',
+    accentBorder: 'border-lime-200',
+    accentText:   'text-lime-700',
+    accentIcon:   'bg-lime-100',
+    buttonBg:     'bg-lime-500',
+    buttonShadow: 'shadow-[0_6px_0_#65A30D]',
+  },
+  {
     band: 'B',
     emoji: '🧒',
     bullets: [

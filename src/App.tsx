@@ -39,6 +39,11 @@ import MyBodyActivity   from './activities/MyBodyActivity';
 import HardSoftActivity from './activities/HardSoftActivity';
 import WeatherActivity  from './activities/WeatherActivity';
 
+// Age 6 topics (B6 — Predict → Test & Record → Badge)
+import FloatSinkRecordActivity  from './activities/FloatSinkRecordActivity';
+import PlantPartsRecordActivity from './activities/PlantPartsRecordActivity';
+import ShadowsRecordActivity    from './activities/ShadowsRecordActivity';
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 import FiveSensesActivity      from './activities/FiveSensesActivity';
 import WetDryActivity          from './activities/WetDryActivity';
@@ -108,6 +113,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     C: [
       { id: 'fs.c.investigate',  label: 'Investigate',     fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
     ],
+  },
+
+  // Age 6 MVP — Predict → Test & Record → Badge (Foundation Phase Gr 1)
+  'mm.float_sink_record': {
+    B6: [{ id: 'mm.fsr.b6.do', label: 'Float & Sink Lab', fiveE: '① TEST & RECORD', voiceHint: 'Predict, test 5 things, fill the data table' }],
+  },
+  'll.plant_parts_record': {
+    B6: [{ id: 'll.ppr.b6.do', label: 'Plant Parts', fiveE: '① LABEL & LEARN', voiceHint: 'Tap each part — learn its job' }],
+  },
+  'ec.shadows_record': {
+    B6: [{ id: 'ec.shr.b6.do', label: 'Shadow Lab', fiveE: '① EXPLORE & REASON', voiceHint: 'Move the torch — why does the shadow change?' }],
   },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
@@ -222,6 +238,9 @@ const ACTIVITY_REGISTRY: Record<
   'll.mb.a.engage':          MyBodyActivity,
   'mm.hs.a.engage':          HardSoftActivity,
   'eb.wx.a.engage':          WeatherActivity,
+  'mm.fsr.b6.do':            FloatSinkRecordActivity,
+  'll.ppr.b6.do':            PlantPartsRecordActivity,
+  'ec.shr.b6.do':            ShadowsRecordActivity,
   'll.5s.a5.engage':         FiveSensesActivity,
   'mm.wd.a5.engage':         WetDryActivity,
   'eb.dn.a5.engage':         DayNightActivity,
@@ -313,6 +332,18 @@ const BAND_UI: Record<Band, {
     nextAccent:  'bg-sky-400 shadow-[0_4px_0_#0EA5E9]',
     doneBg:      'bg-sky-50 border-sky-200 text-sky-700',
     goBadge:     'bg-sky-400',
+  },
+  B6: {
+    emoji: '🔬',
+    bannerBg:    'bg-lime-50 border-lime-200',
+    iconBg:      'bg-lime-200',
+    labelText:   'text-lime-700',
+    subtitleText:'text-lime-600',
+    pillBg:      'bg-lime-100 border-lime-300 text-lime-700',
+    nextBorder:  'border-lime-300',
+    nextAccent:  'bg-lime-500 shadow-[0_4px_0_#65A30D]',
+    doneBg:      'bg-lime-50 border-lime-200 text-lime-700',
+    goBadge:     'bg-lime-500',
   },
   B: {
     emoji: '🧒',

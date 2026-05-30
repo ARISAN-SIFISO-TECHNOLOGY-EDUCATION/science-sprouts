@@ -168,6 +168,42 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Age 6 (B6) — Foundation Phase Gr 1 MVP ───────────────────────────────
+
+  {
+    id: 'mm.float_sink_record',
+    strand: 'matter_and_materials',
+    topic: 'Floating & Sinking',
+    title: 'Predict, test and record what floats',
+    capsRef: 'CAPS Gr 1: Matter & Materials',
+    band: 'B6',
+    prerequisites: [],
+    anchoringPhenomenon: 'Will a big heavy rock float — or sink?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'll.plant_parts_record',
+    strand: 'life_and_living',
+    topic: 'Plant Parts',
+    title: 'Each plant part has a job',
+    capsRef: 'CAPS Gr 1: Life & Living',
+    band: 'B6',
+    prerequisites: [],
+    anchoringPhenomenon: 'What job does each part of a plant do?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'ec.shadows_record',
+    strand: 'energy_and_change',
+    topic: 'Shadows',
+    title: 'Light makes shadows change size',
+    capsRef: 'CAPS Gr 1: Energy & Change',
+    band: 'B6',
+    prerequisites: [],
+    anchoringPhenomenon: 'What makes a shadow bigger or smaller?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -339,6 +375,12 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'ec.lts.a5.engage', objectiveId: 'ec.light_sources',    band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'lightSources',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'At night, which things give light?' },
   { id: 'ec.pp.a5.engage',  objectiveId: 'ec.push_pull',        band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'pushPull',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Push your toy car. Now pull it back!' },
   { id: 'eb.we.a5.engage',  objectiveId: 'eb.water_everywhere', band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'waterEverywhere',config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Find 3 places water comes from at home!' },
+
+  // ── Age 6 (B6) MVP activities — single multi-phase activity per topic ───
+
+  { id: 'mm.fsr.b6.do', objectiveId: 'mm.float_sink_record', band: 'B6', fiveEStage: 'explore', kind: 'game',  generatorKey: 'floatSinkRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 360, caregiverPrompt: 'Bath science! Test 3 things — float or sink?' },
+  { id: 'll.ppr.b6.do', objectiveId: 'll.plant_parts_record', band: 'B6', fiveEStage: 'explore', kind: 'game', generatorKey: 'plantPartsRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Draw your plant. Label 2 parts!' },
+  { id: 'ec.shr.b6.do', objectiveId: 'ec.shadows_record', band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'shadowsRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Make a big shadow and a small shadow with a torch!' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
@@ -543,9 +585,18 @@ export const BAND_META = {
     textColor: 'text-sky-600',
     bgLight: 'bg-sky-50',
   },
+  B6: {
+    label: 'Foundation Scientists',
+    ageRange: 'Age 6',
+    description: 'Predict, test & record like a scientist',
+    color: 'bg-lime-500',
+    shadow: 'shadow-[0_6px_0_#65A30D]',
+    textColor: 'text-lime-700',
+    bgLight: 'bg-lime-50',
+  },
   B: {
     label: 'Science Adventurers',
-    ageRange: 'Ages 6–9',
+    ageRange: 'Ages 7–9',
     description: 'Explore, experiment, discover!',
     color: 'bg-green-500',
     shadow: 'shadow-[0_6px_0_#16A34A]',
