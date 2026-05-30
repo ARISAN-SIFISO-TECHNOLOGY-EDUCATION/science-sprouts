@@ -10,7 +10,7 @@
 //   activity    (full-screen activity component)
 // ──────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Settings, Star, FlaskConical, Leaf, Zap, Globe, Lock, ChevronLeft,
@@ -25,89 +25,93 @@ import Garden       from './components/Garden';
 import Dashboard    from './components/Dashboard';
 import BandSelector from './components/BandSelector';
 
-// ── Activity imports ──────────────────────────────────────────────────────────
+// ── Activity imports (lazy) ─────────────────────────────────────────────────
+// Each activity is code-split with React.lazy so the phone only downloads an
+// activity's code the moment the child opens it. Keeps the home screen tiny
+// and the cold start fast on low-end Android. The shell components (Garden,
+// Dashboard, BandSelector) stay eager above — they are always needed.
 
 // Matter & Materials — Floating & Sinking
-import FloatSinkExplore  from './activities/FloatSinkExplore';
-import FloatSinkExplain  from './activities/FloatSinkExplain';
-import FloatSinkEvaluate from './activities/FloatSinkEvaluate';
-import FloatSinkBandA    from './activities/FloatSinkBandA';
-import FloatSinkBandC    from './activities/FloatSinkBandC';
+const FloatSinkExplore  = lazy(() => import('./activities/FloatSinkExplore'));
+const FloatSinkExplain  = lazy(() => import('./activities/FloatSinkExplain'));
+const FloatSinkEvaluate = lazy(() => import('./activities/FloatSinkEvaluate'));
+const FloatSinkBandA    = lazy(() => import('./activities/FloatSinkBandA'));
+const FloatSinkBandC    = lazy(() => import('./activities/FloatSinkBandC'));
 
 // Ages 3–4 topics (A3 + A4 share same components)
-import MyBodyActivity   from './activities/MyBodyActivity';
-import HardSoftActivity from './activities/HardSoftActivity';
-import WeatherActivity  from './activities/WeatherActivity';
+const MyBodyActivity   = lazy(() => import('./activities/MyBodyActivity'));
+const HardSoftActivity = lazy(() => import('./activities/HardSoftActivity'));
+const WeatherActivity  = lazy(() => import('./activities/WeatherActivity'));
 
 // Age 6 topics (B6 — Predict → Test & Record → Badge)
-import FloatSinkRecordActivity      from './activities/FloatSinkRecordActivity';
-import PlantPartsRecordActivity     from './activities/PlantPartsRecordActivity';
-import ShadowsRecordActivity        from './activities/ShadowsRecordActivity';
-import BodyPartsRecordActivity      from './activities/BodyPartsRecordActivity';
-import AnimalNeedsRecordActivity    from './activities/AnimalNeedsRecordActivity';
-import LifeCycleRecordActivity      from './activities/LifeCycleRecordActivity';
-import MaterialsRecordActivity      from './activities/MaterialsRecordActivity';
-import StrongMaterialsRecordActivity from './activities/StrongMaterialsRecordActivity';
-import LightSortRecordActivity      from './activities/LightSortRecordActivity';
-import MovementRecordActivity       from './activities/MovementRecordActivity';
-import WeatherChartRecordActivity   from './activities/WeatherChartRecordActivity';
-import EarthSpinRecordActivity      from './activities/EarthSpinRecordActivity';
+const FloatSinkRecordActivity       = lazy(() => import('./activities/FloatSinkRecordActivity'));
+const PlantPartsRecordActivity      = lazy(() => import('./activities/PlantPartsRecordActivity'));
+const ShadowsRecordActivity         = lazy(() => import('./activities/ShadowsRecordActivity'));
+const BodyPartsRecordActivity       = lazy(() => import('./activities/BodyPartsRecordActivity'));
+const AnimalNeedsRecordActivity     = lazy(() => import('./activities/AnimalNeedsRecordActivity'));
+const LifeCycleRecordActivity       = lazy(() => import('./activities/LifeCycleRecordActivity'));
+const MaterialsRecordActivity       = lazy(() => import('./activities/MaterialsRecordActivity'));
+const StrongMaterialsRecordActivity = lazy(() => import('./activities/StrongMaterialsRecordActivity'));
+const LightSortRecordActivity       = lazy(() => import('./activities/LightSortRecordActivity'));
+const MovementRecordActivity        = lazy(() => import('./activities/MovementRecordActivity'));
+const WeatherChartRecordActivity    = lazy(() => import('./activities/WeatherChartRecordActivity'));
+const EarthSpinRecordActivity       = lazy(() => import('./activities/EarthSpinRecordActivity'));
 
 // Age 7 topics (B7 — Predict → Fair Test → Bar Chart → Badge)
-import AbsorbentMaterialsActivity from './activities/AbsorbentMaterialsActivity';
-import MagnetsActivity            from './activities/MagnetsActivity';
-import GrowthActivity             from './activities/GrowthActivity';
-import AnimalHomesActivity        from './activities/AnimalHomesActivity';
-import FoodSourcesActivity        from './activities/FoodSourcesActivity';
-import SensesSafetyActivity       from './activities/SensesSafetyActivity';
-import StatesChangeActivity       from './activities/StatesChangeActivity';
-import MixturesActivity           from './activities/MixturesActivity';
-import EnergySourcesActivity      from './activities/EnergySourcesActivity';
-import WindActivity               from './activities/WindActivity';
-import WaterSourcesActivity       from './activities/WaterSourcesActivity';
-import SoilTypesActivity          from './activities/SoilTypesActivity';
+const AbsorbentMaterialsActivity = lazy(() => import('./activities/AbsorbentMaterialsActivity'));
+const MagnetsActivity            = lazy(() => import('./activities/MagnetsActivity'));
+const GrowthActivity             = lazy(() => import('./activities/GrowthActivity'));
+const AnimalHomesActivity        = lazy(() => import('./activities/AnimalHomesActivity'));
+const FoodSourcesActivity        = lazy(() => import('./activities/FoodSourcesActivity'));
+const SensesSafetyActivity       = lazy(() => import('./activities/SensesSafetyActivity'));
+const StatesChangeActivity       = lazy(() => import('./activities/StatesChangeActivity'));
+const MixturesActivity           = lazy(() => import('./activities/MixturesActivity'));
+const EnergySourcesActivity      = lazy(() => import('./activities/EnergySourcesActivity'));
+const WindActivity               = lazy(() => import('./activities/WindActivity'));
+const WaterSourcesActivity       = lazy(() => import('./activities/WaterSourcesActivity'));
+const SoilTypesActivity          = lazy(() => import('./activities/SoilTypesActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
-import FiveSensesActivity      from './activities/FiveSensesActivity';
-import WetDryActivity          from './activities/WetDryActivity';
-import DayNightActivity        from './activities/DayNightActivity';
-import PlantNeedsActivity      from './activities/PlantNeedsActivity';
-import AnimalGroupsActivity    from './activities/AnimalGroupsActivity';
-import HotColdActivity         from './activities/HotColdActivity';
-import BuildingThingsActivity  from './activities/BuildingThingsActivity';
-import LightSourcesActivity    from './activities/LightSourcesActivity';
-import PushPullActivity        from './activities/PushPullActivity';
-import WaterEverywhereActivity from './activities/WaterEverywhereActivity';
+const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
+const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
+const DayNightActivity        = lazy(() => import('./activities/DayNightActivity'));
+const PlantNeedsActivity      = lazy(() => import('./activities/PlantNeedsActivity'));
+const AnimalGroupsActivity    = lazy(() => import('./activities/AnimalGroupsActivity'));
+const HotColdActivity         = lazy(() => import('./activities/HotColdActivity'));
+const BuildingThingsActivity  = lazy(() => import('./activities/BuildingThingsActivity'));
+const LightSourcesActivity    = lazy(() => import('./activities/LightSourcesActivity'));
+const PushPullActivity        = lazy(() => import('./activities/PushPullActivity'));
+const WaterEverywhereActivity = lazy(() => import('./activities/WaterEverywhereActivity'));
 
 // Matter & Materials — Solids, Liquids & Gases
-import SolidsLiquidsGasesBandA    from './activities/SolidsLiquidsGasesBandA';
-import SolidsLiquidsGasesExplore  from './activities/SolidsLiquidsGasesExplore';
-import SolidsLiquidsGasesExplain  from './activities/SolidsLiquidsGasesExplain';
-import SolidsLiquidsGasesEvaluate from './activities/SolidsLiquidsGasesEvaluate';
+const SolidsLiquidsGasesBandA    = lazy(() => import('./activities/SolidsLiquidsGasesBandA'));
+const SolidsLiquidsGasesExplore  = lazy(() => import('./activities/SolidsLiquidsGasesExplore'));
+const SolidsLiquidsGasesExplain  = lazy(() => import('./activities/SolidsLiquidsGasesExplain'));
+const SolidsLiquidsGasesEvaluate = lazy(() => import('./activities/SolidsLiquidsGasesEvaluate'));
 
 // Life & Living — Parts of a Plant
-import PartsOfPlantBandA    from './activities/PartsOfPlantBandA';
-import PartsOfPlantExplore  from './activities/PartsOfPlantExplore';
-import PartsOfPlantExplain  from './activities/PartsOfPlantExplain';
-import PartsOfPlantEvaluate from './activities/PartsOfPlantEvaluate';
+const PartsOfPlantBandA    = lazy(() => import('./activities/PartsOfPlantBandA'));
+const PartsOfPlantExplore  = lazy(() => import('./activities/PartsOfPlantExplore'));
+const PartsOfPlantExplain  = lazy(() => import('./activities/PartsOfPlantExplain'));
+const PartsOfPlantEvaluate = lazy(() => import('./activities/PartsOfPlantEvaluate'));
 
 // Life & Living — Food Chains
-import FoodChainsBandA    from './activities/FoodChainsBandA';
-import FoodChainsExplore  from './activities/FoodChainsExplore';
-import FoodChainsExplain  from './activities/FoodChainsExplain';
-import FoodChainsEvaluate from './activities/FoodChainsEvaluate';
+const FoodChainsBandA    = lazy(() => import('./activities/FoodChainsBandA'));
+const FoodChainsExplore  = lazy(() => import('./activities/FoodChainsExplore'));
+const FoodChainsExplain  = lazy(() => import('./activities/FoodChainsExplain'));
+const FoodChainsEvaluate = lazy(() => import('./activities/FoodChainsEvaluate'));
 
 // Energy & Change — Light & Shadows
-import LightShadowsBandA    from './activities/LightShadowsBandA';
-import LightShadowsExplore  from './activities/LightShadowsExplore';
-import LightShadowsExplain  from './activities/LightShadowsExplain';
-import LightShadowsEvaluate from './activities/LightShadowsEvaluate';
+const LightShadowsBandA    = lazy(() => import('./activities/LightShadowsBandA'));
+const LightShadowsExplore  = lazy(() => import('./activities/LightShadowsExplore'));
+const LightShadowsExplain  = lazy(() => import('./activities/LightShadowsExplain'));
+const LightShadowsEvaluate = lazy(() => import('./activities/LightShadowsEvaluate'));
 
 // Life & Living — Living vs Non-Living
-import LivingNonLivingBandA    from './activities/LivingNonLivingBandA';
-import LivingNonLivingExplore  from './activities/LivingNonLivingExplore';
-import LivingNonLivingExplain  from './activities/LivingNonLivingExplain';
-import LivingNonLivingEvaluate from './activities/LivingNonLivingEvaluate';
+const LivingNonLivingBandA    = lazy(() => import('./activities/LivingNonLivingBandA'));
+const LivingNonLivingExplore  = lazy(() => import('./activities/LivingNonLivingExplore'));
+const LivingNonLivingExplain  = lazy(() => import('./activities/LivingNonLivingExplain'));
+const LivingNonLivingEvaluate = lazy(() => import('./activities/LivingNonLivingEvaluate'));
 
 // ── Curriculum activity definitions ──────────────────────────────────────────
 
@@ -498,6 +502,24 @@ type Screen = 'bandSelect' | 'home' | 'activity';
 
 const BAND_CHOSEN_KEY = 'bandExplicitlyChosen';
 
+// ── Suspense fallback while a lazy activity loads ──────────────────────────────
+// Shown only for the brief moment a code-split activity is fetched (instant
+// once installed offline). Matches the app's sprout splash so it never jars.
+
+function ActivityLoading() {
+  return (
+    <div className="fixed inset-0 bg-brand-cream z-40 flex items-center justify-center">
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+        transition={{ duration: 1.2, repeat: Infinity }}
+        className="text-5xl"
+      >
+        🌱
+      </motion.div>
+    </div>
+  );
+}
+
 // ── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -582,10 +604,12 @@ export default function App() {
     const Component = ACTIVITY_REGISTRY[activeAct];
     if (Component) {
       return (
-        <Component
-          onComplete={() => handleComplete(activeAct)}
-          onExit={handleExit}
-        />
+        <Suspense fallback={<ActivityLoading />}>
+          <Component
+            onComplete={() => handleComplete(activeAct)}
+            onExit={handleExit}
+          />
+        </Suspense>
       );
     }
   }
