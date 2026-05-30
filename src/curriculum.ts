@@ -88,6 +88,86 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Age 5 (A5) — Pack v1 (remaining 7 topics) ────────────────────────────
+
+  {
+    id: 'll.plant_needs',
+    strand: 'life_and_living',
+    topic: 'Plant Needs',
+    title: 'Plants need sun and water to grow',
+    capsRef: 'CAPS Gr R: Life & Living',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Why does one plant grow big and another stay small?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'll.animal_groups',
+    strand: 'life_and_living',
+    topic: 'Animal Groups',
+    title: 'Animals move in different ways',
+    capsRef: 'CAPS Gr R: Life & Living',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Why do birds fly but fish swim?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'mm.hot_cold',
+    strand: 'matter_and_materials',
+    topic: 'Hot vs Cold',
+    title: 'We can feel hot and cold',
+    capsRef: 'CAPS Gr R: Matter & Materials',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Why does ice feel cold but tea feels hot?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'mm.building_things',
+    strand: 'matter_and_materials',
+    topic: 'Building Things',
+    title: 'Different materials do different jobs',
+    capsRef: 'CAPS Gr R: Matter & Materials',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Why does a paper roof leak but a plastic one keeps you dry?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'ec.light_sources',
+    strand: 'energy_and_change',
+    topic: 'Light Sources',
+    title: 'The sun, lamps and candles give light',
+    capsRef: 'CAPS Gr R: Energy & Change',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'What gives us light when the sun goes down?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'ec.push_pull',
+    strand: 'energy_and_change',
+    topic: 'Push & Pull',
+    title: 'We move things by pushing and pulling',
+    capsRef: 'CAPS Gr R: Energy & Change',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'How do we bring a wagon closer or send a box away?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'eb.water_everywhere',
+    strand: 'earth_and_beyond',
+    topic: 'Water Everywhere',
+    title: 'Water comes from rain, rivers and taps',
+    capsRef: 'CAPS Gr R: Earth & Beyond',
+    band: 'A5',
+    prerequisites: [],
+    anchoringPhenomenon: 'Where does the water from your tap come from?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -249,6 +329,16 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'll.5s.a5.engage',  objectiveId: 'll.five_senses', band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'fiveSenses', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Close your eyes. Can you hear 3 sounds?' },
   { id: 'mm.wd.a5.engage',  objectiveId: 'mm.wet_dry',     band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'wetDry',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Wash a face cloth. Where does it dry?' },
   { id: 'eb.dn.a5.engage',  objectiveId: 'eb.day_night',   band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'dayNight',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Tonight, find 3 stars in the sky!' },
+
+  // ── Age 5 Pack v1 — remaining 7 topics (single 4-phase activity each) ───
+
+  { id: 'll.pn.a5.engage',  objectiveId: 'll.plant_needs',      band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'plantNeeds',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Water one plant at home. Watch it for 3 days!' },
+  { id: 'll.ag.a5.engage',  objectiveId: 'll.animal_groups',    band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'animalGroups',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Move like an animal — hop like a frog!' },
+  { id: 'mm.hc.a5.engage',  objectiveId: 'mm.hot_cold',         band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'hotCold',        config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'With a grown-up, feel cool water vs a warm cup.' },
+  { id: 'mm.bt.a5.engage',  objectiveId: 'mm.building_things',  band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'buildingThings', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Build a small roof. Test it with water drops!' },
+  { id: 'ec.lts.a5.engage', objectiveId: 'ec.light_sources',    band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'lightSources',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'At night, which things give light?' },
+  { id: 'ec.pp.a5.engage',  objectiveId: 'ec.push_pull',        band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'pushPull',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Push your toy car. Now pull it back!' },
+  { id: 'eb.we.a5.engage',  objectiveId: 'eb.water_everywhere', band: 'A5', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'waterEverywhere',config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 240, caregiverPrompt: 'Find 3 places water comes from at home!' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 

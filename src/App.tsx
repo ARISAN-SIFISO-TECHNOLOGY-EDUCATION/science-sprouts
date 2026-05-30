@@ -40,9 +40,16 @@ import HardSoftActivity from './activities/HardSoftActivity';
 import WeatherActivity  from './activities/WeatherActivity';
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
-import FiveSensesActivity from './activities/FiveSensesActivity';
-import WetDryActivity     from './activities/WetDryActivity';
-import DayNightActivity   from './activities/DayNightActivity';
+import FiveSensesActivity      from './activities/FiveSensesActivity';
+import WetDryActivity          from './activities/WetDryActivity';
+import DayNightActivity        from './activities/DayNightActivity';
+import PlantNeedsActivity      from './activities/PlantNeedsActivity';
+import AnimalGroupsActivity    from './activities/AnimalGroupsActivity';
+import HotColdActivity         from './activities/HotColdActivity';
+import BuildingThingsActivity  from './activities/BuildingThingsActivity';
+import LightSourcesActivity    from './activities/LightSourcesActivity';
+import PushPullActivity        from './activities/PushPullActivity';
+import WaterEverywhereActivity from './activities/WaterEverywhereActivity';
 
 // Matter & Materials — Solids, Liquids & Gases
 import SolidsLiquidsGasesBandA    from './activities/SolidsLiquidsGasesBandA';
@@ -112,6 +119,27 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
   'eb.day_night': {
     A5: [{ id: 'eb.dn.a5.engage', label: 'Day & Night', fiveE: '① EXPLORE', voiceHint: 'Move the sun — watch day turn to night' }],
+  },
+  'll.plant_needs': {
+    A5: [{ id: 'll.pn.a5.engage', label: 'Plant Needs', fiveE: '① EXPLORE', voiceHint: 'Give the seed sun and water — watch it grow!' }],
+  },
+  'll.animal_groups': {
+    A5: [{ id: 'll.ag.a5.engage', label: 'Animal Groups', fiveE: '① EXPLORE', voiceHint: 'How do animals move — fly, swim, or walk?' }],
+  },
+  'mm.hot_cold': {
+    A5: [{ id: 'mm.hc.a5.engage', label: 'Hot or Cold?', fiveE: '① EXPLORE', voiceHint: 'Which things are hot? Which are cold?' }],
+  },
+  'mm.building_things': {
+    A5: [{ id: 'mm.bt.a5.engage', label: 'Building Things', fiveE: '① EXPLORE', voiceHint: 'Which roof keeps the rain out?' }],
+  },
+  'ec.light_sources': {
+    A5: [{ id: 'ec.lts.a5.engage', label: 'Light Sources', fiveE: '① EXPLORE', voiceHint: 'Tap lights to brighten the dark room' }],
+  },
+  'ec.push_pull': {
+    A5: [{ id: 'ec.pp.a5.engage', label: 'Push & Pull', fiveE: '① EXPLORE', voiceHint: 'Push things away, pull things closer' }],
+  },
+  'eb.water_everywhere': {
+    A5: [{ id: 'eb.we.a5.engage', label: 'Water Everywhere', fiveE: '① EXPLORE', voiceHint: 'Find water in rain, rivers, and taps' }],
   },
 
   // Ages 3–4 — same activities for both A3 and A4
@@ -197,6 +225,13 @@ const ACTIVITY_REGISTRY: Record<
   'll.5s.a5.engage':         FiveSensesActivity,
   'mm.wd.a5.engage':         WetDryActivity,
   'eb.dn.a5.engage':         DayNightActivity,
+  'll.pn.a5.engage':         PlantNeedsActivity,
+  'll.ag.a5.engage':         AnimalGroupsActivity,
+  'mm.hc.a5.engage':         HotColdActivity,
+  'mm.bt.a5.engage':         BuildingThingsActivity,
+  'ec.lts.a5.engage':        LightSourcesActivity,
+  'ec.pp.a5.engage':         PushPullActivity,
+  'eb.we.a5.engage':         WaterEverywhereActivity,
   'll.pop.a.engage':         PartsOfPlantBandA,
   'll.pop.b.explore':        PartsOfPlantExplore,
   'll.pop.b.explain':        PartsOfPlantExplain,
