@@ -31,3 +31,7 @@ screenshots/
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Android release artefacts
+android/app/release/
+android/app/build/
