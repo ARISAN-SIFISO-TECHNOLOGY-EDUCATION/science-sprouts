@@ -40,6 +40,24 @@ import SolidsLiquidsGasesExplore  from './activities/SolidsLiquidsGasesExplore';
 import SolidsLiquidsGasesExplain  from './activities/SolidsLiquidsGasesExplain';
 import SolidsLiquidsGasesEvaluate from './activities/SolidsLiquidsGasesEvaluate';
 
+// Life & Living — Parts of a Plant
+import PartsOfPlantBandA    from './activities/PartsOfPlantBandA';
+import PartsOfPlantExplore  from './activities/PartsOfPlantExplore';
+import PartsOfPlantExplain  from './activities/PartsOfPlantExplain';
+import PartsOfPlantEvaluate from './activities/PartsOfPlantEvaluate';
+
+// Life & Living — Food Chains
+import FoodChainsBandA    from './activities/FoodChainsBandA';
+import FoodChainsExplore  from './activities/FoodChainsExplore';
+import FoodChainsExplain  from './activities/FoodChainsExplain';
+import FoodChainsEvaluate from './activities/FoodChainsEvaluate';
+
+// Energy & Change — Light & Shadows
+import LightShadowsBandA    from './activities/LightShadowsBandA';
+import LightShadowsExplore  from './activities/LightShadowsExplore';
+import LightShadowsExplain  from './activities/LightShadowsExplain';
+import LightShadowsEvaluate from './activities/LightShadowsEvaluate';
+
 // Life & Living — Living vs Non-Living
 import LivingNonLivingBandA    from './activities/LivingNonLivingBandA';
 import LivingNonLivingExplore  from './activities/LivingNonLivingExplore';
@@ -72,6 +90,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     ],
     C: [
       { id: 'fs.c.investigate',  label: 'Investigate',     fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
+    ],
+  },
+
+  'll.parts_of_plant': {
+    A: [{ id: 'll.pop.a.engage',   label: 'Find a plant!',    fiveE: '① EXPLORE', voiceHint: 'Caregiver-led: name each part on a real plant' }],
+    B: [
+      { id: 'll.pop.b.explore',  label: 'Discover parts',   fiveE: '① EXPLORE', voiceHint: 'Tap each part to find out what it does' },
+      { id: 'll.pop.b.explain',  label: 'What each does',   fiveE: '② EXPLAIN', voiceHint: 'Roots, leaves, flowers — their jobs' },
+      { id: 'll.pop.b.evaluate', label: 'Plant Quiz!',       fiveE: '③ TEST',    voiceHint: 'Which part drinks water? Which makes seeds?' },
+    ],
+  },
+
+  'll.food_chains': {
+    A: [{ id: 'll.fc.a.engage',   label: 'Who eats who?',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led food chain story' }],
+    B: [
+      { id: 'll.fc.b.explore',  label: 'Build the chain',  fiveE: '① EXPLORE', voiceHint: 'Arrange the chain in order — who eats who?' },
+      { id: 'll.fc.b.explain',  label: 'How chains work',  fiveE: '② EXPLAIN', voiceHint: 'Producers, herbivores, carnivores' },
+      { id: 'll.fc.b.evaluate', label: 'Chain Challenge',   fiveE: '③ TEST',    voiceHint: 'What if the grass disappeared?' },
+    ],
+  },
+
+  'ec.light_shadows': {
+    A: [{ id: 'ec.ls.a.engage',   label: 'Make shadows!',   fiveE: '① EXPLORE', voiceHint: 'Caregiver-led outdoor shadow play' }],
+    B: [
+      { id: 'ec.ls.b.explore',  label: 'Watch shadows',    fiveE: '① EXPLORE', voiceHint: 'See how shadow changes with torch position' },
+      { id: 'ec.ls.b.explain',  label: 'Why shadows form', fiveE: '② EXPLAIN', voiceHint: 'Light travels straight — objects block it' },
+      { id: 'ec.ls.b.evaluate', label: 'Shadow Quiz!',      fiveE: '③ TEST',    voiceHint: 'Predict shadow direction and size' },
     ],
   },
 
@@ -111,6 +156,18 @@ const ACTIVITY_REGISTRY: Record<
   'fs.b.explain':       FloatSinkExplain,
   'fs.b.evaluate':      FloatSinkEvaluate,
   'fs.c.investigate':   FloatSinkBandC,
+  'll.pop.a.engage':         PartsOfPlantBandA,
+  'll.pop.b.explore':        PartsOfPlantExplore,
+  'll.pop.b.explain':        PartsOfPlantExplain,
+  'll.pop.b.evaluate':       PartsOfPlantEvaluate,
+  'll.fc.a.engage':          FoodChainsBandA,
+  'll.fc.b.explore':         FoodChainsExplore,
+  'll.fc.b.explain':         FoodChainsExplain,
+  'll.fc.b.evaluate':        FoodChainsEvaluate,
+  'ec.ls.a.engage':          LightShadowsBandA,
+  'ec.ls.b.explore':         LightShadowsExplore,
+  'ec.ls.b.explain':         LightShadowsExplain,
+  'ec.ls.b.evaluate':        LightShadowsEvaluate,
   'mm.slg.a.engage':         SolidsLiquidsGasesBandA,
   'mm.slg.b.explore':        SolidsLiquidsGasesExplore,
   'mm.slg.b.explain':        SolidsLiquidsGasesExplain,

@@ -53,6 +53,44 @@ export const OBJECTIVES: LearningObjective[] = [
   // ── Life & Living ─────────────────────────────────────────────────────────
 
   {
+    id: 'll.parts_of_plant',
+    strand: 'life_and_living',
+    topic: 'Parts of a Plant',
+    title: 'What does each part of a plant do?',
+    capsRef: 'CAPS NS&T Gr 1-2: Life & Living',
+    band: 'B',
+    prerequisites: [],
+    anchoringPhenomenon: 'A plant cut at the stem wilts — but why does the whole plant suffer?',
+    languages: ['en', 'zu'],
+  },
+
+  {
+    id: 'll.food_chains',
+    strand: 'life_and_living',
+    topic: 'Food Chains',
+    title: 'Who eats who — and why does it matter?',
+    capsRef: 'CAPS NS&T Gr 4-5: Life & Living',
+    band: 'B',
+    prerequisites: ['ll.parts_of_plant'],
+    anchoringPhenomenon: 'If all the grass disappeared, would the foxes survive?',
+    languages: ['en', 'zu'],
+  },
+
+  // ── Energy & Change ───────────────────────────────────────────────────────
+
+  {
+    id: 'ec.light_shadows',
+    strand: 'energy_and_change',
+    topic: 'Light & Shadows',
+    title: 'Why do shadows change size and direction?',
+    capsRef: 'CAPS NS&T Gr 3: Energy & Change',
+    band: 'B',
+    prerequisites: [],
+    anchoringPhenomenon: 'Your shadow is long in the morning but almost gone at midday. Why?',
+    languages: ['en', 'zu'],
+  },
+
+  {
     id: 'll.non_living',
     strand: 'life_and_living',
     topic: 'Living vs Non-Living',
@@ -180,6 +218,27 @@ export const ACTIVITIES: LearningActivity[] = [
     estimatedSeconds: 120,
     hints: ['Does it keep its shape?', 'Does it fill its container completely?'],
   },
+
+  // ── ll.parts_of_plant  ·  Band A + B ─────────────────────────────────────
+
+  { id: 'll.pop.a.engage',  objectiveId: 'll.parts_of_plant', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30,  caregiverPrompt: 'Point to the roots, stem, leaves, and flower on a real plant!' },
+  { id: 'll.pop.b.explore', objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'explore',  kind: 'game',         generatorKey: 'tapToReveal',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'll.pop.b.explain', objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'll.pop.b.evaluate',objectiveId: 'll.parts_of_plant', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
+
+  // ── ll.food_chains  ·  Band A + B ────────────────────────────────────────
+
+  { id: 'll.fc.a.engage',   objectiveId: 'll.food_chains', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
+  { id: 'll.fc.b.explore',  objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'explore',  kind: 'game',         generatorKey: 'chainSequence',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'll.fc.b.explain',  objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'll.fc.b.evaluate', objectiveId: 'll.food_chains', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
+
+  // ── ec.light_shadows  ·  Band A + B ──────────────────────────────────────
+
+  { id: 'ec.ls.a.engage',   objectiveId: 'ec.light_shadows', band: 'A', fiveEStage: 'engage',   kind: 'sensory_play', generatorKey: 'caregiverPrompt', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 30  },
+  { id: 'ec.ls.b.explore',  objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'explore',  kind: 'simulation',   generatorKey: 'shadowSim',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'ec.ls.b.explain',  objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'explain',  kind: 'story',        generatorKey: 'narratedDiagram', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90  },
+  { id: 'ec.ls.b.evaluate', objectiveId: 'ec.light_shadows', band: 'B', fiveEStage: 'evaluate', kind: 'quiz',         generatorKey: 'predictThenTest', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 120 },
 
   // ── ll.non_living  ·  Band A ──────────────────────────────────────────────
 
