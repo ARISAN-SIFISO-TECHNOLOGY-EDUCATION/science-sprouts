@@ -1,6 +1,6 @@
 // ──────────────────────────────────────────────────────────────────────────────
 // Science Sprouts — curriculum data
-// Phase 0 spike: Matter & Materials → Floating & Sinking (Band B)
+// Base Camp: 2 topics across 2 CAPS strands (Band B)
 // This file is the single source of truth for all learning objectives and
 // activities. It is the science analogue of constants.ts in Numeracy Sprouts.
 // ──────────────────────────────────────────────────────────────────────────────
@@ -34,6 +34,20 @@ export const OBJECTIVES: LearningObjective[] = [
     prerequisites: ['mm.solids_liquids'],
     anchoringPhenomenon:
       'An orange floats — but peel it, and it sinks. Why?',
+    languages: ['en', 'zu'],
+  },
+
+  // ── Life & Living ─────────────────────────────────────────────────────────
+
+  {
+    id: 'll.non_living',
+    strand: 'life_and_living',
+    topic: 'Living vs Non-Living',
+    title: 'What makes something alive?',
+    capsRef: 'CAPS NS&T Gr 4: Life & Living',
+    band: 'B',
+    prerequisites: [],
+    anchoringPhenomenon: 'A fire grows and eats fuel — is it alive?',
     languages: ['en', 'zu'],
   },
 ];
@@ -96,6 +110,56 @@ export const ACTIVITIES: LearningActivity[] = [
     hints: [
       'Think about whether it has air trapped inside.',
       'Heavy-for-its-size things tend to sink.',
+    ],
+  },
+
+  // ── ll.non_living  ·  Band B ──────────────────────────────────────────────
+
+  {
+    id: 'll.b.explore',
+    objectiveId: 'll.non_living',
+    band: 'B',
+    fiveEStage: 'explore',
+    kind: 'game',
+    generatorKey: 'sortLivingNonLiving',
+    config: {
+      objects: ['tree', 'rock', 'dog', 'car', 'flower', 'chair', 'butterfly', 'book'],
+    },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 90,
+    hints: [
+      'Think: does it grow by itself?',
+      'Does it need food or water to survive?',
+    ],
+  },
+
+  {
+    id: 'll.b.explain',
+    objectiveId: 'll.non_living',
+    band: 'B',
+    fiveEStage: 'explain',
+    kind: 'story',
+    generatorKey: 'narratedDiagram',
+    config: { concept: 'living_characteristics', diagram: 'grow_eat_reproduce' },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 90,
+  },
+
+  {
+    id: 'll.b.evaluate',
+    objectiveId: 'll.non_living',
+    band: 'B',
+    fiveEStage: 'evaluate',
+    kind: 'quiz',
+    generatorKey: 'predictThenTest',
+    config: {
+      objects: ['fire', 'mushroom', 'river', 'robot'],
+    },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 120,
+    hints: [
+      'Can it grow and feed on its own?',
+      'Can it make more of its kind without human help?',
     ],
   },
 ];

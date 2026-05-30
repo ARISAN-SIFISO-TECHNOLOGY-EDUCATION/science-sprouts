@@ -1,78 +1,136 @@
 // ──────────────────────────────────────────────────────────────────────────────
 // Science Sprouts — main app shell
-// Phase 0 spike: Matter & Materials → Floating & Sinking (Band B)
+// Multi-topic architecture: topic list → topic detail → activity
 //
-// Architecture mirrors Numeracy Sprouts:
-//   home → activity → home  (with success overlay inside ActivityWrapper)
+// Screen flow:
+//   bandSelect  (first launch / band change)
+//   home        (two sub-views via selectedObjective state)
+//     └─ topic list     (selectedObjective === null)
+//     └─ topic detail   (selectedObjective set)
+//   activity    (full-screen activity component)
 // ──────────────────────────────────────────────────────────────────────────────
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Settings, Star, Trophy, FlaskConical, Leaf, Zap, Globe, Lock,
+  Settings, Star, FlaskConical, Leaf, Zap, Globe, Lock, ChevronLeft,
 } from 'lucide-react';
 
 import { Band, LearnerProfile } from './types';
 import { getProfile, saveProfile, awardStar } from './lib/db';
-import { OBJECTIVES, ACTIVITIES_BY_OBJECTIVE, BAND_META, STRAND_META } from './curriculum';
+import { OBJECTIVES, BAND_META, STRAND_META } from './curriculum';
 import { cn } from './lib/utils';
 
 import Garden       from './components/Garden';
 import Dashboard    from './components/Dashboard';
 import BandSelector from './components/BandSelector';
 
-// Activities — Band B (6-9)
+// ── Activity imports ──────────────────────────────────────────────────────────
+
+// Matter & Materials — Floating & Sinking
 import FloatSinkExplore  from './activities/FloatSinkExplore';
 import FloatSinkExplain  from './activities/FloatSinkExplain';
 import FloatSinkEvaluate from './activities/FloatSinkEvaluate';
-// Activities — Band A (3-5) and Band C (10-12)
 import FloatSinkBandA    from './activities/FloatSinkBandA';
 import FloatSinkBandC    from './activities/FloatSinkBandC';
 
+// Life & Living — Living vs Non-Living
+import LivingNonLivingExplore  from './activities/LivingNonLivingExplore';
+import LivingNonLivingExplain  from './activities/LivingNonLivingExplain';
+import LivingNonLivingEvaluate from './activities/LivingNonLivingEvaluate';
+
+// ── Curriculum activity definitions ──────────────────────────────────────────
+
+/** Display metadata for one activity card on the topic detail screen. */
+type ActivityDef = {
+  id: string;
+  label: string;
+  fiveE: string;
+  voiceHint: string;
+};
+
+/**
+ * ALL_BAND_ACTIVITIES maps objectiveId → band → activity card definitions.
+ * When adding a new topic, add an entry here AND a component in ACTIVITY_REGISTRY.
+ */
+const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> = {
+  'mm.float_sink': {
+    A: [
+      { id: 'fs.a.engage',       label: 'Try with water!', fiveE: '① EXPLORE',     voiceHint: 'A caregiver-led sensory activity' },
+    ],
+    B: [
+      { id: 'fs.b.explore',      label: 'Explore',         fiveE: '① EXPLORE',     voiceHint: 'Drop objects into water' },
+      { id: 'fs.b.explain',      label: 'Why it floats',   fiveE: '② EXPLAIN',     voiceHint: 'Find out WHY things float' },
+      { id: 'fs.b.evaluate',     label: 'Predict & Test',  fiveE: '③ TEST',        voiceHint: 'Predict — then check!' },
+    ],
+    C: [
+      { id: 'fs.c.investigate',  label: 'Investigate',     fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
+    ],
+  },
+
+  'll.non_living': {
+    B: [
+      { id: 'll.b.explore',   label: 'Sort it out!',    fiveE: '① EXPLORE', voiceHint: 'Sort things into Living and Not Living' },
+      { id: 'll.b.explain',   label: 'What is ALIVE?',  fiveE: '② EXPLAIN', voiceHint: 'Discover what makes something alive' },
+      { id: 'll.b.evaluate',  label: 'Tricky Things!',  fiveE: '③ TEST',    voiceHint: 'Is fire alive? Is a robot?' },
+    ],
+  },
+};
+
+/**
+ * ACTIVITY_REGISTRY maps activity ID → React component.
+ * When adding a new topic, register its components here.
+ */
+const ACTIVITY_REGISTRY: Record<
+  string,
+  React.ComponentType<{ onComplete: () => void; onExit: () => void }>
+> = {
+  'fs.a.engage':        FloatSinkBandA,
+  'fs.b.explore':       FloatSinkExplore,
+  'fs.b.explain':       FloatSinkExplain,
+  'fs.b.evaluate':      FloatSinkEvaluate,
+  'fs.c.investigate':   FloatSinkBandC,
+  'll.b.explore':       LivingNonLivingExplore,
+  'll.b.explain':       LivingNonLivingExplain,
+  'll.b.evaluate':      LivingNonLivingEvaluate,
+};
+
 // ── Strand icon map ───────────────────────────────────────────────────────────
 
-const STRAND_ICON = {
-  life_and_living:      <Leaf size={22} />,
-  matter_and_materials: <FlaskConical size={22} />,
-  energy_and_change:    <Zap size={22} />,
-  earth_and_beyond:     <Globe size={22} />,
+const STRAND_ICON: Record<string, React.ReactNode> = {
+  life_and_living:      <Leaf size={20} />,
+  matter_and_materials: <FlaskConical size={20} />,
+  energy_and_change:    <Zap size={20} />,
+  earth_and_beyond:     <Globe size={20} />,
 };
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 type Screen = 'bandSelect' | 'home' | 'activity';
-// Band A has one activity id, Band B has three, Band C has one
-type ActiveActivity =
-  | 'fs.a.engage'
-  | 'fs.b.explore' | 'fs.b.explain' | 'fs.b.evaluate'
-  | 'fs.c.investigate';
 
-// A profile that has never had its band explicitly chosen by the user
-// (default value from db.ts is 'B'). We track whether the user has actively
-// picked their band so we can show the selector on first launch.
 const BAND_CHOSEN_KEY = 'bandExplicitlyChosen';
 
 // ── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [loading, setLoading]             = useState(true);
-  const [profile, setProfile]             = useState<LearnerProfile | null>(null);
-  const [screen, setScreen]               = useState<Screen>('home');
-  const [activeAct, setActiveAct]         = useState<ActiveActivity | null>(null);
-  const [showDashboard, setShowDashboard] = useState(false);
+  const [loading, setLoading]               = useState(true);
+  const [profile, setProfile]               = useState<LearnerProfile | null>(null);
+  const [screen, setScreen]                 = useState<Screen>('home');
+  const [activeAct, setActiveAct]           = useState<string | null>(null);
+  const [selectedObjective, setSelectedObjective] = useState<string | null>(null);
+  const [showDashboard, setShowDashboard]   = useState(false);
 
   // Load profile from IndexedDB
   useEffect(() => {
     getProfile().then(p => {
       setProfile(p);
-      // Show band selector on first launch (user hasn't explicitly chosen yet)
       const chosen = localStorage.getItem(BAND_CHOSEN_KEY);
       setScreen(chosen ? 'home' : 'bandSelect');
       setLoading(false);
     });
   }, [showDashboard]);
 
-  // ── Band selection ────────────────────────────────────────────────────────
+  // ── Band selection ──────────────────────────────────────────────────────────
 
   async function handleBandSelect(band: Band) {
     if (!profile) return;
@@ -80,25 +138,28 @@ export default function App() {
     await saveProfile(updated);
     setProfile(updated);
     localStorage.setItem(BAND_CHOSEN_KEY, '1');
+    setSelectedObjective(null);  // return to topic list for new band
     setScreen('home');
   }
 
-  // ── Activity completion ───────────────────────────────────────────────────
+  // ── Activity lifecycle ──────────────────────────────────────────────────────
 
   async function handleComplete(activityId: string) {
-    if (!profile) return;
-    const updated = await awardStar('mm.float_sink', activityId);
+    if (!profile || !selectedObjective) return;
+    const updated = await awardStar(selectedObjective, activityId);
     setProfile(updated);
     setScreen('home');
     setActiveAct(null);
+    // Keep selectedObjective so user returns to their topic's activity list
   }
 
   function handleExit() {
     setScreen('home');
     setActiveAct(null);
+    // Keep selectedObjective — return to topic detail
   }
 
-  // ── Loading splash ────────────────────────────────────────────────────────
+  // ── Loading splash ──────────────────────────────────────────────────────────
 
   if (loading || !profile) {
     return (
@@ -114,10 +175,9 @@ export default function App() {
     );
   }
 
-  // ── Band selection screen ─────────────────────────────────────────────────
+  // ── Band selection screen ───────────────────────────────────────────────────
 
   if (screen === 'bandSelect') {
-    // Show back button only if user has already chosen a band (not first launch)
     const alreadyChosen = !!localStorage.getItem(BAND_CHOSEN_KEY);
     return (
       <BandSelector
@@ -128,78 +188,190 @@ export default function App() {
     );
   }
 
-  // ── Activity screens — routed by band + activity id ─────────────────────────
+  // ── Activity screen — registry-driven routing ───────────────────────────────
 
-  // Band A (Ages 3–5): one caregiver-led activity
-  if (screen === 'activity' && activeAct === 'fs.a.engage') {
-    return (
-      <FloatSinkBandA
-        onComplete={() => handleComplete('fs.a.engage')}
-        onExit={handleExit}
-      />
-    );
-  }
-
-  // Band B (Ages 6–9): full 5E trio
-  if (screen === 'activity' && activeAct === 'fs.b.explore') {
-    return (
-      <FloatSinkExplore
-        onComplete={() => handleComplete('fs.b.explore')}
-        onExit={handleExit}
-      />
-    );
-  }
-  if (screen === 'activity' && activeAct === 'fs.b.explain') {
-    return (
-      <FloatSinkExplain
-        onComplete={() => handleComplete('fs.b.explain')}
-        onExit={handleExit}
-      />
-    );
-  }
-  if (screen === 'activity' && activeAct === 'fs.b.evaluate') {
-    return (
-      <FloatSinkEvaluate
-        onComplete={() => handleComplete('fs.b.evaluate')}
-        onExit={handleExit}
-      />
-    );
+  if (screen === 'activity' && activeAct && selectedObjective) {
+    const Component = ACTIVITY_REGISTRY[activeAct];
+    if (Component) {
+      return (
+        <Component
+          onComplete={() => handleComplete(activeAct)}
+          onExit={handleExit}
+        />
+      );
+    }
   }
 
-  // Band C (Ages 10–12): variable-change inquiry investigation
-  if (screen === 'activity' && activeAct === 'fs.c.investigate') {
-    return (
-      <FloatSinkBandC
-        onComplete={() => handleComplete('fs.c.investigate')}
-        onExit={handleExit}
-      />
-    );
-  }
-
-  // ── Home screen ───────────────────────────────────────────────────────────
+  // ── Home screen helpers ─────────────────────────────────────────────────────
 
   const band      = profile.selectedBand;
   const bandMeta  = BAND_META[band];
-  const objective = OBJECTIVES.find(o => o.id === 'mm.float_sink')!;
-  const mastery   = profile.masteryByObjective['mm.float_sink'];
-  const completed = mastery?.completedActivityIds ?? [];
 
-  // Activity sequence varies by band. Each band renders the same phenomenon differently.
-  const BAND_ACTIVITIES: Record<typeof band, { id: ActiveActivity; label: string; fiveE: string; voiceHint: string }[]> = {
-    A: [
-      { id: 'fs.a.engage', label: 'Try with water!', fiveE: '① EXPLORE', voiceHint: 'A caregiver-led sensory activity' },
-    ],
-    B: [
-      { id: 'fs.b.explore',  label: 'Explore',  fiveE: '① EXPLORE',  voiceHint: 'Drop objects into water' },
-      { id: 'fs.b.explain',  label: 'Explain',  fiveE: '② EXPLAIN',  voiceHint: 'Find out WHY things float' },
-      { id: 'fs.b.evaluate', label: 'Test it',  fiveE: '③ TEST',     voiceHint: 'Predict — then check!' },
-    ],
-    C: [
-      { id: 'fs.c.investigate', label: 'Investigate', fiveE: '① INVESTIGATE', voiceHint: 'Change the variable — predict & test' },
-    ],
-  };
+  // Topics available for the current band (have at least one activity)
+  const availableObjectives = OBJECTIVES.filter(obj => {
+    const acts = ALL_BAND_ACTIVITIES[obj.id]?.[band];
+    return acts && acts.length > 0;
+  });
 
-  const bandActs = BAND_ACTIVITIES[band];
+  // ── Topic detail view (an objective is selected) ────────────────────────────
+
+  if (selectedObjective) {
+    const objective = OBJECTIVES.find(o => o.id === selectedObjective);
+    if (!objective) { setSelectedObjective(null); return null; }
+
+    const mastery   = profile.masteryByObjective[selectedObjective];
+    const completed = mastery?.completedActivityIds ?? [];
+    const bandActs  = ALL_BAND_ACTIVITIES[selectedObjective]?.[band] ?? [];
+
+    // Band accent colours
+    const nextBg     = band === 'A' ? 'bg-sky-400 shadow-[0_4px_0_#0EA5E9]'
+                     : band === 'C' ? 'bg-indigo-500 shadow-[0_4px_0_#4338CA]'
+                     :                'bg-green-500 shadow-[0_4px_0_#16A34A]';
+    const nextBorder = band === 'A' ? 'border-sky-300'
+                     : band === 'C' ? 'border-indigo-300'
+                     :                'border-green-300';
+    const doneBg     = band === 'A' ? 'bg-sky-50  border-sky-200   text-sky-700'
+                     : band === 'C' ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
+                     :                'bg-green-50 border-green-200 text-green-700';
+    const goBadge    = band === 'A' ? 'bg-sky-400'
+                     : band === 'C' ? 'bg-indigo-500'
+                     :                'bg-green-500';
+
+    return (
+      <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key="topic-detail"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            className="p-6 min-h-screen flex flex-col"
+          >
+            {/* ── Header ──────────────────────────────────────────────────── */}
+            <header className="flex items-center justify-between mb-5 pb-4 dashed-divider">
+              <button
+                onClick={() => setSelectedObjective(null)}
+                className="flex items-center gap-1 text-sm font-black text-gray-500
+                           hover:text-gray-800 transition-colors"
+                aria-label="Back to topics"
+              >
+                <ChevronLeft size={18} />
+                Topics
+              </button>
+
+              <div className="bg-white px-3 py-1 rounded-full shadow-sm flex items-center
+                              gap-1 border-2 border-gray-100">
+                <Star size={15} fill="currentColor" className="text-yellow-400" />
+                <span className="font-black text-gray-700 text-sm">{profile.totalStars}</span>
+              </div>
+            </header>
+
+            {/* ── Topic header card ───────────────────────────────────────── */}
+            <div className="bg-white rounded-2xl p-4 border-2 border-gray-100 shadow-sm mb-4">
+              <div className={cn(
+                'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black mb-3',
+                STRAND_META[objective.strand].color
+              )}>
+                {STRAND_ICON[objective.strand]}
+                {STRAND_META[objective.strand].label}
+              </div>
+              <h2 className="font-display font-black text-2xl text-gray-800 leading-tight mb-1">
+                {objective.topic}
+              </h2>
+              <p className="text-xs text-gray-400 italic">"{objective.anchoringPhenomenon}"</p>
+            </div>
+
+            {/* ── Activity sequence ───────────────────────────────────────── */}
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
+              Your learning journey
+            </p>
+
+            {bandActs.length === 0 ? (
+              <div className="text-center p-8 text-gray-400 text-sm font-bold">
+                No activities yet for this age group. Coming soon! 🌱
+              </div>
+            ) : (
+              <div className="space-y-3 flex-1">
+                {bandActs.map((act, i) => {
+                  const isDone   = completed.includes(act.id);
+                  const prevDone = i === 0 || completed.includes(bandActs[i - 1].id);
+                  const isLocked = !profile.settings.overrideSequence && !prevDone && !isDone;
+                  const isNext   = !isDone && prevDone && !isLocked;
+
+                  return (
+                    <motion.button
+                      key={act.id}
+                      whileTap={!isLocked ? { scale: 0.97 } : {}}
+                      disabled={isLocked}
+                      onClick={() => {
+                        if (!isLocked) {
+                          setActiveAct(act.id);
+                          setScreen('activity');
+                        }
+                      }}
+                      className={cn(
+                        'w-full p-4 rounded-2xl text-left border-2 transition-all flex items-center gap-4',
+                        isDone    ? doneBg
+                        : isNext  ? `bg-white ${nextBorder} shadow-md text-gray-800`
+                        : isLocked ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-60'
+                        :            'bg-white border-gray-200 text-gray-700'
+                      )}
+                    >
+                      {/* Step icon */}
+                      <div className={cn(
+                        'w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0',
+                        isDone   ? 'bg-white/60'
+                        : isNext ? `${nextBg} text-white`
+                        :          'bg-gray-200'
+                      )}>
+                        {isDone ? '✅' : isLocked ? <Lock size={18} /> : STRAND_ICON[objective.strand]}
+                      </div>
+
+                      {/* Labels */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">
+                          {act.fiveE}
+                        </p>
+                        <p className="font-display font-black text-lg leading-tight">
+                          {act.label}
+                        </p>
+                        <p className="text-xs opacity-60 truncate">{act.voiceHint}</p>
+                      </div>
+
+                      {/* Status badge */}
+                      {isDone   && <span className="text-[10px] font-black bg-white/60 px-2 py-0.5 rounded-full flex-shrink-0">DONE ✓</span>}
+                      {isNext   && <span className={cn('text-[10px] font-black text-white px-2 py-0.5 rounded-full animate-pulse flex-shrink-0', goBadge)}>GO →</span>}
+                      {isLocked && <span className="text-[10px] font-black text-gray-400 flex-shrink-0">LOCKED</span>}
+                    </motion.button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* CAPS reference */}
+            <div className="mt-6 pt-4 border-t border-gray-100">
+              <p className="text-[9px] text-gray-300 text-center font-medium tracking-wide">
+                {objective.capsRef} · South African CAPS curriculum
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Dashboard overlay */}
+        <AnimatePresence>
+          {showDashboard && (
+            <Dashboard
+              profile={profile}
+              onUpdate={setProfile}
+              onClose={() => setShowDashboard(false)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  // ── Topic list view (home) ──────────────────────────────────────────────────
 
   return (
     <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
@@ -211,7 +383,7 @@ export default function App() {
           exit={{ opacity: 0, y: -16 }}
           className="p-6 min-h-screen flex flex-col"
         >
-          {/* ── Header ─────────────────────────────────────────────────── */}
+          {/* ── Header ──────────────────────────────────────────────────── */}
           <header className="flex items-center justify-between mb-4 pb-4 dashed-divider">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center
@@ -243,9 +415,7 @@ export default function App() {
             </div>
           </header>
 
-          {/* ── Age band banner ─────────────────────────────────────────── */}
-          {/* Shows the full 3-12 scope and which band is active. Tapping opens
-              the full BandSelector so users understand all three age groups. */}
+          {/* ── Band banner ─────────────────────────────────────────────── */}
           <button
             onClick={() => setScreen('bandSelect')}
             className={cn(
@@ -257,7 +427,6 @@ export default function App() {
             )}
             aria-label="Change age band"
           >
-            {/* Big age emoji */}
             <div className={cn(
               'w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0',
               band === 'A' ? 'bg-sky-200'
@@ -267,7 +436,6 @@ export default function App() {
               {band === 'A' ? '👶' : band === 'B' ? '🧒' : '👦'}
             </div>
 
-            {/* Text block */}
             <div className="flex-1 min-w-0">
               <p className={cn(
                 'font-display font-black text-lg leading-tight',
@@ -287,7 +455,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* Select age content pill */}
             <div className={cn(
               'flex-shrink-0 px-3 py-2 rounded-xl border-2 text-center',
               band === 'A' ? 'bg-sky-100   border-sky-300   text-sky-700'
@@ -298,139 +465,92 @@ export default function App() {
                 Select
               </p>
               <p className="text-[10px] font-black uppercase tracking-widest leading-none">
-                Age Content
+                Age Group
               </p>
             </div>
           </button>
 
-          {/* ── Garden ─────────────────────────────────────────────────── */}
+          {/* ── Garden ──────────────────────────────────────────────────── */}
           <Garden flowers={profile.gardenFlowers} />
 
-          {/* ── Mission card ───────────────────────────────────────────── */}
-          <div className="flex items-center gap-4 mb-6 p-4 bg-white rounded-2xl
-                          border-2 border-gray-100 shadow-sm">
-            <div className="p-2 bg-green-500 rounded-xl text-white shadow-[0_4px_0_#16A34A]">
-              <Trophy size={20} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                Current Topic
-              </p>
-              <p className="font-black text-gray-800 truncate">{objective.topic}</p>
-              <p className="text-xs text-gray-400 italic truncate">
-                "{objective.anchoringPhenomenon}"
-              </p>
-            </div>
-          </div>
-
-          {/* ── Strand badge ───────────────────────────────────────────── */}
-          <div className={cn(
-            'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black mb-4 self-start',
-            STRAND_META[objective.strand].color
-          )}>
-            {STRAND_META[objective.strand].icon}
-            {STRAND_META[objective.strand].label}
-          </div>
-
-          {/* ── Activity cards — per-band sequence ───────────────────── */}
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">
-            Your learning journey
+          {/* ── Topic list ──────────────────────────────────────────────── */}
+          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-5 mb-3">
+            🌿 Choose a Topic
           </p>
-          <div className="space-y-3 flex-1">
-            {bandActs.map((act, i) => {
-              const isDone   = completed.includes(act.id);
-              const prevDone = i === 0 || completed.includes(bandActs[i - 1].id);
-              const isLocked = !profile.settings.overrideSequence && !prevDone && !isDone;
-              const isNext   = !isDone && prevDone && !isLocked;
 
-              // Accent colours per band
-              const nextBg     = band === 'A' ? 'bg-sky-400 shadow-[0_4px_0_#0EA5E9]'
-                               : band === 'C' ? 'bg-indigo-500 shadow-[0_4px_0_#4338CA]'
-                               :                'bg-green-500 shadow-[0_4px_0_#16A34A]';
-              const nextBorder = band === 'A' ? 'border-sky-300'
-                               : band === 'C' ? 'border-indigo-300'
-                               :                'border-green-300';
-              const doneBg     = band === 'A' ? 'bg-sky-50  border-sky-200   text-sky-700'
-                               : band === 'C' ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
-                               :                'bg-green-50 border-green-200 text-green-700';
-              const goBadge    = band === 'A' ? 'bg-sky-400'
-                               : band === 'C' ? 'bg-indigo-500'
-                               :                'bg-green-500';
+          <div className="space-y-3 flex-1">
+            {availableObjectives.map(obj => {
+              const mastery    = profile.masteryByObjective[obj.id];
+              const completed  = mastery?.completedActivityIds ?? [];
+              const bandActs   = ALL_BAND_ACTIVITIES[obj.id]?.[band] ?? [];
+              const doneCount  = bandActs.filter(a => completed.includes(a.id)).length;
+              const allDone    = bandActs.length > 0 && doneCount === bandActs.length;
+              const inProgress = doneCount > 0 && !allDone;
 
               return (
                 <motion.button
-                  key={act.id}
-                  whileTap={!isLocked ? { scale: 0.97 } : {}}
-                  disabled={isLocked}
-                  onClick={() => {
-                    if (!isLocked) {
-                      setActiveAct(act.id);
-                      setScreen('activity');
-                    }
-                  }}
-                  className={cn(
-                    'w-full p-4 rounded-2xl text-left border-2 transition-all flex items-center gap-4',
-                    isDone    ? doneBg
-                    : isNext  ? `bg-white ${nextBorder} shadow-md text-gray-800`
-                    : isLocked ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-60'
-                    :            'bg-white border-gray-200 text-gray-700'
-                  )}
+                  key={obj.id}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => setSelectedObjective(obj.id)}
+                  className="w-full p-4 rounded-2xl border-2 bg-white border-gray-100
+                             shadow-sm text-left flex items-center gap-4
+                             active:scale-95 transition-transform hover:shadow-md"
                 >
-                  {/* Step icon */}
+                  {/* Strand icon pill */}
                   <div className={cn(
-                    'w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0',
-                    isDone   ? 'bg-white/60'
-                    : isNext ? `${nextBg} text-white`
-                    :          'bg-gray-200'
+                    'w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0',
+                    STRAND_META[obj.strand].color
                   )}>
-                    {isDone ? '✅' : isLocked ? <Lock size={18} /> : STRAND_ICON[objective.strand]}
+                    {STRAND_ICON[obj.strand]}
                   </div>
 
-                  {/* Labels */}
+                  {/* Text */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-black uppercase tracking-widest opacity-60">
-                      {act.fiveE}
+                    <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-0.5">
+                      {STRAND_META[obj.strand].label}
                     </p>
-                    <p className="font-display font-black text-lg leading-tight">
-                      {act.label}
+                    <p className="font-display font-black text-base text-gray-800 leading-tight">
+                      {obj.topic}
                     </p>
-                    <p className="text-xs opacity-60 truncate">{act.voiceHint}</p>
+                    <p className="text-xs text-gray-400 italic truncate mt-0.5">
+                      "{obj.anchoringPhenomenon}"
+                    </p>
                   </div>
 
-                  {/* Status badge */}
-                  {isDone && (
-                    <span className="text-[10px] font-black bg-white/60 px-2 py-0.5 rounded-full">
-                      DONE ✓
-                    </span>
-                  )}
-                  {isNext && (
-                    <span className={cn(
-                      'text-[10px] font-black text-white px-2 py-0.5 rounded-full animate-pulse',
-                      goBadge
-                    )}>
-                      GO →
-                    </span>
-                  )}
-                  {isLocked && (
-                    <span className="text-[10px] font-black text-gray-400">
-                      LOCKED
-                    </span>
-                  )}
+                  {/* Progress badge */}
+                  <div className="flex-shrink-0">
+                    {allDone ? (
+                      <span className="text-[10px] font-black text-emerald-600 bg-emerald-50
+                                       border border-emerald-200 px-2 py-1 rounded-full">
+                        ✓ DONE
+                      </span>
+                    ) : inProgress ? (
+                      <span className="text-[10px] font-black text-amber-600 bg-amber-50
+                                       border border-amber-200 px-2 py-1 rounded-full">
+                        {doneCount}/{bandActs.length} ✦
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-black text-indigo-600 bg-indigo-50
+                                       border border-indigo-200 px-2 py-1 rounded-full">
+                        START →
+                      </span>
+                    )}
+                  </div>
                 </motion.button>
               );
             })}
           </div>
 
-          {/* ── CAPS reference footer ─────────────────────────────────── */}
+          {/* Footer */}
           <div className="mt-6 pt-4 border-t border-gray-100">
             <p className="text-[9px] text-gray-300 text-center font-medium tracking-wide">
-              Aligned to {objective.capsRef} · South African CAPS curriculum
+              South African CAPS curriculum · Ages 3–12 · Offline &amp; free
             </p>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* ── Dashboard overlay ─────────────────────────────────────────────── */}
+      {/* Dashboard overlay */}
       <AnimatePresence>
         {showDashboard && (
           <Dashboard
