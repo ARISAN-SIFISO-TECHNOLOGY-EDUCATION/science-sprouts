@@ -34,6 +34,11 @@ import FloatSinkEvaluate from './activities/FloatSinkEvaluate';
 import FloatSinkBandA    from './activities/FloatSinkBandA';
 import FloatSinkBandC    from './activities/FloatSinkBandC';
 
+// Matter & Materials — Solids, Liquids & Gases
+import SolidsLiquidsGasesExplore  from './activities/SolidsLiquidsGasesExplore';
+import SolidsLiquidsGasesExplain  from './activities/SolidsLiquidsGasesExplain';
+import SolidsLiquidsGasesEvaluate from './activities/SolidsLiquidsGasesEvaluate';
+
 // Life & Living — Living vs Non-Living
 import LivingNonLivingExplore  from './activities/LivingNonLivingExplore';
 import LivingNonLivingExplain  from './activities/LivingNonLivingExplain';
@@ -68,6 +73,14 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     ],
   },
 
+  'mm.solids_liquids_gases': {
+    B: [
+      { id: 'mm.slg.b.explore',  label: 'Sort it!',        fiveE: '① EXPLORE', voiceHint: 'Sort objects into Solid, Liquid, Gas' },
+      { id: 'mm.slg.b.explain',  label: 'Why different?',  fiveE: '② EXPLAIN', voiceHint: 'Discover particle theory' },
+      { id: 'mm.slg.b.evaluate', label: 'Tricky States!',  fiveE: '③ TEST',    voiceHint: 'Is steam a gas? Is sand a solid?' },
+    ],
+  },
+
   'll.non_living': {
     B: [
       { id: 'll.b.explore',   label: 'Sort it out!',    fiveE: '① EXPLORE', voiceHint: 'Sort things into Living and Not Living' },
@@ -90,6 +103,9 @@ const ACTIVITY_REGISTRY: Record<
   'fs.b.explain':       FloatSinkExplain,
   'fs.b.evaluate':      FloatSinkEvaluate,
   'fs.c.investigate':   FloatSinkBandC,
+  'mm.slg.b.explore':   SolidsLiquidsGasesExplore,
+  'mm.slg.b.explain':   SolidsLiquidsGasesExplain,
+  'mm.slg.b.evaluate':  SolidsLiquidsGasesEvaluate,
   'll.b.explore':       LivingNonLivingExplore,
   'll.b.explain':       LivingNonLivingExplain,
   'll.b.evaluate':      LivingNonLivingEvaluate,

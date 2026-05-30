@@ -37,6 +37,19 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  {
+    id: 'mm.solids_liquids_gases',
+    strand: 'matter_and_materials',
+    topic: 'Solids, Liquids & Gases',
+    title: 'Why does water change state?',
+    capsRef: 'CAPS NS&T Gr 2-3: Matter & Materials',
+    band: 'B',
+    prerequisites: ['mm.float_sink'],
+    anchoringPhenomenon:
+      'Water can be ice, a river, or steam — all depending on temperature. Why?',
+    languages: ['en', 'zu'],
+  },
+
   // ── Life & Living ─────────────────────────────────────────────────────────
 
   {
@@ -111,6 +124,46 @@ export const ACTIVITIES: LearningActivity[] = [
       'Think about whether it has air trapped inside.',
       'Heavy-for-its-size things tend to sink.',
     ],
+  },
+
+  // ── mm.solids_liquids_gases  ·  Band B ───────────────────────────────────
+
+  {
+    id: 'mm.slg.b.explore',
+    objectiveId: 'mm.solids_liquids_gases',
+    band: 'B',
+    fiveEStage: 'explore',
+    kind: 'game',
+    generatorKey: 'sortThreeStates',
+    config: { objects: ['ice', 'juice', 'steam', 'rock', 'milk', 'oxygen', 'wood', 'water'] },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 90,
+    hints: ['Does it keep its own shape?', 'Can it flow or pour?'],
+  },
+
+  {
+    id: 'mm.slg.b.explain',
+    objectiveId: 'mm.solids_liquids_gases',
+    band: 'B',
+    fiveEStage: 'explain',
+    kind: 'story',
+    generatorKey: 'narratedDiagram',
+    config: { concept: 'particle_theory', diagram: 'three_states' },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 90,
+  },
+
+  {
+    id: 'mm.slg.b.evaluate',
+    objectiveId: 'mm.solids_liquids_gases',
+    band: 'B',
+    fiveEStage: 'evaluate',
+    kind: 'quiz',
+    generatorKey: 'predictThenTest',
+    config: { objects: ['steam', 'honey', 'sand', 'air'] },
+    assets: { audioByLang: { en: [], zu: [] } },
+    estimatedSeconds: 120,
+    hints: ['Does it keep its shape?', 'Does it fill its container completely?'],
   },
 
   // ── ll.non_living  ·  Band B ──────────────────────────────────────────────
