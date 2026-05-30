@@ -204,6 +204,18 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
+  // ── Age 6 (B6) — Pack v1 (remaining 9 topics) ────────────────────────────
+
+  { id: 'll.body_parts',       strand: 'life_and_living',      topic: 'Body Parts',       title: 'Each body part has a job',                capsRef: 'CAPS Gr 1: Life & Living',      band: 'B6', prerequisites: [], anchoringPhenomenon: 'What do your eyes, ears and legs help you do?', languages: ['en', 'zu'] },
+  { id: 'll.animal_needs_b6',  strand: 'life_and_living',      topic: 'Animal Needs',     title: 'Animals need food, water and shelter',    capsRef: 'CAPS Gr 1: Life & Living',      band: 'B6', prerequisites: [], anchoringPhenomenon: 'What does a pet need to stay alive and happy?', languages: ['en', 'zu'] },
+  { id: 'll.life_cycle',       strand: 'life_and_living',      topic: 'Life Cycle',       title: 'Living things grow and change',           capsRef: 'CAPS Gr 1: Life & Living',      band: 'B6', prerequisites: [], anchoringPhenomenon: 'How does an egg become a chicken?',             languages: ['en', 'zu'] },
+  { id: 'mm.materials',        strand: 'matter_and_materials', topic: 'Materials Around Us', title: 'Things are made of wood, metal or plastic', capsRef: 'CAPS Gr 1: Matter & Materials', band: 'B6', prerequisites: [], anchoringPhenomenon: 'What is a chair, a spoon and a bottle made of?', languages: ['en', 'zu'] },
+  { id: 'mm.strong_materials', strand: 'matter_and_materials', topic: 'Strong Materials', title: 'Strong materials hold weight',            capsRef: 'CAPS Gr 1: Matter & Materials', band: 'B6', prerequisites: [], anchoringPhenomenon: 'Which bridge will hold the heavy car?',          languages: ['en', 'zu'] },
+  { id: 'ec.sources_of_light', strand: 'energy_and_change',    topic: 'Sources of Light', title: 'Some things make light, some do not',     capsRef: 'CAPS Gr 1: Energy & Change',    band: 'B6', prerequisites: [], anchoringPhenomenon: 'Does a rock give light? Does a lamp?',            languages: ['en', 'zu'] },
+  { id: 'ec.movement',         strand: 'energy_and_change',    topic: 'Movement',         title: 'Heavy things need a bigger push',         capsRef: 'CAPS Gr 1: Energy & Change',    band: 'B6', prerequisites: [], anchoringPhenomenon: 'Is it easier to push a ball or a heavy box?',    languages: ['en', 'zu'] },
+  { id: 'eb.weather_seasons',  strand: 'earth_and_beyond',     topic: 'Weather & Seasons',title: 'We can watch and record the weather',     capsRef: 'CAPS Gr 1: Earth & Beyond',     band: 'B6', prerequisites: [], anchoringPhenomenon: 'What is the weather each day this week?',         languages: ['en', 'zu'] },
+  { id: 'eb.day_night_spin',   strand: 'earth_and_beyond',     topic: 'Day & Night',      title: 'The Earth spins to give day and night',   capsRef: 'CAPS Gr 1: Earth & Beyond',     band: 'B6', prerequisites: [], anchoringPhenomenon: 'Why does it get dark at night?',                  languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -381,6 +393,18 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'mm.fsr.b6.do', objectiveId: 'mm.float_sink_record', band: 'B6', fiveEStage: 'explore', kind: 'game',  generatorKey: 'floatSinkRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 360, caregiverPrompt: 'Bath science! Test 3 things — float or sink?' },
   { id: 'll.ppr.b6.do', objectiveId: 'll.plant_parts_record', band: 'B6', fiveEStage: 'explore', kind: 'game', generatorKey: 'plantPartsRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Draw your plant. Label 2 parts!' },
   { id: 'ec.shr.b6.do', objectiveId: 'ec.shadows_record', band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'shadowsRecord', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Make a big shadow and a small shadow with a torch!' },
+
+  // ── Age 6 Pack v1 — remaining 9 activities ──────────────────────────────
+
+  { id: 'll.bp.b6.do',  objectiveId: 'll.body_parts',       band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'bodyParts',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Point to body parts. What does each do?' },
+  { id: 'll.an.b6.do',  objectiveId: 'll.animal_needs_b6',  band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'animalNeeds',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Name a pet. What 3 things does it need?' },
+  { id: 'll.lc.b6.do',  objectiveId: 'll.life_cycle',       band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'lifeCycle',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Find baby, child and grown-up pictures.' },
+  { id: 'mm.mat.b6.do', objectiveId: 'mm.materials',        band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'materials',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Find 3 plastic things at home.' },
+  { id: 'mm.sm.b6.do',  objectiveId: 'mm.strong_materials', band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'strongMaterials', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Build a bridge. Test it with a coin.' },
+  { id: 'ec.sol.b6.do', objectiveId: 'ec.sources_of_light', band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'lightSort',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Find 2 light sources at night.' },
+  { id: 'ec.mv.b6.do',  objectiveId: 'ec.movement',         band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'movement',        config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Push a light toy, then a heavy one.' },
+  { id: 'eb.ws.b6.do',  objectiveId: 'eb.weather_seasons',  band: 'B6', fiveEStage: 'explore', kind: 'game',       generatorKey: 'weatherChart',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Watch the sky for 3 mornings. Draw it.' },
+  { id: 'eb.dns.b6.do', objectiveId: 'eb.day_night_spin',   band: 'B6', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'earthSpin',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 300, caregiverPrompt: 'Spin near a lamp — day and night!' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 

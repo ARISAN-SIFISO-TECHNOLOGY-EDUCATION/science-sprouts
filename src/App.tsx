@@ -40,9 +40,18 @@ import HardSoftActivity from './activities/HardSoftActivity';
 import WeatherActivity  from './activities/WeatherActivity';
 
 // Age 6 topics (B6 — Predict → Test & Record → Badge)
-import FloatSinkRecordActivity  from './activities/FloatSinkRecordActivity';
-import PlantPartsRecordActivity from './activities/PlantPartsRecordActivity';
-import ShadowsRecordActivity    from './activities/ShadowsRecordActivity';
+import FloatSinkRecordActivity      from './activities/FloatSinkRecordActivity';
+import PlantPartsRecordActivity     from './activities/PlantPartsRecordActivity';
+import ShadowsRecordActivity        from './activities/ShadowsRecordActivity';
+import BodyPartsRecordActivity      from './activities/BodyPartsRecordActivity';
+import AnimalNeedsRecordActivity    from './activities/AnimalNeedsRecordActivity';
+import LifeCycleRecordActivity      from './activities/LifeCycleRecordActivity';
+import MaterialsRecordActivity      from './activities/MaterialsRecordActivity';
+import StrongMaterialsRecordActivity from './activities/StrongMaterialsRecordActivity';
+import LightSortRecordActivity      from './activities/LightSortRecordActivity';
+import MovementRecordActivity       from './activities/MovementRecordActivity';
+import WeatherChartRecordActivity   from './activities/WeatherChartRecordActivity';
+import EarthSpinRecordActivity      from './activities/EarthSpinRecordActivity';
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 import FiveSensesActivity      from './activities/FiveSensesActivity';
@@ -124,6 +133,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   },
   'ec.shadows_record': {
     B6: [{ id: 'ec.shr.b6.do', label: 'Shadow Lab', fiveE: '① EXPLORE & REASON', voiceHint: 'Move the torch — why does the shadow change?' }],
+  },
+  'll.body_parts': {
+    B6: [{ id: 'll.bp.b6.do', label: 'Body Parts', fiveE: '① LABEL & LEARN', voiceHint: 'Tap each part — learn its job' }],
+  },
+  'll.animal_needs_b6': {
+    B6: [{ id: 'll.an.b6.do', label: 'Animal Needs', fiveE: '① CARE & REASON', voiceHint: 'Give the puppy what it needs to live' }],
+  },
+  'll.life_cycle': {
+    B6: [{ id: 'll.lc.b6.do', label: 'Life Cycle', fiveE: '① ORDER & REASON', voiceHint: 'Put egg → chick → chicken in order' }],
+  },
+  'mm.materials': {
+    B6: [{ id: 'mm.mat.b6.do', label: 'Materials Lab', fiveE: '① SORT & REASON', voiceHint: 'What is each thing made of?' }],
+  },
+  'mm.strong_materials': {
+    B6: [{ id: 'mm.sm.b6.do', label: 'Bridge Lab', fiveE: '① TEST & REASON', voiceHint: 'Which bridge holds the car?' }],
+  },
+  'ec.sources_of_light': {
+    B6: [{ id: 'ec.sol.b6.do', label: 'Light Sources', fiveE: '① SORT & REASON', voiceHint: 'Sort things that make light' }],
+  },
+  'ec.movement': {
+    B6: [{ id: 'ec.mv.b6.do', label: 'Push Power', fiveE: '① TEST & REASON', voiceHint: 'Push light and heavy things' }],
+  },
+  'eb.weather_seasons': {
+    B6: [{ id: 'eb.ws.b6.do', label: 'Weather Chart', fiveE: '① RECORD & REASON', voiceHint: 'Fill in a week of weather' }],
+  },
+  'eb.day_night_spin': {
+    B6: [{ id: 'eb.dns.b6.do', label: 'Spinning Earth', fiveE: '① EXPLORE & REASON', voiceHint: 'Spin the Earth — why is it night?' }],
   },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
@@ -241,6 +277,15 @@ const ACTIVITY_REGISTRY: Record<
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
+  'll.bp.b6.do':             BodyPartsRecordActivity,
+  'll.an.b6.do':             AnimalNeedsRecordActivity,
+  'll.lc.b6.do':             LifeCycleRecordActivity,
+  'mm.mat.b6.do':            MaterialsRecordActivity,
+  'mm.sm.b6.do':             StrongMaterialsRecordActivity,
+  'ec.sol.b6.do':            LightSortRecordActivity,
+  'ec.mv.b6.do':             MovementRecordActivity,
+  'eb.ws.b6.do':             WeatherChartRecordActivity,
+  'eb.dns.b6.do':            EarthSpinRecordActivity,
   'll.5s.a5.engage':         FiveSensesActivity,
   'mm.wd.a5.engage':         WetDryActivity,
   'eb.dn.a5.engage':         DayNightActivity,
