@@ -89,6 +89,15 @@ const SpaceActivity                 = lazy(() => import('./activities/SpaceActiv
 const PhotosynthesisActivity        = lazy(() => import('./activities/PhotosynthesisActivity'));
 const CircuitBuilderActivity        = lazy(() => import('./activities/CircuitBuilderActivity'));
 const WaterCycleActivity            = lazy(() => import('./activities/WaterCycleActivity'));
+const PlantReproductionActivity     = lazy(() => import('./activities/PlantReproductionActivity'));
+const NutritionActivity             = lazy(() => import('./activities/NutritionActivity'));
+const ParticlesActivity             = lazy(() => import('./activities/ParticlesActivity'));
+const StructuresActivity            = lazy(() => import('./activities/StructuresActivity'));
+const StoredEnergyActivity          = lazy(() => import('./activities/StoredEnergyActivity'));
+const SoundVibrationActivity        = lazy(() => import('./activities/SoundVibrationActivity'));
+const SolarSystemActivity           = lazy(() => import('./activities/SolarSystemActivity'));
+const WeatheringActivity            = lazy(() => import('./activities/WeatheringActivity'));
+const SeasonsActivity               = lazy(() => import('./activities/SeasonsActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
@@ -285,6 +294,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'mm.water_cycle': {
     B: [{ id: 'mm.wc.b.do', label: 'Water Cycle Lab', fiveE: '① HEAT → MEASURE → CONCLUDE', voiceHint: 'Heat the sea and watch evaporation, clouds and rain' }],
   },
+  'll.plant_reproduction': {
+    B: [{ id: 'll.pr.b.do', label: 'Pollination Lab', fiveE: '① OBSERVE → COUNT → CONCLUDE', voiceHint: 'Does a flower need a bee to make seeds?' }],
+  },
+  'll.nutrition': {
+    B: [{ id: 'll.nut.b.do', label: 'Food Groups', fiveE: '① SORT → CONCLUDE', voiceHint: 'Sort foods into energy, building and protecting groups' }],
+  },
+  'mm.particles': {
+    B: [{ id: 'mm.par.b.do', label: 'Particle Lab', fiveE: '① HEAT → MEASURE → CONCLUDE', voiceHint: 'Heat the particles and measure how fast they move' }],
+  },
+  'mm.structures': {
+    B: [{ id: 'mm.str.b.do', label: 'Structure Lab', fiveE: '① TEST → RECORD → CONCLUDE', voiceHint: 'Load-test shapes — which holds the most weight?' }],
+  },
+  'ec.stored_energy': {
+    B: [{ id: 'ec.se.b.do', label: 'Stored Energy', fiveE: '① SORT → CONCLUDE', voiceHint: 'Which things store energy we can use later?' }],
+  },
+  'ec.sound_vibration': {
+    B: [{ id: 'ec.snd.b.do', label: 'Drum Lab', fiveE: '① TEST → MEASURE → CONCLUDE', voiceHint: 'Hit the drum harder — does it get louder?' }],
+  },
+  'eb.solar_system': {
+    B: [{ id: 'eb.ss.b.do', label: 'Solar System', fiveE: '① MEASURE → CONCLUDE', voiceHint: 'Time each planet around the sun' }],
+  },
+  'eb.weathering': {
+    B: [{ id: 'eb.wea.b.do', label: 'Weathering Lab', fiveE: '① TEST → MEASURE → CONCLUDE', voiceHint: 'How long until water and wind break a rock?' }],
+  },
+  'eb.seasons': {
+    B: [{ id: 'eb.sea.b.do', label: 'Seasons Lab', fiveE: '① MODEL → RECORD → CONCLUDE', voiceHint: 'Tilt the Earth — why is summer hotter?' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -425,6 +461,15 @@ const ACTIVITY_REGISTRY: Record<
   'll.photo.b.do':           PhotosynthesisActivity,
   'ec.circ.b.do':            CircuitBuilderActivity,
   'mm.wc.b.do':              WaterCycleActivity,
+  'll.pr.b.do':              PlantReproductionActivity,
+  'll.nut.b.do':             NutritionActivity,
+  'mm.par.b.do':             ParticlesActivity,
+  'mm.str.b.do':             StructuresActivity,
+  'ec.se.b.do':              StoredEnergyActivity,
+  'ec.snd.b.do':             SoundVibrationActivity,
+  'eb.ss.b.do':              SolarSystemActivity,
+  'eb.wea.b.do':             WeatheringActivity,
+  'eb.sea.b.do':             SeasonsActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
