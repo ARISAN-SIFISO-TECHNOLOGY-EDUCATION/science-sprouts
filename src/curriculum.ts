@@ -281,6 +281,11 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.weather_b8',     strand: 'earth_and_beyond',     topic: 'Weather Patterns',       title: 'Recorded weather data shows patterns we can predict', capsRef: 'CAPS Gr 3: Earth & Beyond', band: 'B8', prerequisites: [], anchoringPhenomenon: 'Can we spot a pattern in the weather to predict tomorrow?', languages: ['en', 'zu'] },
   { id: 'eb.space_b8',       strand: 'earth_and_beyond',     topic: 'Planets, Sun & Moon',    title: 'The Earth spins, giving us day and night', capsRef: 'CAPS Gr 3: Earth & Beyond', band: 'B8', prerequisites: [], anchoringPhenomenon: 'Why do we have day and night?', languages: ['en', 'zu'] },
 
+  // ── Age 9 (Band B) — CAPS Gr 4 "Science Adventurers": flagship sims ──────
+  { id: 'll.photosynthesis', strand: 'life_and_living',      topic: 'Photosynthesis',         title: 'Plants make their own food using light', capsRef: 'CAPS Gr 4: Life & Living', band: 'B', prerequisites: [], anchoringPhenomenon: 'How do plants make their own food from sunlight?', languages: ['en', 'zu'] },
+  { id: 'ec.circuits',       strand: 'energy_and_change',    topic: 'Electrical Circuits',    title: 'A bulb lights only in a complete circuit', capsRef: 'CAPS Gr 4: Energy & Change', band: 'B', prerequisites: [], anchoringPhenomenon: 'What do we need to make a bulb light up?', languages: ['en', 'zu'] },
+  { id: 'mm.water_cycle',    strand: 'matter_and_materials', topic: 'The Water Cycle',        title: 'Water evaporates, condenses and falls as rain', capsRef: 'CAPS Gr 4: Matter & Materials', band: 'B', prerequisites: [], anchoringPhenomenon: 'Where does rain come from?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -502,6 +507,11 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'eb.rck.b8.do', objectiveId: 'eb.rocks',          band: 'B8', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'rocks',        config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Collect 3 rocks. Which scratches which?' },
   { id: 'eb.wx.b8.do',  objectiveId: 'eb.weather_b8',     band: 'B8', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'weatherB8',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Make a weather chart for a week.' },
   { id: 'eb.spc.b8.do', objectiveId: 'eb.space_b8',       band: 'B8', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'spaceB8',      config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Watch the moon for 4 nights. Draw its shape.' },
+
+  // ── Age 9 activities (Band B — CAPS Gr 4 flagship sims) ─────────────────
+  { id: 'll.photo.b.do', objectiveId: 'll.photosynthesis', band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'photosynthesis', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 900, caregiverPrompt: 'Grow two beans — one in sun, one in the dark. Measure after a week.' },
+  { id: 'ec.circ.b.do',  objectiveId: 'ec.circuits',       band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'circuitBuilder', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 900, caregiverPrompt: 'Find 3 things that use electricity. Trace the path from plug to device.' },
+  { id: 'mm.wc.b.do',    objectiveId: 'mm.water_cycle',    band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'waterCycle',     config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 900, caregiverPrompt: 'Put one glass of water in sun, one in shade. Which loses more?' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 

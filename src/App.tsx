@@ -85,6 +85,11 @@ const RocksActivity                 = lazy(() => import('./activities/RocksActiv
 const WeatherPatternsActivity       = lazy(() => import('./activities/WeatherPatternsActivity'));
 const SpaceActivity                 = lazy(() => import('./activities/SpaceActivity'));
 
+// Age 9 topics (Band B — CAPS Gr 4 flagship sims)
+const PhotosynthesisActivity        = lazy(() => import('./activities/PhotosynthesisActivity'));
+const CircuitBuilderActivity        = lazy(() => import('./activities/CircuitBuilderActivity'));
+const WaterCycleActivity            = lazy(() => import('./activities/WaterCycleActivity'));
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
 const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
@@ -270,6 +275,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     B8: [{ id: 'eb.spc.b8.do', label: 'Day & Night Lab', fiveE: '① MODEL → CONCLUDE', voiceHint: 'Spin the Earth to discover why we have day and night' }],
   },
 
+  // Age 9 — CAPS Gr 4 flagship sims (Band B)
+  'll.photosynthesis': {
+    B: [{ id: 'll.photo.b.do', label: 'Photosynthesis Lab', fiveE: '① SLIDER → MEASURE → CONCLUDE', voiceHint: 'Change the light and measure how the plant grows' }],
+  },
+  'ec.circuits': {
+    B: [{ id: 'ec.circ.b.do', label: 'Circuit Builder', fiveE: '① BUILD → TEST → CONCLUDE', voiceHint: 'Build a circuit and make the bulb light up' }],
+  },
+  'mm.water_cycle': {
+    B: [{ id: 'mm.wc.b.do', label: 'Water Cycle Lab', fiveE: '① HEAT → MEASURE → CONCLUDE', voiceHint: 'Heat the sea and watch evaporation, clouds and rain' }],
+  },
+
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
     A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
@@ -406,6 +422,9 @@ const ACTIVITY_REGISTRY: Record<
   'eb.rck.b8.do':            RocksActivity,
   'eb.wx.b8.do':             WeatherPatternsActivity,
   'eb.spc.b8.do':            SpaceActivity,
+  'll.photo.b.do':           PhotosynthesisActivity,
+  'ec.circ.b.do':            CircuitBuilderActivity,
+  'mm.wc.b.do':              WaterCycleActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
