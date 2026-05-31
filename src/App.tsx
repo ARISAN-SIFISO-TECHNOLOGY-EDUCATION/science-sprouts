@@ -75,6 +75,15 @@ const SoilTypesActivity          = lazy(() => import('./activities/SoilTypesActi
 const InsulationActivity            = lazy(() => import('./activities/InsulationActivity'));
 const FoodChainsInvestigateActivity = lazy(() => import('./activities/FoodChainsInvestigateActivity'));
 const ShadowSizeActivity            = lazy(() => import('./activities/ShadowSizeActivity'));
+const LifeCycleCompleteActivity     = lazy(() => import('./activities/LifeCycleCompleteActivity'));
+const HealthyBodyActivity           = lazy(() => import('./activities/HealthyBodyActivity'));
+const EvaporationActivity           = lazy(() => import('./activities/EvaporationActivity'));
+const ReversibleChangeActivity      = lazy(() => import('./activities/ReversibleChangeActivity'));
+const ForcesActivity                = lazy(() => import('./activities/ForcesActivity'));
+const SoundActivity                 = lazy(() => import('./activities/SoundActivity'));
+const RocksActivity                 = lazy(() => import('./activities/RocksActivity'));
+const WeatherPatternsActivity       = lazy(() => import('./activities/WeatherPatternsActivity'));
+const SpaceActivity                 = lazy(() => import('./activities/SpaceActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
@@ -233,6 +242,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'ec.shadow_size': {
     B8: [{ id: 'ec.shd.b8.do', label: 'Shadow Lab', fiveE: '① MEASURE → CONCLUDE', voiceHint: 'Measure how shadow size changes with distance' }],
   },
+  'll.life_cycle_b8': {
+    B8: [{ id: 'll.lc.b8.do', label: 'Life Cycle Lab', fiveE: '① ORDER → COUNT → CONCLUDE', voiceHint: 'Order the butterfly stages and add up the days' }],
+  },
+  'll.healthy_body': {
+    B8: [{ id: 'll.hb.b8.do', label: 'Health Diary', fiveE: '① RECORD → GRAPH → CONCLUDE', voiceHint: 'Track 3 days of water and graph it' }],
+  },
+  'mm.evaporation': {
+    B8: [{ id: 'mm.evap.b8.do', label: 'Evaporation Lab', fiveE: '① MEASURE → CONCLUDE', voiceHint: 'Where does the water go when clothes dry?' }],
+  },
+  'mm.reversible': {
+    B8: [{ id: 'mm.rev.b8.do', label: 'Change Detective', fiveE: '① SORT → CONCLUDE', voiceHint: 'Which changes can be undone, and which cannot?' }],
+  },
+  'ec.forces_b8': {
+    B8: [{ id: 'ec.frc.b8.do', label: 'Force Lab', fiveE: '① MEASURE (N) → CONCLUDE', voiceHint: 'Measure the force to lift each object in Newtons' }],
+  },
+  'ec.sound': {
+    B8: [{ id: 'ec.snd.b8.do', label: 'Sound Lab', fiveE: '① TEST → CONCLUDE', voiceHint: 'Tight or loose band — which makes a higher pitch?' }],
+  },
+  'eb.rocks': {
+    B8: [{ id: 'eb.rck.b8.do', label: 'Rock Lab', fiveE: '① TEST → RECORD → CONCLUDE', voiceHint: 'Scratch-test rocks and record their hardness' }],
+  },
+  'eb.weather_b8': {
+    B8: [{ id: 'eb.wx.b8.do', label: 'Weather Chart', fiveE: '① RECORD → PREDICT → CONCLUDE', voiceHint: 'Record a week of temperatures and spot the pattern' }],
+  },
+  'eb.space_b8': {
+    B8: [{ id: 'eb.spc.b8.do', label: 'Day & Night Lab', fiveE: '① MODEL → CONCLUDE', voiceHint: 'Spin the Earth to discover why we have day and night' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -361,6 +397,15 @@ const ACTIVITY_REGISTRY: Record<
   'mm.ins.b8.do':            InsulationActivity,
   'll.fc.b8.do':             FoodChainsInvestigateActivity,
   'ec.shd.b8.do':            ShadowSizeActivity,
+  'll.lc.b8.do':             LifeCycleCompleteActivity,
+  'll.hb.b8.do':             HealthyBodyActivity,
+  'mm.evap.b8.do':           EvaporationActivity,
+  'mm.rev.b8.do':            ReversibleChangeActivity,
+  'ec.frc.b8.do':            ForcesActivity,
+  'ec.snd.b8.do':            SoundActivity,
+  'eb.rck.b8.do':            RocksActivity,
+  'eb.wx.b8.do':             WeatherPatternsActivity,
+  'eb.spc.b8.do':            SpaceActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
