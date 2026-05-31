@@ -71,6 +71,11 @@ const WindActivity               = lazy(() => import('./activities/WindActivity'
 const WaterSourcesActivity       = lazy(() => import('./activities/WaterSourcesActivity'));
 const SoilTypesActivity          = lazy(() => import('./activities/SoilTypesActivity'));
 
+// Age 8 topics (B8 — plan → measure → record → conclude)
+const InsulationActivity            = lazy(() => import('./activities/InsulationActivity'));
+const FoodChainsInvestigateActivity = lazy(() => import('./activities/FoodChainsInvestigateActivity'));
+const ShadowSizeActivity            = lazy(() => import('./activities/ShadowSizeActivity'));
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
 const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
@@ -218,6 +223,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     B7: [{ id: 'eb.soil.b7.do', label: 'Soil Lab', fiveE: '① FAIR TEST', voiceHint: 'Which soil holds the most water?' }],
   },
 
+  // Age 8 — Plan → Measure → Record → Conclude (Intermediate Phase Gr 3)
+  'mm.insulation': {
+    B8: [{ id: 'mm.ins.b8.do', label: 'Insulation Lab', fiveE: '① PLAN → MEASURE → CONCLUDE', voiceHint: 'Which cup keeps hot water warmest? Measure & conclude' }],
+  },
+  'll.food_chains_b8': {
+    B8: [{ id: 'll.fc.b8.do', label: 'Food Chain Lab', fiveE: '① BUILD → TEST → CONCLUDE', voiceHint: 'What happens if we remove the sun from a food chain?' }],
+  },
+  'ec.shadow_size': {
+    B8: [{ id: 'ec.shd.b8.do', label: 'Shadow Lab', fiveE: '① MEASURE → CONCLUDE', voiceHint: 'Measure how shadow size changes with distance' }],
+  },
+
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
     A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
@@ -342,6 +358,9 @@ const ACTIVITY_REGISTRY: Record<
   'ec.wind.b7.do':           WindActivity,
   'eb.wat.b7.do':            WaterSourcesActivity,
   'eb.soil.b7.do':           SoilTypesActivity,
+  'mm.ins.b8.do':            InsulationActivity,
+  'll.fc.b8.do':             FoodChainsInvestigateActivity,
+  'ec.shd.b8.do':            ShadowSizeActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
@@ -469,6 +488,18 @@ const BAND_UI: Record<Band, {
     nextAccent:  'bg-emerald-500 shadow-[0_4px_0_#059669]',
     doneBg:      'bg-emerald-50 border-emerald-200 text-emerald-700',
     goBadge:     'bg-emerald-500',
+  },
+  B8: {
+    emoji: '📏',
+    bannerBg:    'bg-teal-50 border-teal-200',
+    iconBg:      'bg-teal-200',
+    labelText:   'text-teal-700',
+    subtitleText:'text-teal-600',
+    pillBg:      'bg-teal-100 border-teal-300 text-teal-700',
+    nextBorder:  'border-teal-300',
+    nextAccent:  'bg-teal-500 shadow-[0_4px_0_#0D9488]',
+    doneBg:      'bg-teal-50 border-teal-200 text-teal-700',
+    goBadge:     'bg-teal-500',
   },
   B: {
     emoji: '🧒',

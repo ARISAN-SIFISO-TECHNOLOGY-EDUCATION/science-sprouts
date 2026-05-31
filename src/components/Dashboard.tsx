@@ -96,7 +96,7 @@ export default function Dashboard({ profile, onUpdate, onClose }: DashboardProps
 
         {/* Age 6, Age 7, Ages 8–9, Ages 10–12 */}
         <div className="grid grid-cols-2 gap-2 mb-6">
-          {(['B6', 'B7', 'B', 'C'] as Band[]).map(band => {
+          {(['B6', 'B7', 'B8', 'B', 'C'] as Band[]).map(band => {
             const m = BAND_META[band];
             const active = profile.selectedBand === band;
             return (

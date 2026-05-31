@@ -68,6 +68,22 @@ const OLDER_BANDS: {
     buttonShadow: 'shadow-[0_6px_0_#059669]',
   },
   {
+    band: 'B8',
+    emoji: '📏',
+    bullets: [
+      'Plans investigations & changes variables',
+      'Measures with units — cm, ml, °C',
+      'Calculates results & reads short paragraphs',
+      'Writes conclusions: "I found that… because…"',
+    ],
+    accentBg:     'bg-teal-50',
+    accentBorder: 'border-teal-200',
+    accentText:   'text-teal-700',
+    accentIcon:   'bg-teal-100',
+    buttonBg:     'bg-teal-500',
+    buttonShadow: 'shadow-[0_6px_0_#0D9488]',
+  },
+  {
     band: 'B',
     emoji: '🧒',
     bullets: [

@@ -17,7 +17,8 @@ export type Band =
   | 'A5'   // Age 5    — Pre-Grade R structured discovery
   | 'B6'   // Age 6    — Foundation Phase Gr 1: predict, test, record, badges
   | 'B7'   // Age 7    — Foundation Phase Gr 2: fair tests, bar charts
-  | 'B'    // Ages 8–9 — Foundation + Intermediate Phase
+  | 'B8'   // Age 8    — Intermediate Phase Gr 3: plan, measure, conclude
+  | 'B'    // Age 9    — Intermediate Phase
   | 'C';   // Ages 10–12 — Senior Phase primary
 
 /** The 5E instructional model stages. */

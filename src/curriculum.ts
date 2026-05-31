@@ -264,6 +264,12 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.water_sources', strand: 'earth_and_beyond',     topic: 'Water Sources',           title: 'Tap water travels from rain to our homes', capsRef: 'CAPS Gr 2: Earth & Beyond', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Where does the water in your tap come from?',     languages: ['en', 'zu'] },
   { id: 'eb.soil',          strand: 'earth_and_beyond',     topic: 'Soil Types',              title: 'Different soils hold different amounts of water', capsRef: 'CAPS Gr 2: Earth & Beyond', band: 'B7', prerequisites: [], anchoringPhenomenon: 'Which soil holds the most water — sand, loam or clay?', languages: ['en', 'zu'] },
 
+  // ── Age 8 (B8) — Intermediate Phase Gr 3: plan, measure, conclude ────────
+
+  { id: 'mm.insulation',     strand: 'matter_and_materials', topic: 'Insulation — Keep Warm', title: 'Some materials trap heat better than others', capsRef: 'CAPS Gr 3: Matter & Materials', band: 'B8', prerequisites: [], anchoringPhenomenon: 'Which cup keeps hot water warmest — paper, plastic or foil?', languages: ['en', 'zu'] },
+  { id: 'll.food_chains_b8', strand: 'life_and_living',      topic: 'Food Chains & Energy',   title: 'Energy flows from the sun through every food chain', capsRef: 'CAPS Gr 3: Life & Living', band: 'B8', prerequisites: [], anchoringPhenomenon: 'What happens to a food chain if we remove the sun?', languages: ['en', 'zu'] },
+  { id: 'ec.shadow_size',    strand: 'energy_and_change',    topic: 'Shadow Size',            title: 'Distance from the light changes shadow size', capsRef: 'CAPS Gr 3: Energy & Change', band: 'B8', prerequisites: [], anchoringPhenomenon: 'What happens to a shadow when the object moves closer to the light?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -471,6 +477,11 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'ec.wind.b7.do',objectiveId: 'ec.wind',          band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'wind',         config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Make a paper windmill. Test it outside.' },
   { id: 'eb.wat.b7.do', objectiveId: 'eb.water_sources', band: 'B7', fiveEStage: 'explore', kind: 'game',       generatorKey: 'waterSources', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Trace water from the tap back to its source.' },
   { id: 'eb.soil.b7.do',objectiveId: 'eb.soil',          band: 'B7', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'soilTypes',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 420, caregiverPrompt: 'Collect 3 soils. Drop water on each.' },
+
+  // ── Age 8 activities (B8 — plan → measure → record → conclude) ──────────
+  { id: 'mm.ins.b8.do', objectiveId: 'mm.insulation',     band: 'B8', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'insulation',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Which 2 materials keep an ice cream coldest? Test it.' },
+  { id: 'll.fc.b8.do',  objectiveId: 'll.food_chains_b8', band: 'B8', fiveEStage: 'explore', kind: 'game',       generatorKey: 'foodChainsB8', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Make a food chain from 4 living things you saw outside.' },
+  { id: 'ec.shd.b8.do', objectiveId: 'ec.shadow_size',    band: 'B8', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'shadowSize',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 600, caregiverPrompt: 'Measure your shadow at 9am and 3pm. Which is longer?' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
@@ -693,9 +704,18 @@ export const BAND_META = {
     textColor: 'text-emerald-700',
     bgLight: 'bg-emerald-50',
   },
+  B8: {
+    label: 'Junior Investigators II',
+    ageRange: 'Age 8',
+    description: 'Plan, measure & write conclusions',
+    color: 'bg-teal-500',
+    shadow: 'shadow-[0_6px_0_#0D9488]',
+    textColor: 'text-teal-700',
+    bgLight: 'bg-teal-50',
+  },
   B: {
     label: 'Science Adventurers',
-    ageRange: 'Ages 8–9',
+    ageRange: 'Age 9',
     description: 'Explore, experiment, discover!',
     color: 'bg-green-500',
     shadow: 'shadow-[0_6px_0_#16A34A]',
