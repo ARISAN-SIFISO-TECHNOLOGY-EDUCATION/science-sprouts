@@ -325,6 +325,11 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.rotation_revolution', strand: 'earth_and_beyond',   topic: 'Rotation & Revolution',    title: 'Spinning gives day/night; orbiting gives the year', capsRef: 'CAPS Gr 6: Earth & Beyond', band: 'C11', prerequisites: [], anchoringPhenomenon: 'What is the difference between a day and a year?', languages: ['en', 'zu'] },
   { id: 'eb.moon_phases',       strand: 'earth_and_beyond',     topic: 'The Moon & its Phases',    title: 'The moon reflects sunlight and shows phases as it orbits', capsRef: 'CAPS Gr 6: Earth & Beyond', band: 'C11', prerequisites: [], anchoringPhenomenon: 'Why does the moon change shape each night?', languages: ['en', 'zu'] },
 
+  // ── Age 12 (Band C12) — CAPS Gr 7: classify, model, reason ──────────────
+  { id: 'll.biosphere',     strand: 'life_and_living',      topic: 'The Biosphere',           title: 'Life exists on land, in water and in the air', capsRef: 'CAPS Gr 7: Life & Living', band: 'C12', prerequisites: [], anchoringPhenomenon: 'Where on Earth do living things live?', languages: ['en', 'zu'] },
+  { id: 'mm.acids_bases',   strand: 'matter_and_materials', topic: 'Acids, Bases & Neutrals', title: 'Indicators tell acids, bases and neutrals apart', capsRef: 'CAPS Gr 7: Matter & Materials', band: 'C12', prerequisites: [], anchoringPhenomenon: 'Why does lemon taste sour but soap feels slippery?', languages: ['en', 'zu'] },
+  { id: 'ec.heat_transfer', strand: 'energy_and_change',    topic: 'Heat Transfer',           title: 'Heat moves by conduction, convection and radiation', capsRef: 'CAPS Gr 7: Energy & Change', band: 'C12', prerequisites: [], anchoringPhenomenon: 'How does the sun warm you from so far away?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -589,6 +594,11 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'eb.rr.c11.do',   objectiveId: 'eb.rotation_revolution', band: 'C11', fiveEStage: 'explore', kind: 'game',     generatorKey: 'rotationRevolution', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'A day is one spin; a year is one trip around the sun.' },
   { id: 'eb.moon.c11.do', objectiveId: 'eb.moon_phases',       band: 'C11', fiveEStage: 'explore', kind: 'game',       generatorKey: 'moonPhases',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Watch the moon over a week — its shape changes.' },
 
+  // ── Age 12 activities (Band C12 — CAPS Gr 7) ───────────────────────────
+  { id: 'll.bio.c12.do',  objectiveId: 'll.biosphere',     band: 'C12', fiveEStage: 'explore', kind: 'game', generatorKey: 'biosphere',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Spot living things on land, in air and water outside.' },
+  { id: 'mm.acid.c12.do', objectiveId: 'mm.acids_bases',   band: 'C12', fiveEStage: 'explore', kind: 'game', generatorKey: 'acidsBases',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find an acid (lemon) and a base (soap) at home.' },
+  { id: 'ec.heat.c12.do', objectiveId: 'ec.heat_transfer', band: 'C12', fiveEStage: 'explore', kind: 'game', generatorKey: 'heatTransfer', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Feel radiation from a warm cup; conduction through a spoon.' },
+
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
   { id: 'll.mb.a.engage',  objectiveId: 'll.my_body',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'tapBodyParts', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Touch your nose! Touch mummy\'s nose!' },
@@ -845,6 +855,15 @@ export const BAND_META = {
     shadow: 'shadow-[0_6px_0_#7E22CE]',
     textColor: 'text-purple-700',
     bgLight: 'bg-purple-50',
+  },
+  C12: {
+    label: 'Senior Scientists',
+    ageRange: 'Age 12',
+    description: 'Classify, model, reason',
+    color: 'bg-fuchsia-500',
+    shadow: 'shadow-[0_6px_0_#A21CAF]',
+    textColor: 'text-fuchsia-700',
+    bgLight: 'bg-fuchsia-50',
   },
 } as const;
 

@@ -46,7 +46,7 @@ export async function getProfile(): Promise<LearnerProfile> {
   // ── Migration: Band 'A' (legacy) → 'A5' ──────────────────────────────────
   // Before the A3/A4/A5 split, the single Band A was stored as 'A'.
   // Any profile written before that change needs upgrading.
-  const VALID_BANDS: string[] = ['A3', 'A4', 'A5', 'B6', 'B7', 'B8', 'B', 'C', 'C11'];
+  const VALID_BANDS: string[] = ['A3', 'A4', 'A5', 'B6', 'B7', 'B8', 'B', 'C', 'C11', 'C12'];
   if (!VALID_BANDS.includes(stored.selectedBand)) {
     stored.selectedBand = 'A5';
     await db.put(PROFILE_STORE, stored, 'current');

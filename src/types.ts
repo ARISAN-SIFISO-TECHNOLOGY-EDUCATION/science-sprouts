@@ -20,7 +20,8 @@ export type Band =
   | 'B8'   // Age 8    — Intermediate Phase Gr 3: plan, measure, conclude
   | 'B'    // Age 9    — Intermediate Phase
   | 'C'    // Age 10    — Intermediate Phase Gr 5: investigate, measure, conclude
-  | 'C11'; // Age 11    — Intermediate Phase Gr 6: separate, transfer, model
+  | 'C11'  // Age 11    — Intermediate Phase Gr 6: separate, transfer, model
+  | 'C12'; // Age 12    — Senior Phase Gr 7: classify, model, reason
 
 /** The 5E instructional model stages. */
 export type FiveE = 'engage' | 'explore' | 'explain' | 'elaborate' | 'evaluate';

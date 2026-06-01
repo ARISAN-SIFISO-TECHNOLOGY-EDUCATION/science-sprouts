@@ -127,6 +127,11 @@ const SolarSystemOrderActivity      = lazy(() => import('./activities/SolarSyste
 const RotationRevolutionActivity    = lazy(() => import('./activities/RotationRevolutionActivity'));
 const MoonPhasesActivity            = lazy(() => import('./activities/MoonPhasesActivity'));
 
+// Age 12 topics (Band C12 — CAPS Gr 7: classify, model, reason)
+const BiosphereActivity             = lazy(() => import('./activities/BiosphereActivity'));
+const AcidsBasesActivity            = lazy(() => import('./activities/AcidsBasesActivity'));
+const HeatTransferActivity          = lazy(() => import('./activities/HeatTransferActivity'));
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
 const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
@@ -426,6 +431,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     C11: [{ id: 'eb.moon.c11.do', label: 'Moon Phases', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Put the moon phases in order, new to full' }],
   },
 
+  // Age 12 — CAPS Gr 7 (Band C12)
+  'll.biosphere': {
+    C12: [{ id: 'll.bio.c12.do', label: 'Biosphere Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort life by land, water or air' }],
+  },
+  'mm.acids_bases': {
+    C12: [{ id: 'mm.acid.c12.do', label: 'Acid–Base Lab', fiveE: '① TEST → CLASSIFY → CONCLUDE', voiceHint: 'Test substances for acid, neutral or base' }],
+  },
+  'ec.heat_transfer': {
+    C12: [{ id: 'ec.heat.c12.do', label: 'Heat Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort how heat moves: conduction, convection, radiation' }],
+  },
+
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
     A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
@@ -598,6 +614,9 @@ const ACTIVITY_REGISTRY: Record<
   'eb.sol.c11.do':           SolarSystemOrderActivity,
   'eb.rr.c11.do':            RotationRevolutionActivity,
   'eb.moon.c11.do':          MoonPhasesActivity,
+  'll.bio.c12.do':           BiosphereActivity,
+  'mm.acid.c12.do':          AcidsBasesActivity,
+  'ec.heat.c12.do':          HeatTransferActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
@@ -773,6 +792,18 @@ const BAND_UI: Record<Band, {
     nextAccent:  'bg-purple-500 shadow-[0_4px_0_#7E22CE]',
     doneBg:      'bg-purple-50 border-purple-200 text-purple-700',
     goBadge:     'bg-purple-500',
+  },
+  C12: {
+    emoji: '🔭',
+    bannerBg:    'bg-fuchsia-50 border-fuchsia-200',
+    iconBg:      'bg-fuchsia-200',
+    labelText:   'text-fuchsia-700',
+    subtitleText:'text-fuchsia-500',
+    pillBg:      'bg-fuchsia-100 border-fuchsia-300 text-fuchsia-700',
+    nextBorder:  'border-fuchsia-300',
+    nextAccent:  'bg-fuchsia-500 shadow-[0_4px_0_#A21CAF]',
+    doneBg:      'bg-fuchsia-50 border-fuchsia-200 text-fuchsia-700',
+    goBadge:     'bg-fuchsia-500',
   },
 };
 

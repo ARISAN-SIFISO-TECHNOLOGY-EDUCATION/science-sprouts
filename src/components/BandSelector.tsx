@@ -131,6 +131,22 @@ const OLDER_BANDS: {
     buttonBg:     'bg-purple-500',
     buttonShadow: 'shadow-[0_6px_0_#7E22CE]',
   },
+  {
+    band: 'C12',
+    emoji: '🔭',
+    bullets: [
+      'Senior Phase: classifies, models & reasons',
+      'Atoms, acids, elements & energy transfer',
+      'Sun, Moon, tides, stars & galaxies',
+      'Writes conclusions: I found that… because…',
+    ],
+    accentBg:     'bg-fuchsia-50',
+    accentBorder: 'border-fuchsia-200',
+    accentText:   'text-fuchsia-700',
+    accentIcon:   'bg-fuchsia-100',
+    buttonBg:     'bg-fuchsia-500',
+    buttonShadow: 'shadow-[0_6px_0_#A21CAF]',
+  },
 ];
 
 // ── Young age accent colours (for compact cards) ──────────────────────────────
