@@ -99,6 +99,11 @@ const SolarSystemActivity           = lazy(() => import('./activities/SolarSyste
 const WeatheringActivity            = lazy(() => import('./activities/WeatheringActivity'));
 const SeasonsActivity               = lazy(() => import('./activities/SeasonsActivity'));
 
+// Age 10 topics (Band C — CAPS Gr 5: investigate, classify, conclude)
+const VertebratesActivity           = lazy(() => import('./activities/VertebratesActivity'));
+const MetalsActivity                = lazy(() => import('./activities/MetalsActivity'));
+const PowerStationActivity          = lazy(() => import('./activities/PowerStationActivity'));
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
 const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
@@ -322,6 +327,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     B: [{ id: 'eb.sea.b.do', label: 'Seasons Lab', fiveE: '① MODEL → RECORD → CONCLUDE', voiceHint: 'Tilt the Earth — why is summer hotter?' }],
   },
 
+  // Age 10 — CAPS Gr 5 (Band C)
+  'll.vertebrates': {
+    C: [{ id: 'll.vert.c.do', label: 'Backbone Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort animals into vertebrates and invertebrates' }],
+  },
+  'mm.metals': {
+    C: [{ id: 'mm.met.c.do', label: 'Metal Tester', fiveE: '① TEST → CLASSIFY → CONCLUDE', voiceHint: 'Test materials — metal or non-metal?' }],
+  },
+  'ec.mains_electricity': {
+    C: [{ id: 'ec.mains.c.do', label: 'Power Journey', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Follow electricity from the power station to your home' }],
+  },
+
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
     A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
@@ -470,6 +486,9 @@ const ACTIVITY_REGISTRY: Record<
   'eb.ss.b.do':              SolarSystemActivity,
   'eb.wea.b.do':             WeatheringActivity,
   'eb.sea.b.do':             SeasonsActivity,
+  'll.vert.c.do':            VertebratesActivity,
+  'mm.met.c.do':             MetalsActivity,
+  'ec.mains.c.do':           PowerStationActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,

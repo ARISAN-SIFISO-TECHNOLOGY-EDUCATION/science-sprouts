@@ -297,6 +297,11 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.weathering',         strand: 'earth_and_beyond',     topic: 'Rocks & Soil Formation', title: 'Weathering breaks rocks into soil',    capsRef: 'CAPS Gr 4: Earth & Beyond', band: 'B', prerequisites: [], anchoringPhenomenon: 'Can water and wind break a hard rock?', languages: ['en', 'zu'] },
   { id: 'eb.seasons',            strand: 'earth_and_beyond',     topic: 'Seasons & Day Length', title: "Earth's tilt gives us seasons",          capsRef: 'CAPS Gr 4: Earth & Beyond', band: 'B', prerequisites: [], anchoringPhenomenon: 'Why is summer hotter than winter?', languages: ['en', 'zu'] },
 
+  // ── Age 10 (Band C) — CAPS Gr 5: investigate, classify, conclude ─────────
+  { id: 'll.vertebrates',      strand: 'life_and_living',      topic: 'Vertebrates & Invertebrates', title: 'Animals are grouped by whether they have a backbone', capsRef: 'CAPS Gr 5: Life & Living', band: 'C', prerequisites: [], anchoringPhenomenon: 'Does every animal have a backbone like you?', languages: ['en', 'zu'] },
+  { id: 'mm.metals',           strand: 'matter_and_materials', topic: 'Metals & Non-Metals',         title: 'Metals are shiny and conduct electricity',          capsRef: 'CAPS Gr 5: Matter & Materials', band: 'C', prerequisites: [], anchoringPhenomenon: 'Why are electric wires made of metal?', languages: ['en', 'zu'] },
+  { id: 'ec.mains_electricity', strand: 'energy_and_change',   topic: 'Mains Electricity',           title: 'Electricity is made at a power station and travels to homes', capsRef: 'CAPS Gr 5: Energy & Change', band: 'C', prerequisites: [], anchoringPhenomenon: 'Where does the electricity in your wall come from?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -532,6 +537,11 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'eb.ss.b.do',  objectiveId: 'eb.solar_system',       band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'solarSystem',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'At night, find a planet — it does not twinkle like a star.' },
   { id: 'eb.wea.b.do', objectiveId: 'eb.weathering',         band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'weathering',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find cracked rocks or sand — broken-down rock.' },
   { id: 'eb.sea.b.do', objectiveId: 'eb.seasons',            band: 'B', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'seasons',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Note the sunset time now vs in 3 months.' },
+
+  // ── Age 10 activities (Band C — CAPS Gr 5) ─────────────────────────────
+  { id: 'll.vert.c.do', objectiveId: 'll.vertebrates',       band: 'C', fiveEStage: 'explore', kind: 'game', generatorKey: 'vertebrates',  config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find an animal or photo — does it have a backbone?' },
+  { id: 'mm.met.c.do',  objectiveId: 'mm.metals',            band: 'C', fiveEStage: 'explore', kind: 'game', generatorKey: 'metals',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find one metal and one non-metal object at home.' },
+  { id: 'ec.mains.c.do', objectiveId: 'ec.mains_electricity', band: 'C', fiveEStage: 'explore', kind: 'game', generatorKey: 'powerStation', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Count things in one room that use mains electricity.' },
 
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
@@ -774,8 +784,8 @@ export const BAND_META = {
   },
   C: {
     label: 'Junior Scientists',
-    ageRange: 'Ages 10–12',
-    description: 'Investigate, predict, reason',
+    ageRange: 'Age 10',
+    description: 'Investigate, measure, conclude',
     color: 'bg-indigo-500',
     shadow: 'shadow-[0_6px_0_#4338CA]',
     textColor: 'text-indigo-700',
