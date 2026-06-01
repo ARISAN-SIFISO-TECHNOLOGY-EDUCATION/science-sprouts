@@ -113,6 +113,11 @@ const ErosionActivity               = lazy(() => import('./activities/ErosionAct
 const FossilsActivity               = lazy(() => import('./activities/FossilsActivity'));
 const RotationActivity              = lazy(() => import('./activities/RotationActivity'));
 
+// Age 11 topics (Band C11 — CAPS Gr 6: separate, transfer, model)
+const PhotosynthesisIOActivity      = lazy(() => import('./activities/PhotosynthesisIOActivity'));
+const MixturesSeparateActivity      = lazy(() => import('./activities/MixturesSeparateActivity'));
+const SeriesCircuitActivity         = lazy(() => import('./activities/SeriesCircuitActivity'));
+
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
 const WetDryActivity          = lazy(() => import('./activities/WetDryActivity'));
@@ -374,6 +379,17 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     C: [{ id: 'eb.rot.c.do', label: 'Day & Night Lab', fiveE: '① MODEL → CONCLUDE', voiceHint: 'Spin the Earth to make day and night' }],
   },
 
+  // Age 11 — CAPS Gr 6 (Band C11)
+  'll.photosynthesis_io': {
+    C11: [{ id: 'll.psio.c11.do', label: 'Leaf Factory', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort what goes into a leaf and what comes out' }],
+  },
+  'mm.mixtures_separate': {
+    C11: [{ id: 'mm.sep.c11.do', label: 'Separation Lab', fiveE: '① MATCH → CONCLUDE', voiceHint: 'Pick the right way to separate each mixture' }],
+  },
+  'ec.series_circuit': {
+    C11: [{ id: 'ec.ser.c11.do', label: 'Brightness Lab', fiveE: '① INVESTIGATE → MEASURE → CONCLUDE', voiceHint: 'Add cells and measure the bulb brightness' }],
+  },
+
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
     A5: [{ id: 'll.5s.a5.engage', label: '5 Senses!',  fiveE: '① EXPLORE', voiceHint: 'Predict & tap — eyes, ears, nose, mouth, hands' }],
@@ -534,6 +550,9 @@ const ACTIVITY_REGISTRY: Record<
   'eb.ero.c.do':             ErosionActivity,
   'eb.fos.c.do':             FossilsActivity,
   'eb.rot.c.do':             RotationActivity,
+  'll.psio.c11.do':          PhotosynthesisIOActivity,
+  'mm.sep.c11.do':           MixturesSeparateActivity,
+  'ec.ser.c11.do':           SeriesCircuitActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
@@ -697,6 +716,18 @@ const BAND_UI: Record<Band, {
     nextAccent:  'bg-indigo-500 shadow-[0_4px_0_#4338CA]',
     doneBg:      'bg-indigo-50 border-indigo-200 text-indigo-700',
     goBadge:     'bg-indigo-500',
+  },
+  C11: {
+    emoji: '🧑‍🔬',
+    bannerBg:    'bg-purple-50 border-purple-200',
+    iconBg:      'bg-purple-200',
+    labelText:   'text-purple-700',
+    subtitleText:'text-purple-500',
+    pillBg:      'bg-purple-100 border-purple-300 text-purple-700',
+    nextBorder:  'border-purple-300',
+    nextAccent:  'bg-purple-500 shadow-[0_4px_0_#7E22CE]',
+    doneBg:      'bg-purple-50 border-purple-200 text-purple-700',
+    goBadge:     'bg-purple-500',
   },
 };
 

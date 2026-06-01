@@ -115,6 +115,22 @@ const OLDER_BANDS: {
     buttonBg:     'bg-indigo-500',
     buttonShadow: 'shadow-[0_6px_0_#4338CA]',
   },
+  {
+    band: 'C11',
+    emoji: '🧑‍🔬',
+    bullets: [
+      'Plans full investigations independently',
+      'Separates mixtures & tracks energy transfer',
+      'Models the solar system, Earth & Moon',
+      'Writes conclusions: I found that… because…',
+    ],
+    accentBg:     'bg-purple-50',
+    accentBorder: 'border-purple-200',
+    accentText:   'text-purple-700',
+    accentIcon:   'bg-purple-100',
+    buttonBg:     'bg-purple-500',
+    buttonShadow: 'shadow-[0_6px_0_#7E22CE]',
+  },
 ];
 
 // ── Young age accent colours (for compact cards) ──────────────────────────────

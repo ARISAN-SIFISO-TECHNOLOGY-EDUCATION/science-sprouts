@@ -311,6 +311,11 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.fossils',          strand: 'earth_and_beyond',     topic: 'Sedimentary Rocks & Fossils', title: 'Rock layers build up over time; the deepest is oldest', capsRef: 'CAPS Gr 5: Earth & Beyond', band: 'C', prerequisites: [], anchoringPhenomenon: 'Which fossil is the oldest in a cliff of rock layers?', languages: ['en', 'zu'] },
   { id: 'eb.earth_rotation',   strand: 'earth_and_beyond',     topic: 'Day & Night',                 title: 'Earth spins once every 24 hours, giving day and night', capsRef: 'CAPS Gr 5: Earth & Beyond', band: 'C', prerequisites: [], anchoringPhenomenon: 'What makes day turn into night?', languages: ['en', 'zu'] },
 
+  // ── Age 11 (Band C11) — CAPS Gr 6: separate, transfer, model ────────────
+  { id: 'll.photosynthesis_io', strand: 'life_and_living',      topic: 'Photosynthesis In & Out',  title: 'Leaves take in water, CO₂ and light; give out glucose and oxygen', capsRef: 'CAPS Gr 6: Life & Living', band: 'C11', prerequisites: [], anchoringPhenomenon: 'What does a leaf take in, and what does it make?', languages: ['en', 'zu'] },
+  { id: 'mm.mixtures_separate', strand: 'matter_and_materials', topic: 'Mixtures & Separation',    title: 'Mixtures can be separated by the right method',     capsRef: 'CAPS Gr 6: Matter & Materials', band: 'C11', prerequisites: [], anchoringPhenomenon: 'How do you get salt back out of salt water?', languages: ['en', 'zu'] },
+  { id: 'ec.series_circuit',    strand: 'energy_and_change',    topic: 'Series Circuits',          title: 'More cells push more current and a brighter bulb',  capsRef: 'CAPS Gr 6: Energy & Change', band: 'C11', prerequisites: [], anchoringPhenomenon: 'What happens to the bulb when you add more cells?', languages: ['en', 'zu'] },
+
   // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
 
   {
@@ -561,6 +566,11 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'eb.fos.c.do',  objectiveId: 'eb.fossils',          band: 'C', fiveEStage: 'explore', kind: 'game',       generatorKey: 'fossils',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find layers in a cliff or cake — the bottom is oldest.' },
   { id: 'eb.rot.c.do',  objectiveId: 'eb.earth_rotation',   band: 'C', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'rotation',   config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'The sun is not moving — you are, spinning on Earth.' },
 
+  // ── Age 11 activities (Band C11 — CAPS Gr 6) ───────────────────────────
+  { id: 'll.psio.c11.do', objectiveId: 'll.photosynthesis_io', band: 'C11', fiveEStage: 'explore', kind: 'game',       generatorKey: 'photosynthesisIO', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Breathe near a plant — the oxygen was made by leaves.' },
+  { id: 'mm.sep.c11.do',  objectiveId: 'mm.mixtures_separate', band: 'C11', fiveEStage: 'explore', kind: 'game',       generatorKey: 'mixturesSeparate', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Find a sieve or colander — what does it separate?' },
+  { id: 'ec.ser.c11.do',  objectiveId: 'ec.series_circuit',    band: 'C11', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'seriesCircuit',    config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Count the batteries in a torch — joined in series.' },
+
   // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
 
   { id: 'll.mb.a.engage',  objectiveId: 'll.my_body',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'tapBodyParts', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Touch your nose! Touch mummy\'s nose!' },
@@ -808,6 +818,15 @@ export const BAND_META = {
     shadow: 'shadow-[0_6px_0_#4338CA]',
     textColor: 'text-indigo-700',
     bgLight: 'bg-indigo-50',
+  },
+  C11: {
+    label: 'Junior Scientists II',
+    ageRange: 'Age 11',
+    description: 'Separate, transfer, model',
+    color: 'bg-purple-500',
+    shadow: 'shadow-[0_6px_0_#7E22CE]',
+    textColor: 'text-purple-700',
+    bgLight: 'bg-purple-50',
   },
 } as const;
 
