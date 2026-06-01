@@ -103,6 +103,15 @@ const SeasonsActivity               = lazy(() => import('./activities/SeasonsAct
 const VertebratesActivity           = lazy(() => import('./activities/VertebratesActivity'));
 const MetalsActivity                = lazy(() => import('./activities/MetalsActivity'));
 const PowerStationActivity          = lazy(() => import('./activities/PowerStationActivity'));
+const SkeletonsActivity             = lazy(() => import('./activities/SkeletonsActivity'));
+const FoodWebActivity               = lazy(() => import('./activities/FoodWebActivity'));
+const MetalUsesActivity             = lazy(() => import('./activities/MetalUsesActivity'));
+const ProcessingActivity            = lazy(() => import('./activities/ProcessingActivity'));
+const FuelsActivity                 = lazy(() => import('./activities/FuelsActivity'));
+const SwitchCircuitActivity         = lazy(() => import('./activities/SwitchCircuitActivity'));
+const ErosionActivity               = lazy(() => import('./activities/ErosionActivity'));
+const FossilsActivity               = lazy(() => import('./activities/FossilsActivity'));
+const RotationActivity              = lazy(() => import('./activities/RotationActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
@@ -337,6 +346,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'ec.mains_electricity': {
     C: [{ id: 'ec.mains.c.do', label: 'Power Journey', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Follow electricity from the power station to your home' }],
   },
+  'll.skeletons': {
+    C: [{ id: 'll.skel.c.do', label: 'Skeleton Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Bones inside or shell outside?' }],
+  },
+  'll.food_webs': {
+    C: [{ id: 'll.web.c.do', label: 'Food Web Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort producers and consumers' }],
+  },
+  'mm.metal_uses': {
+    C: [{ id: 'mm.use.c.do', label: 'Metal Uses', fiveE: '① MATCH → CONCLUDE', voiceHint: 'Match each object to the metal property it needs' }],
+  },
+  'mm.processing': {
+    C: [{ id: 'mm.proc.c.do', label: 'Material Factory', fiveE: '① MATCH → CONCLUDE', voiceHint: 'Turn raw materials into products' }],
+  },
+  'ec.fuels': {
+    C: [{ id: 'ec.fuel.c.do', label: 'Fuel Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Which things store energy we can burn?' }],
+  },
+  'ec.switches': {
+    C: [{ id: 'ec.sw.c.do', label: 'Switch Lab', fiveE: '① TEST → CONCLUDE', voiceHint: 'Use a switch to turn the bulb on and off' }],
+  },
+  'eb.erosion': {
+    C: [{ id: 'eb.ero.c.do', label: 'Erosion Lab', fiveE: '① INVESTIGATE → MEASURE → CONCLUDE', voiceHint: 'Make it rain on bare and planted soil' }],
+  },
+  'eb.fossils': {
+    C: [{ id: 'eb.fos.c.do', label: 'Fossil Dig', fiveE: '① INVESTIGATE → CONCLUDE', voiceHint: 'Find the oldest fossil in the rock layers' }],
+  },
+  'eb.earth_rotation': {
+    C: [{ id: 'eb.rot.c.do', label: 'Day & Night Lab', fiveE: '① MODEL → CONCLUDE', voiceHint: 'Spin the Earth to make day and night' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -489,6 +525,15 @@ const ACTIVITY_REGISTRY: Record<
   'll.vert.c.do':            VertebratesActivity,
   'mm.met.c.do':             MetalsActivity,
   'ec.mains.c.do':           PowerStationActivity,
+  'll.skel.c.do':            SkeletonsActivity,
+  'll.web.c.do':             FoodWebActivity,
+  'mm.use.c.do':             MetalUsesActivity,
+  'mm.proc.c.do':            ProcessingActivity,
+  'ec.fuel.c.do':            FuelsActivity,
+  'ec.sw.c.do':              SwitchCircuitActivity,
+  'eb.ero.c.do':             ErosionActivity,
+  'eb.fos.c.do':             FossilsActivity,
+  'eb.rot.c.do':             RotationActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
