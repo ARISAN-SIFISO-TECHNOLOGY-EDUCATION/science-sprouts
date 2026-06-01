@@ -117,6 +117,15 @@ const RotationActivity              = lazy(() => import('./activities/RotationAc
 const PhotosynthesisIOActivity      = lazy(() => import('./activities/PhotosynthesisIOActivity'));
 const MixturesSeparateActivity      = lazy(() => import('./activities/MixturesSeparateActivity'));
 const SeriesCircuitActivity         = lazy(() => import('./activities/SeriesCircuitActivity'));
+const NutrientsActivity             = lazy(() => import('./activities/NutrientsActivity'));
+const FoodPreservationActivity      = lazy(() => import('./activities/FoodPreservationActivity'));
+const ChangesOfStateActivity        = lazy(() => import('./activities/ChangesOfStateActivity'));
+const DissolvingActivity            = lazy(() => import('./activities/DissolvingActivity'));
+const ConductorsActivity            = lazy(() => import('./activities/ConductorsActivity'));
+const LeversActivity                = lazy(() => import('./activities/LeversActivity'));
+const SolarSystemOrderActivity      = lazy(() => import('./activities/SolarSystemOrderActivity'));
+const RotationRevolutionActivity    = lazy(() => import('./activities/RotationRevolutionActivity'));
+const MoonPhasesActivity            = lazy(() => import('./activities/MoonPhasesActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
@@ -389,6 +398,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'ec.series_circuit': {
     C11: [{ id: 'ec.ser.c11.do', label: 'Brightness Lab', fiveE: '① INVESTIGATE → MEASURE → CONCLUDE', voiceHint: 'Add cells and measure the bulb brightness' }],
   },
+  'll.nutrients': {
+    C11: [{ id: 'll.nut.c11.do', label: 'Nutrient Sort', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort foods by carbohydrate, protein or vitamins' }],
+  },
+  'll.food_preservation': {
+    C11: [{ id: 'll.pres.c11.do', label: 'Food Keeper', fiveE: '① MATCH → CONCLUDE', voiceHint: 'Choose how to preserve each food' }],
+  },
+  'mm.changes_of_state': {
+    C11: [{ id: 'mm.cos.c11.do', label: 'State Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort changes by heating or cooling' }],
+  },
+  'mm.dissolving': {
+    C11: [{ id: 'mm.dis.c11.do', label: 'Dissolving Lab', fiveE: '① INVESTIGATE → MEASURE → CONCLUDE', voiceHint: 'Change the water temperature and time the dissolving' }],
+  },
+  'ec.conductors': {
+    C11: [{ id: 'ec.con.c11.do', label: 'Conductor Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Test which materials let the current through' }],
+  },
+  'ec.levers': {
+    C11: [{ id: 'ec.lev.c11.do', label: 'Lever Lab', fiveE: '① INVESTIGATE → CONCLUDE', voiceHint: 'Move the effort to lift a heavy load' }],
+  },
+  'eb.solar_order': {
+    C11: [{ id: 'eb.sol.c11.do', label: 'Planet Order', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Line up the planets from the sun' }],
+  },
+  'eb.rotation_revolution': {
+    C11: [{ id: 'eb.rr.c11.do', label: 'Spin or Orbit', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort events by Earth spinning or orbiting' }],
+  },
+  'eb.moon_phases': {
+    C11: [{ id: 'eb.moon.c11.do', label: 'Moon Phases', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Put the moon phases in order, new to full' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -553,6 +589,15 @@ const ACTIVITY_REGISTRY: Record<
   'll.psio.c11.do':          PhotosynthesisIOActivity,
   'mm.sep.c11.do':           MixturesSeparateActivity,
   'ec.ser.c11.do':           SeriesCircuitActivity,
+  'll.nut.c11.do':           NutrientsActivity,
+  'll.pres.c11.do':          FoodPreservationActivity,
+  'mm.cos.c11.do':           ChangesOfStateActivity,
+  'mm.dis.c11.do':           DissolvingActivity,
+  'ec.con.c11.do':           ConductorsActivity,
+  'ec.lev.c11.do':           LeversActivity,
+  'eb.sol.c11.do':           SolarSystemOrderActivity,
+  'eb.rr.c11.do':            RotationRevolutionActivity,
+  'eb.moon.c11.do':          MoonPhasesActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
