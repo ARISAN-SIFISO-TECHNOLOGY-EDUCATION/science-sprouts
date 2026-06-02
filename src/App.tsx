@@ -131,6 +131,15 @@ const MoonPhasesActivity            = lazy(() => import('./activities/MoonPhases
 const BiosphereActivity             = lazy(() => import('./activities/BiosphereActivity'));
 const AcidsBasesActivity            = lazy(() => import('./activities/AcidsBasesActivity'));
 const HeatTransferActivity          = lazy(() => import('./activities/HeatTransferActivity'));
+const ClassificationActivity        = lazy(() => import('./activities/ClassificationActivity'));
+const PlantReproductionOrderActivity = lazy(() => import('./activities/PlantReproductionOrderActivity'));
+const ElementsCompoundsActivity     = lazy(() => import('./activities/ElementsCompoundsActivity'));
+const BuildAtomActivity             = lazy(() => import('./activities/BuildAtomActivity'));
+const EnergyTypesActivity           = lazy(() => import('./activities/EnergyTypesActivity'));
+const RenewableEnergyActivity       = lazy(() => import('./activities/RenewableEnergyActivity'));
+const SunEarthMoonActivity          = lazy(() => import('./activities/SunEarthMoonActivity'));
+const TidesActivity                 = lazy(() => import('./activities/TidesActivity'));
+const GalaxiesActivity              = lazy(() => import('./activities/GalaxiesActivity'));
 
 // Age 5 topics (A5 — See → Predict → Do → Caregiver Card)
 const FiveSensesActivity      = lazy(() => import('./activities/FiveSensesActivity'));
@@ -441,6 +450,33 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
   'ec.heat_transfer': {
     C12: [{ id: 'ec.heat.c12.do', label: 'Heat Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort how heat moves: conduction, convection, radiation' }],
   },
+  'll.classification': {
+    C12: [{ id: 'll.class.c12.do', label: 'Sorting Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Group living things: animal, plant or fungus' }],
+  },
+  'll.plant_reproduction_c12': {
+    C12: [{ id: 'll.repro.c12.do', label: 'Flower to Fruit', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Order how a flower becomes a fruit with seeds' }],
+  },
+  'mm.elements_compounds': {
+    C12: [{ id: 'mm.elem.c12.do', label: 'Matter Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort matter: element, compound or mixture' }],
+  },
+  'mm.atom': {
+    C12: [{ id: 'mm.atom.c12.do', label: 'Build an Atom', fiveE: '① BUILD → CONCLUDE', voiceHint: 'Add electrons to balance the atom' }],
+  },
+  'ec.energy_types': {
+    C12: [{ id: 'ec.etypes.c12.do', label: 'Energy Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort energy: stored potential or moving kinetic' }],
+  },
+  'ec.energy_renewable': {
+    C12: [{ id: 'ec.esrc.c12.do', label: 'Power Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort energy sources: renewable or runs out' }],
+  },
+  'eb.sun_earth_moon': {
+    C12: [{ id: 'eb.sem.c12.do', label: 'Sky Lab', fiveE: '① CLASSIFY → CONCLUDE', voiceHint: 'Sort space objects: star, planet or moon' }],
+  },
+  'eb.tides': {
+    C12: [{ id: 'eb.tides.c12.do', label: 'Tide Model', fiveE: '① INVESTIGATE → CONCLUDE', voiceHint: 'Move the Moon and watch the tides rise' }],
+  },
+  'eb.galaxies': {
+    C12: [{ id: 'eb.gal.c12.do', label: 'Cosmic Scale', fiveE: '① ORDER → CONCLUDE', voiceHint: 'Order space from moon to galaxy' }],
+  },
 
   // Age 5 MVP — single 4-phase activity per topic (See → Predict → Do → Card)
   'll.five_senses': {
@@ -617,6 +653,15 @@ const ACTIVITY_REGISTRY: Record<
   'll.bio.c12.do':           BiosphereActivity,
   'mm.acid.c12.do':          AcidsBasesActivity,
   'ec.heat.c12.do':          HeatTransferActivity,
+  'll.class.c12.do':         ClassificationActivity,
+  'll.repro.c12.do':         PlantReproductionOrderActivity,
+  'mm.elem.c12.do':          ElementsCompoundsActivity,
+  'mm.atom.c12.do':          BuildAtomActivity,
+  'ec.etypes.c12.do':        EnergyTypesActivity,
+  'ec.esrc.c12.do':          RenewableEnergyActivity,
+  'eb.sem.c12.do':           SunEarthMoonActivity,
+  'eb.tides.c12.do':         TidesActivity,
+  'eb.gal.c12.do':           GalaxiesActivity,
   'mm.fsr.b6.do':            FloatSinkRecordActivity,
   'll.ppr.b6.do':            PlantPartsRecordActivity,
   'ec.shr.b6.do':            ShadowsRecordActivity,
