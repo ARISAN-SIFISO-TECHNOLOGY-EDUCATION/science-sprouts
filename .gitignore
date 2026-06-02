@@ -35,3 +35,9 @@ screenshots/
 # Android release artefacts
 android/app/release/
 android/app/build/
+
+# Signing secrets — NEVER commit these
+*.jks
+*.keystore
+keystore.properties
+android/keystore.properties
