@@ -27,6 +27,7 @@ import BandSelector from './components/BandSelector';
 import NavBar, { Tab } from './components/NavBar';
 import About        from './components/About';
 import Progress     from './components/Progress';
+import HomeLanding  from './components/HomeLanding';
 
 // ── Activity imports (lazy) ─────────────────────────────────────────────────
 // Each activity is code-split with React.lazy so the phone only downloads an
@@ -887,6 +888,7 @@ export default function App() {
   const [profile, setProfile]               = useState<LearnerProfile | null>(null);
   const [bandChosen, setBandChosen]         = useState(false);
   const [tab, setTab]                       = useState<Tab>('home');
+  const [homeStarted, setHomeStarted]       = useState(false);   // Home: landing → topics
   const [activeAct, setActiveAct]           = useState<string | null>(null);
   const [selectedObjective, setSelectedObjective] = useState<string | null>(null);
   const [showDashboard, setShowDashboard]   = useState(false);
@@ -908,6 +910,7 @@ export default function App() {
   function navigate(t: Tab) {
     deepen();
     setSelectedObjective(null);          // leaving Home always resets the drill-in
+    if (t === 'home')  setHomeStarted(false);  // Home tab lands on the hero/vision
     if (t === 'about') setAboutView('about');
     setTab(t);
   }
@@ -926,6 +929,7 @@ export default function App() {
     localStorage.setItem(BAND_CHOSEN_KEY, '1');
     setBandChosen(true);
     setSelectedObjective(null);  // return to topic list for new band
+    setHomeStarted(true);        // jump straight into the chosen age's topics
     setTab('home');
   }
 
@@ -955,6 +959,7 @@ export default function App() {
     if (activeAct)                                      { setActiveAct(null); return true; }
     if (tab === 'about' && aboutView === 'privacy')     { setAboutView('about'); return true; }
     if (tab === 'home' && selectedObjective)            { setSelectedObjective(null); return true; }
+    if (tab === 'home' && homeStarted)                  { setHomeStarted(false); return true; }
     if (tab !== 'home')                                 { setTab('home'); return true; }
     return false;
   };
@@ -1057,6 +1062,11 @@ export default function App() {
     return shell(
       <About key="about" view={aboutView} onShowPrivacy={openPrivacy} onBackToAbout={() => setAboutView('about')} />
     );
+
+  // ── Home tab — landing (hero + vision); CTA reveals the topics ──────────────
+
+  if (!homeStarted)
+    return shell(<HomeLanding key="home-landing" onStart={() => navigate('ages')} onOpenSettings={openDashboard} />);
 
   // ── Home tab — topic detail (an objective is selected) ──────────────────────
 

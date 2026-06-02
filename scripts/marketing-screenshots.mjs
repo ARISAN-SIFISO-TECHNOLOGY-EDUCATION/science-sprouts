@@ -72,15 +72,17 @@ async function run() {
   await page.waitForSelector('text=Who is learning today', { timeout: 8000 });
   await shot(page, '1-choose-age');
 
-  // 2. Home — Foundation Scientists (Age 6), rich topic list + new bottom nav
-  await seed(page, 'B6', {}, 4, 4);
-  await page.waitForSelector('nav[aria-label="Main navigation"]');
-  await shot(page, '2-home-age6');
+  // 2. Home landing — hero banner + The Vision
+  await seed(page, 'C12', {}, 6, 5);
+  await page.waitForSelector('text=Our Vision', { timeout: 5000 });
+  await shot(page, '2-home-landing');
 
-  // 3. Home — Senior Scientists (Age 12), shows breadth + nav
-  await seed(page, 'C12', {}, 8, 6);
-  await page.waitForSelector('nav[aria-label="Main navigation"]');
-  await shot(page, '3-home-age12');
+  // 3. Topics — Start Exploring → choose Age 12 → topic list
+  await page.locator('button:has-text("Start Exploring")').click();
+  await page.waitForSelector('text=Who is learning today', { timeout: 5000 });
+  await page.locator('button:has-text("Senior Scientists")').click();
+  await page.waitForSelector('text=Choose a Topic', { timeout: 5000 });
+  await shot(page, '3-topics-age12');
 
   // 4. Activity — a "Predict" investigation screen (Biosphere, C12)
   await page.locator('button').filter({ hasText: 'The Biosphere' }).first().click();
