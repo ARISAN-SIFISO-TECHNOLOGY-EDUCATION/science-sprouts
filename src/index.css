@@ -60,6 +60,25 @@ body {
   border-bottom: 2px dashed #E5E7EB;
 }
 
+/* ── Safe-area insets (gesture-nav phones, notches) ──────────────────────── */
+/* Requires <meta viewport ... viewport-fit=cover>. On devices without insets
+   these env() values resolve to 0, so they are harmless on desktop/older phones. */
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Bottom-nav height (h-16 = 4rem) plus the device's bottom inset, so page
+   content never hides behind the bar or the system gesture pill. */
+@utility pb-nav {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom) + 0.5rem);
+}
+
+/* Push fixed-bottom chrome above the gesture pill. */
+@utility bottom-safe {
+  bottom: env(safe-area-inset-bottom);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; }

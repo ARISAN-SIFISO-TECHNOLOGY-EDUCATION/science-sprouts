@@ -10,7 +10,7 @@
 //   activity    (full-screen activity component)
 // ──────────────────────────────────────────────────────────────────────────────
 
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Settings, Star, FlaskConical, Leaf, Zap, Globe, Lock, ChevronLeft,
@@ -24,6 +24,9 @@ import { cn } from './lib/utils';
 import Garden       from './components/Garden';
 import Dashboard    from './components/Dashboard';
 import BandSelector from './components/BandSelector';
+import NavBar, { Tab } from './components/NavBar';
+import About        from './components/About';
+import Progress     from './components/Progress';
 
 // ── Activity imports (lazy) ─────────────────────────────────────────────────
 // Each activity is code-split with React.lazy so the phone only downloads an
@@ -853,8 +856,9 @@ const BAND_UI: Record<Band, {
 };
 
 // ── Types ─────────────────────────────────────────────────────────────────────
-
-type Screen = 'bandSelect' | 'home' | 'activity';
+// Navigation is tab-based (NavBar). `Tab` lives in NavBar.tsx. Within the Home
+// tab, `selectedObjective` toggles topic-list ⇄ topic-detail. A running activity
+// (`activeAct`) and the first-run band picker are full-screen takeovers with no nav.
 
 const BAND_CHOSEN_KEY = 'bandExplicitlyChosen';
 
@@ -881,20 +885,36 @@ function ActivityLoading() {
 export default function App() {
   const [loading, setLoading]               = useState(true);
   const [profile, setProfile]               = useState<LearnerProfile | null>(null);
-  const [screen, setScreen]                 = useState<Screen>('home');
+  const [bandChosen, setBandChosen]         = useState(false);
+  const [tab, setTab]                       = useState<Tab>('home');
   const [activeAct, setActiveAct]           = useState<string | null>(null);
   const [selectedObjective, setSelectedObjective] = useState<string | null>(null);
   const [showDashboard, setShowDashboard]   = useState(false);
+  const [aboutView, setAboutView]           = useState<'about' | 'privacy'>('about');
 
   // Load profile from IndexedDB
   useEffect(() => {
     getProfile().then(p => {
       setProfile(p);
-      const chosen = localStorage.getItem(BAND_CHOSEN_KEY);
-      setScreen(chosen ? 'home' : 'bandSelect');
+      setBandChosen(!!localStorage.getItem(BAND_CHOSEN_KEY));
       setLoading(false);
     });
-  }, [showDashboard]);
+  }, []);
+
+  // ── Forward navigation (each push lets Back/▽ pop one UI level) ──────────────
+
+  function deepen() { try { window.history.pushState({ ss: true }, ''); } catch { /* noop */ } }
+
+  function navigate(t: Tab) {
+    deepen();
+    setSelectedObjective(null);          // leaving Home always resets the drill-in
+    if (t === 'about') setAboutView('about');
+    setTab(t);
+  }
+  function openTopic(id: string)    { deepen(); setSelectedObjective(id); }
+  function openActivity(id: string) { deepen(); setActiveAct(id); }
+  function openDashboard()          { deepen(); setShowDashboard(true); }
+  function openPrivacy()            { deepen(); setAboutView('privacy'); }
 
   // ── Band selection ──────────────────────────────────────────────────────────
 
@@ -904,8 +924,9 @@ export default function App() {
     await saveProfile(updated);
     setProfile(updated);
     localStorage.setItem(BAND_CHOSEN_KEY, '1');
+    setBandChosen(true);
     setSelectedObjective(null);  // return to topic list for new band
-    setScreen('home');
+    setTab('home');
   }
 
   // ── Activity lifecycle ──────────────────────────────────────────────────────
@@ -914,16 +935,52 @@ export default function App() {
     if (!profile || !selectedObjective) return;
     const updated = await awardStar(selectedObjective, activityId);
     setProfile(updated);
-    setScreen('home');
     setActiveAct(null);
     // Keep selectedObjective so user returns to their topic's activity list
   }
 
   function handleExit() {
-    setScreen('home');
     setActiveAct(null);
     // Keep selectedObjective — return to topic detail
   }
+
+  // ── Unified Back handler (Android hardware/gesture + browser back/swipe) ─────
+  // Pops exactly one UI level. Returns false only at the true root, where the
+  // OS is allowed to leave/exit the app. A ref keeps the listeners current
+  // without re-subscribing on every state change.
+
+  const goBackRef = useRef<() => boolean>(() => false);
+  goBackRef.current = function goBack(): boolean {
+    if (showDashboard)                                  { setShowDashboard(false); return true; }
+    if (activeAct)                                      { setActiveAct(null); return true; }
+    if (tab === 'about' && aboutView === 'privacy')     { setAboutView('about'); return true; }
+    if (tab === 'home' && selectedObjective)            { setSelectedObjective(null); return true; }
+    if (tab !== 'home')                                 { setTab('home'); return true; }
+    return false;
+  };
+
+  // Browser back button / edge-swipe → keep the user inside the app until root.
+  useEffect(() => {
+    const onPop = () => {
+      if (goBackRef.current()) { try { window.history.pushState({ ss: true }, ''); } catch { /* noop */ } }
+    };
+    try { window.history.pushState({ ss: true }, ''); } catch { /* noop */ }
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  // Native Android hardware/gesture Back (Capacitor). No-op in a plain browser.
+  useEffect(() => {
+    let detach: (() => void) | undefined;
+    import('@capacitor/app')
+      .then(({ App: CapApp }) =>
+        CapApp.addListener('backButton', () => {
+          if (!goBackRef.current()) CapApp.exitApp();
+        }).then(handle => { detach = () => handle.remove(); })
+      )
+      .catch(() => { /* not running inside Capacitor */ });
+    return () => detach?.();
+  }, []);
 
   // ── Loading splash ──────────────────────────────────────────────────────────
 
@@ -941,22 +998,15 @@ export default function App() {
     );
   }
 
-  // ── Band selection screen ───────────────────────────────────────────────────
+  // ── First run — force band selection (full screen, no nav) ──────────────────
 
-  if (screen === 'bandSelect') {
-    const alreadyChosen = !!localStorage.getItem(BAND_CHOSEN_KEY);
-    return (
-      <BandSelector
-        currentBand={profile.selectedBand}
-        onSelect={handleBandSelect}
-        onBack={alreadyChosen ? () => setScreen('home') : undefined}
-      />
-    );
+  if (!bandChosen) {
+    return <BandSelector currentBand={profile.selectedBand} onSelect={handleBandSelect} />;
   }
 
-  // ── Activity screen — registry-driven routing ───────────────────────────────
+  // ── Activity — full-screen takeover, no nav ─────────────────────────────────
 
-  if (screen === 'activity' && activeAct && selectedObjective) {
+  if (activeAct && selectedObjective) {
     const Component = ACTIVITY_REGISTRY[activeAct];
     if (Component) {
       return (
@@ -970,7 +1020,7 @@ export default function App() {
     }
   }
 
-  // ── Home screen helpers ─────────────────────────────────────────────────────
+  // ── Shell — persistent nav wraps every tab; activities/first-run are takeovers ─
 
   const band      = profile.selectedBand;
   const bandMeta  = BAND_META[band];
@@ -981,7 +1031,34 @@ export default function App() {
     return acts && acts.length > 0;
   });
 
-  // ── Topic detail view (an objective is selected) ────────────────────────────
+  const shell = (content: React.ReactNode) => (
+    <div className="min-h-screen">
+      <main className="relative min-h-screen max-w-lg mx-auto bg-brand-cream shadow-xl overflow-x-hidden">
+        <AnimatePresence mode="wait">{content}</AnimatePresence>
+      </main>
+      <NavBar active={tab} onNavigate={navigate} />
+      <AnimatePresence>
+        {showDashboard && (
+          <Dashboard profile={profile} onUpdate={setProfile} onClose={() => setShowDashboard(false)} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  // ── Ages / Progress / About tabs ────────────────────────────────────────────
+
+  if (tab === 'ages')
+    return shell(<BandSelector key="ages" currentBand={band} onSelect={handleBandSelect} />);
+
+  if (tab === 'progress')
+    return shell(<Progress key="progress" profile={profile} onBrowse={() => navigate('home')} />);
+
+  if (tab === 'about')
+    return shell(
+      <About key="about" view={aboutView} onShowPrivacy={openPrivacy} onBackToAbout={() => setAboutView('about')} />
+    );
+
+  // ── Home tab — topic detail (an objective is selected) ──────────────────────
 
   if (selectedObjective) {
     const objective = OBJECTIVES.find(o => o.id === selectedObjective);
@@ -998,15 +1075,13 @@ export default function App() {
     const doneBg     = ui.doneBg;
     const goBadge    = ui.goBadge;
 
-    return (
-      <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
-        <AnimatePresence mode="wait">
+    return shell(
           <motion.div
             key="topic-detail"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="p-6 min-h-screen flex flex-col"
+            className="px-6 pt-6 pb-nav min-h-screen flex flex-col"
           >
             {/* ── Header ──────────────────────────────────────────────────── */}
             <header className="flex items-center justify-between mb-5 pb-4 dashed-divider">
@@ -1064,12 +1139,7 @@ export default function App() {
                       key={act.id}
                       whileTap={!isLocked ? { scale: 0.97 } : {}}
                       disabled={isLocked}
-                      onClick={() => {
-                        if (!isLocked) {
-                          setActiveAct(act.id);
-                          setScreen('activity');
-                        }
-                      }}
+                      onClick={() => { if (!isLocked) openActivity(act.id); }}
                       className={cn(
                         'w-full p-4 rounded-2xl text-left border-2 transition-all flex items-center gap-4',
                         isDone    ? doneBg
@@ -1116,35 +1186,20 @@ export default function App() {
               </p>
             </div>
           </motion.div>
-        </AnimatePresence>
-
-        {/* Dashboard overlay */}
-        <AnimatePresence>
-          {showDashboard && (
-            <Dashboard
-              profile={profile}
-              onUpdate={setProfile}
-              onClose={() => setShowDashboard(false)}
-            />
-          )}
-        </AnimatePresence>
-      </div>
     );
   }
 
-  // ── Topic list view (home) ──────────────────────────────────────────────────
+  // ── Home tab — topic list ───────────────────────────────────────────────────
 
   const homeUi = BAND_UI[band];
 
-  return (
-    <div className="relative min-h-screen max-w-lg mx-auto bg-brand-cream pb-20 shadow-xl overflow-x-hidden">
-      <AnimatePresence mode="wait">
+  return shell(
         <motion.div
           key="home"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
-          className="p-6 min-h-screen flex flex-col"
+          className="px-6 pt-6 pb-nav min-h-screen flex flex-col"
         >
           {/* ── Header ──────────────────────────────────────────────────── */}
           <header className="flex items-center justify-between mb-4 pb-4 dashed-divider">
@@ -1168,7 +1223,7 @@ export default function App() {
                 <span className="font-black text-gray-700 text-sm">{profile.totalStars}</span>
               </div>
               <button
-                onClick={() => setShowDashboard(true)}
+                onClick={openDashboard}
                 className="p-2.5 bg-gray-100 rounded-xl text-gray-500 hover:text-green-600
                            transition-colors"
                 aria-label="Parent settings"
@@ -1180,7 +1235,7 @@ export default function App() {
 
           {/* ── Band banner ─────────────────────────────────────────────── */}
           <button
-            onClick={() => setScreen('bandSelect')}
+            onClick={() => navigate('ages')}
             className={cn('w-full flex items-center gap-4 p-4 rounded-2xl mb-5 text-left border-2 transition-all hover:brightness-95', homeUi.bannerBg)}
             aria-label="Change age band"
           >
@@ -1220,7 +1275,7 @@ export default function App() {
                   We are growing brand-new activities for {bandMeta.ageRange}. Check back soon!
                 </p>
                 <button
-                  onClick={() => setScreen('bandSelect')}
+                  onClick={() => navigate('ages')}
                   className="mt-6 px-6 py-3 bg-green-500 shadow-[0_4px_0_#16A34A] text-white font-display font-black rounded-2xl text-sm btn-press"
                 >
                   Choose a different age
@@ -1239,7 +1294,7 @@ export default function App() {
                 <motion.button
                   key={obj.id}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setSelectedObjective(obj.id)}
+                  onClick={() => openTopic(obj.id)}
                   className="w-full p-4 rounded-2xl border-2 bg-white border-gray-100
                              shadow-sm text-left flex items-center gap-4
                              active:scale-95 transition-transform hover:shadow-md"
@@ -1296,18 +1351,5 @@ export default function App() {
             </p>
           </div>
         </motion.div>
-      </AnimatePresence>
-
-      {/* Dashboard overlay */}
-      <AnimatePresence>
-        {showDashboard && (
-          <Dashboard
-            profile={profile}
-            onUpdate={setProfile}
-            onClose={() => setShowDashboard(false)}
-          />
-        )}
-      </AnimatePresence>
-    </div>
   );
 }

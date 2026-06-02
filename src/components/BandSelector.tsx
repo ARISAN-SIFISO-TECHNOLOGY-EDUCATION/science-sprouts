@@ -165,7 +165,7 @@ export default function BandSelector({ currentBand, onSelect, onBack }: BandSele
   const isYoung = currentBand === 'A3' || currentBand === 'A4' || currentBand === 'A5';
 
   return (
-    <div className="min-h-screen max-w-lg mx-auto bg-brand-cream shadow-xl flex flex-col p-6 pb-10 overflow-y-auto">
+    <div className="min-h-screen max-w-lg mx-auto bg-brand-cream shadow-xl flex flex-col px-6 pt-6 pb-nav overflow-y-auto">
 
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 mb-2">
