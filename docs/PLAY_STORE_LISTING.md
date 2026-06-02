@@ -115,12 +115,18 @@ Expected result: **Everyone / PEGI 3 / rated for all ages.**
 |-------|------|--------|
 | App icon | 512×512 PNG, 32-bit | Derive from `ic_launcher` (confirm 512px master) |
 | Feature graphic | 1024×500 PNG/JPG | **TODO** — `scripts/shot-banner.mjs` may help |
-| Phone screenshots | 2–8, min 320px, 16:9 or 9:16 | Have set in `screenshots/` — pick the best 4–8 |
+| Phone screenshots | 2–8, min 320px, 16:9 or 9:16 | **Ready** in `screenshots/marketing/` (786×1396, 9:16) |
 | Tablet screenshots | optional | optional |
 
-Suggested screenshot picks from `screenshots/`:
-`0-band-selector.png`, `home-band-a-new.png`, `home-band-c-new.png`,
-`11-band-c-predict.png`, `5-band-b-explore.png`, `6-band-b-explain.png`.
+**Upload-ready phone screenshots** — `screenshots/marketing/` (regenerate any time
+with `npm run dev` then `node scripts/marketing-screenshots.mjs`):
 
-> Note: screenshots predate Age 12. Optionally regenerate with
-> `node scripts/screenshot-bands.mjs` to show the Senior Scientists band.
+1. `1-choose-age.png` — "Who is learning today?" age picker
+2. `2-home-age6.png` — Home (Age 6) with the new bottom navigation
+3. `3-home-age12.png` — Home (Age 12, Senior Scientists) showing breadth
+4. `4-activity-predict.png` — a "Predict" investigation screen
+5. `5-progress-badges.png` — Progress page: badges, garden, counts
+6. `6-about-safe.png` — About: "100% offline · no ads · no data collected"
+
+> These are current (Age 12 + the new Home/Ages/Progress/About navigation).
+> The older loose files in `screenshots/` are superseded.
