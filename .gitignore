@@ -32,6 +32,12 @@ screenshots/
 # TypeScript build info
 *.tsbuildinfo
 
+# package-lock is intentionally NOT committed: Vite 8 / rolldown pulls nested
+# optional @emnapi wasm deps that npm's `npm ci` cannot validate cross-platform
+# (a known npm bug). Without a lockfile, CI (Cloudflare Pages) uses lenient
+# `npm install`, which resolves the per-platform native bindings correctly.
+package-lock.json
+
 # Android release artefacts
 android/app/release/
 android/app/build/
