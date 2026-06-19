@@ -1,4 +1,4 @@
-// Activity: My Body — Ages 3–4 (Band A3 + A4)
+// Activity: My Body — Age 3 (Band A3)
 // 3S Pattern: See → Do → Caregiver Card
 //
 // See  (5s):  Animated body with intro voice

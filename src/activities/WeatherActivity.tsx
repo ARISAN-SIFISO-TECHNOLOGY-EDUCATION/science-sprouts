@@ -1,4 +1,4 @@
-// Activity: Weather — Ages 3–4 (Band A3 + A4)
+// Activity: Weather — Age 3 (Band A3)
 // 3S Pattern: See → Do → Caregiver Card
 //
 // See  (5s):  Sky cycles through weather types automatically

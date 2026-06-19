@@ -339,7 +339,7 @@ export const OBJECTIVES: LearningObjective[] = [
   { id: 'eb.tides',                   strand: 'earth_and_beyond',     topic: 'Tides',                    title: "The Moon's gravity pulls the oceans into tides", capsRef: 'CAPS Gr 7: Earth & Beyond', band: 'C12', prerequisites: [], anchoringPhenomenon: 'Why does the sea rise and fall twice a day?', languages: ['en', 'zu'] },
   { id: 'eb.galaxies',                strand: 'earth_and_beyond',     topic: 'Galaxies & Space',         title: 'Space scales up from moons to planets to galaxies', capsRef: 'CAPS Gr 7: Earth & Beyond', band: 'C12', prerequisites: [], anchoringPhenomenon: 'What is the biggest thing in space?', languages: ['en', 'zu'] },
 
-  // ── Ages 3–4 (A3/A4) — Life & Living ────────────────────────────────────
+  // ── Age 3 (A3) — Life & Living ───────────────────────────────────────────
 
   {
     id: 'll.my_body',
@@ -353,7 +353,7 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
-  // ── Ages 3–4 (A3/A4) — Matter & Materials ────────────────────────────────
+  // ── Age 3 (A3) — Matter & Materials ──────────────────────────────────────
 
   {
     id: 'mm.hard_soft',
@@ -367,7 +367,7 @@ export const OBJECTIVES: LearningObjective[] = [
     languages: ['en', 'zu'],
   },
 
-  // ── Ages 3–4 (A3/A4) — Earth & Beyond ───────────────────────────────────
+  // ── Age 3 (A3) — Earth & Beyond ──────────────────────────────────────────
 
   {
     id: 'eb.weather',
@@ -378,6 +378,43 @@ export const OBJECTIVES: LearningObjective[] = [
     band: 'A3',
     prerequisites: [],
     anchoringPhenomenon: 'Look outside — is it sunny or rainy today?',
+    languages: ['en', 'zu'],
+  },
+
+  // ── Age 4 (A4) — "Hands-on explore": distinct topics, one per strand ─────
+  // Bridges Age-3 sensory play and Age-5 predict-test. Tap-and-hear pattern.
+
+  {
+    id: 'll.animal_babies',
+    strand: 'life_and_living',
+    topic: 'Animal Babies',
+    title: 'Every animal was a baby once!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A4',
+    prerequisites: [],
+    anchoringPhenomenon: 'What do you call a baby dog?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'mm.floats',
+    strand: 'matter_and_materials',
+    topic: 'Float or Sink?',
+    title: 'Some things float and some things sink!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A4',
+    prerequisites: [],
+    anchoringPhenomenon: 'Does a leaf stay on top of the water, or go down?',
+    languages: ['en', 'zu'],
+  },
+  {
+    id: 'eb.in_sky',
+    strand: 'earth_and_beyond',
+    topic: 'In the Sky',
+    title: 'So many things to see in the sky!',
+    capsRef: 'NCF Knowledge & Understanding of the World / CAPS Foundation Phase',
+    band: 'A4',
+    prerequisites: [],
+    anchoringPhenomenon: 'What can you see when you look up at the sky?',
     languages: ['en', 'zu'],
   },
 
@@ -617,11 +654,17 @@ export const ACTIVITIES: LearningActivity[] = [
   { id: 'eb.tides.c12.do',   objectiveId: 'eb.tides',                  band: 'C12', fiveEStage: 'explore', kind: 'simulation', generatorKey: 'tides',          config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'Look up a tide table for a coastal town.' },
   { id: 'eb.gal.c12.do',     objectiveId: 'eb.galaxies',               band: 'C12', fiveEStage: 'explore', kind: 'game',       generatorKey: 'galaxies',       config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 720, caregiverPrompt: 'On a dark night, look for the Milky Way band.' },
 
-  // ── Ages 3–4 activities (A3 + A4 share same components) ─────────────────
+  // ── Age 3 activities (A3) ────────────────────────────────────────────────
 
   { id: 'll.mb.a.engage',  objectiveId: 'll.my_body',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'tapBodyParts', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Touch your nose! Touch mummy\'s nose!' },
   { id: 'mm.hs.a.engage',  objectiveId: 'mm.hard_soft', band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'sortTwoBoxes', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Find 1 hard thing and 1 soft thing in your room!' },
   { id: 'eb.wx.a.engage',  objectiveId: 'eb.weather',   band: 'A3', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'weatherExplore', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Look outside — is it sunny, cloudy, or rainy?' },
+
+  // ── Age 4 activities (A4) — distinct tap-and-hear topics ─────────────────
+
+  { id: 'll.ab.a4.engage', objectiveId: 'll.animal_babies', band: 'A4', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'animalBabies',  config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Look at animal pictures together. Name the baby and its mummy!' },
+  { id: 'mm.fl.a4.engage', objectiveId: 'mm.floats',        band: 'A4', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'floatSinkPlay', config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'At bath time, drop a spoon and a leaf. Which one floats?' },
+  { id: 'eb.sky.a4.engage', objectiveId: 'eb.in_sky',       band: 'A4', fiveEStage: 'engage', kind: 'sensory_play', generatorKey: 'inTheSky',      config: {}, assets: { audioByLang: { en: [], zu: [] } }, estimatedSeconds: 90, caregiverPrompt: 'Tonight, look up. Can you find the moon and a star?' },
 
   // ── mm.solids_liquids_gases  ·  Band A ───────────────────────────────────
 

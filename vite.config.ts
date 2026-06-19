@@ -15,6 +15,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: false,
       manifest: {
+        // Explicit, unique app identity — never depends on the install origin.
+        // Prevents PWA collisions when sibling People's Home apps are ever
+        // installed from the same origin (e.g. localhost during testing).
+        id: '/science-sprouts/',
         name: 'Science Sprouts',
         short_name: 'Science Sprouts',
         description:

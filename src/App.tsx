@@ -42,10 +42,15 @@ const FloatSinkEvaluate = lazy(() => import('./activities/FloatSinkEvaluate'));
 const FloatSinkBandA    = lazy(() => import('./activities/FloatSinkBandA'));
 const FloatSinkBandC    = lazy(() => import('./activities/FloatSinkBandC'));
 
-// Ages 3–4 topics (A3 + A4 share same components)
+// Age 3 topics (A3)
 const MyBodyActivity   = lazy(() => import('./activities/MyBodyActivity'));
 const HardSoftActivity = lazy(() => import('./activities/HardSoftActivity'));
 const WeatherActivity  = lazy(() => import('./activities/WeatherActivity'));
+
+// Age 4 topics (A4 — distinct tap-and-hear topics, one per strand)
+const AnimalBabiesActivity  = lazy(() => import('./activities/AnimalBabiesActivity'));
+const FloatSinkPlayActivity = lazy(() => import('./activities/FloatSinkPlayActivity'));
+const InTheSkyActivity      = lazy(() => import('./activities/InTheSkyActivity'));
 
 // Age 6 topics (B6 — Predict → Test & Record → Badge)
 const FloatSinkRecordActivity       = lazy(() => import('./activities/FloatSinkRecordActivity'));
@@ -514,18 +519,26 @@ const ALL_BAND_ACTIVITIES: Record<string, Partial<Record<Band, ActivityDef[]>>> 
     A5: [{ id: 'eb.we.a5.engage', label: 'Water Everywhere', fiveE: '① EXPLORE', voiceHint: 'Find water in rain, rivers, and taps' }],
   },
 
-  // Ages 3–4 — same activities for both A3 and A4
+  // Age 3 (A3) — sensory play
   'll.my_body': {
     A3: [{ id: 'll.mb.a.engage', label: 'My Body!',   fiveE: '① EXPLORE', voiceHint: 'Tap 6 body parts — head, eyes, mouth, hands, tummy, feet' }],
-    A4: [{ id: 'll.mb.a.engage', label: 'My Body!',   fiveE: '① EXPLORE', voiceHint: 'Tap 6 body parts — head, eyes, mouth, hands, tummy, feet' }],
   },
   'mm.hard_soft': {
     A3: [{ id: 'mm.hs.a.engage', label: 'Hard or Soft?', fiveE: '① EXPLORE', voiceHint: 'Sort 4 things into hard and soft boxes' }],
-    A4: [{ id: 'mm.hs.a.engage', label: 'Hard or Soft?', fiveE: '① EXPLORE', voiceHint: 'Sort 4 things into hard and soft boxes' }],
   },
   'eb.weather': {
     A3: [{ id: 'eb.wx.a.engage', label: 'Weather!',    fiveE: '① EXPLORE', voiceHint: 'Explore sunny, cloudy, and rainy weather' }],
-    A4: [{ id: 'eb.wx.a.engage', label: 'Weather!',    fiveE: '① EXPLORE', voiceHint: 'Explore sunny, cloudy, and rainy weather' }],
+  },
+
+  // Age 4 (A4) — distinct "hands-on explore" topics (own content, not Age-3's)
+  'll.animal_babies': {
+    A4: [{ id: 'll.ab.a4.engage', label: 'Animal Babies', fiveE: '① EXPLORE', voiceHint: 'Tap each baby animal to hear its name' }],
+  },
+  'mm.floats': {
+    A4: [{ id: 'mm.fl.a4.engage', label: 'Float or Sink?', fiveE: '① EXPLORE', voiceHint: 'Tap things to see what floats and what sinks' }],
+  },
+  'eb.in_sky': {
+    A4: [{ id: 'eb.sky.a4.engage', label: 'In the Sky', fiveE: '① EXPLORE', voiceHint: 'Tap what you can see up in the sky' }],
   },
 
   'll.parts_of_plant': {
@@ -594,6 +607,9 @@ const ACTIVITY_REGISTRY: Record<
   'll.mb.a.engage':          MyBodyActivity,
   'mm.hs.a.engage':          HardSoftActivity,
   'eb.wx.a.engage':          WeatherActivity,
+  'll.ab.a4.engage':         AnimalBabiesActivity,
+  'mm.fl.a4.engage':         FloatSinkPlayActivity,
+  'eb.sky.a4.engage':        InTheSkyActivity,
   'mm.abs.b7.do':            AbsorbentMaterialsActivity,
   'ec.mag.b7.do':            MagnetsActivity,
   'll.gro.b7.do':            GrowthActivity,

@@ -1,4 +1,4 @@
-// Activity: Hard vs Soft — Ages 3–4 (Band A3 + A4)
+// Activity: Hard vs Soft — Age 3 (Band A3)
 // 3S Pattern: See → Do → Caregiver Card
 //
 // See  (5s):  "The spoon is HARD! The pillow is SOFT!"
