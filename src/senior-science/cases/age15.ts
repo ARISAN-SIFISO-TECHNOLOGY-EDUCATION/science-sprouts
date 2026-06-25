@@ -114,7 +114,61 @@ const LIFE_L3: CaseDef[] = [
     tip: 'More biodiversity → more resilient ecosystems.' },
 ];
 
+// ── Forces & Motion ───────────────────────────────────────────────────────────
+const FORCE_L1: CaseDef[] = [
+  { q: 'Speed tells you…',
+    c: 'How fast something moves', w: ['How heavy something is', 'Which way is north', 'How hot something is'],
+    s: ['Speed measures how much distance is covered in a time.', 'It is about how fast, not how heavy.'],
+    h: ['Distance over time.'], mistake: 'Confusing speed with weight or direction.',
+    tip: 'Speed = distance ÷ time.' },
+  { q: 'A car travels 100 km in 2 hours. Its average speed is…',
+    c: '50 km/h', w: ['200 km/h', '102 km/h', '25 km/h'],
+    s: ['Speed = distance ÷ time.', '100 km ÷ 2 h = 50 km/h.'],
+    h: ['Divide distance by time.'], mistake: 'Multiplying instead of dividing.',
+    tip: 'Average speed = total distance ÷ total time.', m: 4, calc: true },
+  { q: 'What is the difference between speed and velocity?',
+    c: 'Velocity includes the direction; speed does not', w: ['They are exactly the same', 'Speed includes direction; velocity does not', 'Velocity is always smaller'],
+    s: ['Speed is just how fast (e.g. 50 km/h).', 'Velocity is speed in a direction (e.g. 50 km/h north).'],
+    h: ['One of them has a direction.'], mistake: 'Treating speed and velocity as identical.',
+    tip: 'Velocity = speed with a direction.' },
+];
+const FORCE_L2: CaseDef[] = [
+  { q: 'A force is best described as a…',
+    c: 'Push or a pull', w: ['Type of energy', 'Kind of metal', 'Unit of time'],
+    s: ['A force acts on an object.', 'It is a push or a pull.'],
+    h: ['What you do to open a door.'], mistake: 'Calling a force a type of energy.',
+    tip: 'A force is a push or a pull (measured in newtons).' },
+  { q: 'When the forces on an object are balanced, the object…',
+    c: 'Stays still, or keeps moving at a steady speed', w: ['Always speeds up', 'Always stops at once', 'Spins in a circle'],
+    s: ['Balanced forces cancel out — no net force.', 'So motion does not change.'],
+    h: ['No net force means no change in motion.'], mistake: 'Thinking balanced forces always mean “stopped”.',
+    tip: 'Balanced forces → motion stays the same.' },
+  { q: 'What force slows a sliding box and turns its motion into heat?',
+    c: 'Friction', w: ['Gravity', 'Magnetism', 'Upthrust'],
+    s: ['Friction acts between surfaces that rub.', 'It opposes motion and produces heat.'],
+    h: ['Rub your hands together.'], mistake: 'Confusing friction with gravity.',
+    tip: 'Friction opposes motion and makes heat.' },
+];
+const FORCE_L3: CaseDef[] = [
+  { q: 'What is the difference between mass and weight?',
+    c: 'Mass is the amount of matter; weight is the pull of gravity on it', w: ['They are the same thing', 'Weight is the amount of matter', 'Mass is the pull of gravity'],
+    s: ['Mass (kg) is how much matter is in an object.', 'Weight (N) is the gravitational force on that mass.'],
+    h: ['One changes on the Moon, one does not.'], mistake: 'Using “mass” and “weight” as the same word.',
+    tip: 'Mass = matter (kg); weight = gravity’s pull (N).' },
+  { q: 'An astronaut’s MASS on the Moon compared with on Earth is…',
+    c: 'The same', w: ['Much less', 'Much more', 'Zero'],
+    s: ['Mass is the amount of matter — it does not change with location.', 'Only weight changes, because Moon gravity is weaker.'],
+    h: ['Matter doesn’t vanish in space.'], mistake: 'Thinking mass shrinks on the Moon (that’s weight).',
+    tip: 'Mass is constant; weight depends on gravity.' },
+  { q: 'Why do dropped objects fall to the ground?',
+    c: 'Gravity pulls them toward the Earth', w: ['Air pushes them down', 'They are magnetic', 'They have no energy'],
+    s: ['Earth’s gravity attracts all objects.', 'So a released object accelerates downward.'],
+    h: ['What keeps you on the ground?'], mistake: 'Attributing falling to air or magnetism.',
+    tip: 'Gravity pulls objects toward the Earth.' },
+];
+
 export const AGE15_LEVELS: Record<string, TopicLevels> = {
   'age15-matter':  { 1: lvl(MATTER_L1), 2: lvl(MATTER_L2), 3: lvl(MATTER_L3) },
   'age15-lifesci': { 1: lvl(LIFE_L1),   2: lvl(LIFE_L2),   3: lvl(LIFE_L3) },
+  'age15-forces':  { 1: lvl(FORCE_L1),  2: lvl(FORCE_L2),  3: lvl(FORCE_L3) },
 };

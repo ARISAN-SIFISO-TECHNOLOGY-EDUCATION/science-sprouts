@@ -57,6 +57,7 @@ export const SCIENCE_AGES: ScienceAgeGroup[] = [
     topics: [
       { id: 'age15-matter',  title: 'Matter & Classification', subtitle: 'Pure substances, mixtures and states', icon: '🔬', levels: LEVELS, capsRef: 'CAPS Physical Sciences FET: Matter & Materials' },
       { id: 'age15-lifesci', title: 'Cells & Biodiversity',    subtitle: 'Organelles and the variety of life',   icon: '🌿', levels: LEVELS, capsRef: 'CAPS Life Sciences FET: Diversity, Change & Continuity' },
+      { id: 'age15-forces',  title: 'Forces & Motion',         subtitle: 'Speed, forces, gravity and friction',   icon: '🏃', levels: LEVELS, capsRef: 'CAPS Physical Sciences FET: Mechanics' },
     ],
   },
   {
@@ -67,6 +68,7 @@ export const SCIENCE_AGES: ScienceAgeGroup[] = [
     topics: [
       { id: 'age16-bonding',  title: 'Chemical Change & Bonding', subtitle: 'Bonds, equations, acids and bases',  icon: '⚗️', levels: LEVELS, capsRef: 'CAPS Physical Sciences FET: Chemical Change' },
       { id: 'age16-lifeproc', title: 'Life Processes',            subtitle: 'Photosynthesis, respiration, balance', icon: '🌱', levels: LEVELS, capsRef: 'CAPS Life Sciences FET: Life Processes' },
+      { id: 'age16-earth',    title: 'Earth & the Universe',      subtitle: 'Our planet, the solar system, the cosmos', icon: '🌍', levels: LEVELS, capsRef: 'CAPS Natural Sciences: Planet Earth & Beyond' },
     ],
   },
   {
@@ -77,6 +79,7 @@ export const SCIENCE_AGES: ScienceAgeGroup[] = [
     topics: [
       { id: 'age17-rates',    title: 'Reactions, Rates & Energy', subtitle: 'What speeds reactions and stores energy', icon: '🔥', levels: LEVELS, capsRef: 'CAPS Physical Sciences FET: Chemical Change & Energy' },
       { id: 'age17-genetics', title: 'Genetics & Evolution',      subtitle: 'Inheritance and how life changes',        icon: '🧬', levels: LEVELS, capsRef: 'CAPS Life Sciences FET: Genetics & Evolution' },
+      { id: 'age17-ecology',  title: 'Ecology & Human Impact',    subtitle: 'Ecosystems, sustainability and our footprint', icon: '♻️', levels: LEVELS, capsRef: 'CAPS Life Sciences FET: Environmental Studies' },
     ],
   },
 ];

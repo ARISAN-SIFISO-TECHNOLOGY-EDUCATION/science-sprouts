@@ -114,7 +114,61 @@ const GENE_L3: CaseDef[] = [
     tip: 'Beneficial traits spread over generations.' },
 ];
 
+// ── Ecology & Human Impact ────────────────────────────────────────────────────
+const ECO_L1: CaseDef[] = [
+  { q: 'In a food chain, the energy originally comes from…',
+    c: 'The Sun', w: ['The soil', 'Predators', 'The Moon'],
+    s: ['Plants capture sunlight in photosynthesis.', 'That energy then flows along the food chain.'],
+    h: ['Where do plants get their energy?'], mistake: 'Thinking energy starts with animals or soil.',
+    tip: 'Almost all ecosystem energy starts at the Sun.' },
+  { q: 'Organisms that make their own food, like plants, are called…',
+    c: 'Producers', w: ['Consumers', 'Decomposers', 'Predators'],
+    s: ['Producers make food by photosynthesis.', 'Consumers eat other organisms.'],
+    h: ['They “produce” food from sunlight.'], mistake: 'Confusing producers and consumers.',
+    tip: 'Producers make food; consumers eat it.' },
+  { q: 'What do decomposers (like fungi and bacteria) do?',
+    c: 'Break down dead matter and recycle nutrients', w: ['Hunt large animals', 'Make oxygen from rock', 'Produce sunlight'],
+    s: ['Decomposers break down dead plants and animals.', 'This returns nutrients to the soil.'],
+    h: ['They clean up and recycle.'], mistake: 'Overlooking the recycling role of decomposers.',
+    tip: 'Decomposers recycle nutrients back into the ecosystem.' },
+];
+const ECO_L2: CaseDef[] = [
+  { q: 'Removing one species from an ecosystem can…',
+    c: 'Affect many other species connected to it', w: ['Never affect anything else', 'Only affect that one species', 'Make all others stronger'],
+    s: ['Species are linked through food webs.', 'Losing one can ripple through the whole web.'],
+    h: ['Think how a food web is connected.'], mistake: 'Assuming species are independent.',
+    tip: 'Ecosystems are interconnected — one loss spreads.' },
+  { q: 'Which human activity most directly causes habitat loss?',
+    c: 'Clearing land for farming and building', w: ['Watching wildlife', 'Planting indigenous trees', 'Recycling paper'],
+    s: ['Habitats shrink when land is cleared.', 'Farming and building remove natural spaces.'],
+    h: ['What replaces a forest or grassland?'], mistake: 'Confusing helpful actions with harmful ones.',
+    tip: 'Land clearing is a leading cause of habitat loss.' },
+  { q: 'Burning coal and petrol adds which gas linked to climate change?',
+    c: 'Carbon dioxide', w: ['Oxygen', 'Nitrogen', 'Helium'],
+    s: ['Burning fossil fuels releases carbon dioxide.', 'It traps heat and contributes to climate change.'],
+    h: ['The gas you also breathe out.'], mistake: 'Thinking burning fuel releases oxygen.',
+    tip: 'Fossil fuels release carbon dioxide, a greenhouse gas.' },
+];
+const ECO_L3: CaseDef[] = [
+  { q: 'Why is saving water especially important in South Africa?',
+    c: 'Much of the country is dry and water is scarce', w: ['Water is unlimited here', 'Rivers never run dry', 'Rain falls every day'],
+    s: ['South Africa is a water-scarce country.', 'Many areas face drought, so water must be used carefully.'],
+    h: ['Think of dry seasons and droughts.'], mistake: 'Assuming water is unlimited.',
+    tip: 'Water is a scarce resource in South Africa — use it wisely.' },
+  { q: 'Which is a sustainable way to use a natural resource?',
+    c: 'Using it no faster than it can be replaced', w: ['Using as much as possible now', 'Wasting what isn’t needed', 'Replacing it with plastic'],
+    s: ['Sustainable use keeps a resource available for the future.', 'That means not using it faster than it renews.'],
+    h: ['Leave enough for tomorrow.'], mistake: 'Treating “sustainable” as “use it all now”.',
+    tip: 'Sustainable = use no faster than nature replaces it.' },
+  { q: 'Which action best protects biodiversity?',
+    c: 'Protecting natural habitats and indigenous species', w: ['Draining wetlands for parking', 'Introducing invasive species', 'Removing all predators'],
+    s: ['Biodiversity depends on healthy habitats.', 'Protecting habitats and native species keeps ecosystems strong.'],
+    h: ['Which choice helps nature, not harms it?'], mistake: 'Thinking removing predators or wetlands helps.',
+    tip: 'Protecting habitats safeguards biodiversity.' },
+];
+
 export const AGE17_LEVELS: Record<string, TopicLevels> = {
   'age17-rates':    { 1: lvl(RATE_L1), 2: lvl(RATE_L2), 3: lvl(RATE_L3) },
   'age17-genetics': { 1: lvl(GENE_L1), 2: lvl(GENE_L2), 3: lvl(GENE_L3) },
+  'age17-ecology':  { 1: lvl(ECO_L1),  2: lvl(ECO_L2),  3: lvl(ECO_L3) },
 };

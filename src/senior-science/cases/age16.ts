@@ -114,7 +114,61 @@ const PROC_L3: CaseDef[] = [
     tip: 'Stomata = gas exchange pores in leaves.' },
 ];
 
+// ── Earth & the Universe ──────────────────────────────────────────────────────
+const EARTH_L1: CaseDef[] = [
+  { q: 'The Earth’s thin outer rocky layer is called the…',
+    c: 'Crust', w: ['Core', 'Mantle', 'Atmosphere'],
+    s: ['Earth has layers: crust, mantle, core.', 'The crust is the thin solid layer we live on.'],
+    h: ['The layer at the surface.'], mistake: 'Confusing the crust with the core (the centre).',
+    tip: 'Crust = the surface layer; core = the centre.' },
+  { q: 'What causes most earthquakes?',
+    c: 'Movement of the Earth’s tectonic plates', w: ['The Moon’s light', 'Strong winds', 'Ocean tides'],
+    s: ['The crust is broken into moving plates.', 'When they slip past each other the ground shakes.'],
+    h: ['Think of the cracked “shell” of the Earth.'], mistake: 'Blaming weather for earthquakes.',
+    tip: 'Earthquakes come from shifting tectonic plates.' },
+  { q: 'The very centre of the Earth (the core) is mostly…',
+    c: 'Hot metal (iron and nickel)', w: ['Solid rock only', 'Water', 'Empty space'],
+    s: ['The core is extremely hot and dense.', 'It is made mostly of iron and nickel.'],
+    h: ['Very hot and metallic.'], mistake: 'Imagining the core is hollow or watery.',
+    tip: 'Earth’s core is hot iron and nickel.' },
+];
+const EARTH_L2: CaseDef[] = [
+  { q: 'What keeps the planets in orbit around the Sun?',
+    c: 'The Sun’s gravity', w: ['The Sun’s light', 'Magnetism', 'The solar wind'],
+    s: ['Gravity is an attractive force between masses.', 'The Sun’s huge mass holds the planets in orbit.'],
+    h: ['The same force that makes things fall.'], mistake: 'Thinking sunlight, not gravity, holds orbits.',
+    tip: 'Gravity holds the planets in orbit.' },
+  { q: 'Which lists planets correctly from the Sun outward?',
+    c: 'Mercury, Venus, Earth, Mars', w: ['Earth, Venus, Mercury, Mars', 'Mars, Earth, Venus, Mercury', 'Venus, Mercury, Earth, Mars'],
+    s: ['Closest to the Sun is Mercury, then Venus, Earth, Mars.', 'They orbit at increasing distances.'],
+    h: ['Start with the planet nearest the Sun.'], mistake: 'Placing Earth or Mars before Mercury/Venus.',
+    tip: 'Order out: Mercury, Venus, Earth, Mars…' },
+  { q: 'A year is the time the Earth takes to…',
+    c: 'Orbit once around the Sun', w: ['Spin once on its axis', 'Orbit the Moon', 'Cross the galaxy'],
+    s: ['One spin on its axis = a day.', 'One full orbit of the Sun = a year.'],
+    h: ['Day vs year — which is the orbit?'], mistake: 'Confusing a day (spin) with a year (orbit).',
+    tip: 'A year = one orbit of the Sun; a day = one spin.' },
+];
+const EARTH_L3: CaseDef[] = [
+  { q: 'Our solar system is part of a huge group of stars called…',
+    c: 'The Milky Way galaxy', w: ['The Sun', 'A constellation', 'The Moon'],
+    s: ['A galaxy is a vast collection of stars.', 'Ours is the Milky Way.'],
+    h: ['Billions of stars together.'], mistake: 'Calling the solar system a galaxy.',
+    tip: 'We live in the Milky Way galaxy.' },
+  { q: 'Most scientists explain the universe’s beginning with the…',
+    c: 'Big Bang theory', w: ['Theory of gravity', 'Theory of evolution', 'Water cycle'],
+    s: ['Evidence shows the universe is expanding.', 'It began from a hot, dense state — the Big Bang.'],
+    h: ['It describes the start of everything.'], mistake: 'Mixing up the Big Bang with evolution (life).',
+    tip: 'The Big Bang theory describes the universe’s start.' },
+  { q: 'Light from distant stars takes years to reach us, so we see those stars…',
+    c: 'As they were in the past', w: ['Exactly as they are now', 'In the future', 'Only in colour'],
+    s: ['Light travels fast but space is vast.', 'By the time it arrives, time has passed — we see old light.'],
+    h: ['The light is a delayed message.'], mistake: 'Assuming we see distant stars in real time.',
+    tip: 'Looking far into space is looking back in time.' },
+];
+
 export const AGE16_LEVELS: Record<string, TopicLevels> = {
-  'age16-bonding':  { 1: lvl(BOND_L1), 2: lvl(BOND_L2), 3: lvl(BOND_L3) },
-  'age16-lifeproc': { 1: lvl(PROC_L1), 2: lvl(PROC_L2), 3: lvl(PROC_L3) },
+  'age16-bonding':  { 1: lvl(BOND_L1),  2: lvl(BOND_L2),  3: lvl(BOND_L3) },
+  'age16-lifeproc': { 1: lvl(PROC_L1),  2: lvl(PROC_L2),  3: lvl(PROC_L3) },
+  'age16-earth':    { 1: lvl(EARTH_L1), 2: lvl(EARTH_L2), 3: lvl(EARTH_L3) },
 };
