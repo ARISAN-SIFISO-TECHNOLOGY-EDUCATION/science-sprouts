@@ -9,10 +9,15 @@ import { ChevronLeft } from 'lucide-react';
 import { Band } from '../types';
 import { BAND_META } from '../curriculum';
 import { cn } from '../lib/utils';
+import { SCIENCE_AGES } from '../senior-science/curriculum-science';
 
 interface BandSelectorProps {
   currentBand?: Band;
   onSelect: (band: Band) => void;
+  /** Teen tier (ages 13–17). When omitted, the teen section is hidden. */
+  onSelectTeen?: (age: number) => void;
+  /** The currently active teen age, if the learner is in the Science Academy. */
+  currentTeenAge?: number | null;
   onBack?: () => void;
 }
 
@@ -161,7 +166,7 @@ const YOUNG_ACCENT: Record<'A3' | 'A4' | 'A5', {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function BandSelector({ currentBand, onSelect, onBack }: BandSelectorProps) {
+export default function BandSelector({ currentBand, onSelect, onSelectTeen, currentTeenAge, onBack }: BandSelectorProps) {
   const isYoung = currentBand === 'A3' || currentBand === 'A4' || currentBand === 'A5';
 
   return (
@@ -179,7 +184,7 @@ export default function BandSelector({ currentBand, onSelect, onBack }: BandSele
         <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-2xl shadow-[0_4px_0_#16A34A] flex-shrink-0">🌿</div>
         <div>
           <h1 className="font-display font-black text-xl text-gray-800 leading-tight">Science Sprouts</h1>
-          <p className="text-xs font-bold text-gray-400 tracking-wide">Ages 3 – 12</p>
+          <p className="text-xs font-bold text-gray-400 tracking-wide">Ages 3 – 17</p>
         </div>
       </div>
 
@@ -301,6 +306,49 @@ export default function BandSelector({ currentBand, onSelect, onBack }: BandSele
           );
         })}
       </div>
+
+      {/* ── Teens · Ages 13–17 — the Science Academy (dark) ──────────────── */}
+      {onSelectTeen && (
+        <div className="mt-5 rounded-3xl bg-slate-950 border border-slate-800 p-4 shadow-sm">
+          <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">
+            🔬 The Science Academy — Ages 13–17
+          </p>
+          <p className="text-xs text-slate-400 mb-3">
+            Exam-style science · Pass each level at 80% to unlock the next
+          </p>
+          <div className="grid grid-cols-1 gap-2.5">
+            {SCIENCE_AGES.map((g, i) => {
+              const active = currentTeenAge === g.age;
+              return (
+                <motion.button
+                  key={g.age}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05 }}
+                  onClick={() => onSelectTeen(g.age)}
+                  className={cn(
+                    'w-full text-left p-3 rounded-2xl border transition-all active:scale-[0.99] flex items-center gap-3',
+                    active
+                      ? 'bg-indigo-500/15 border-indigo-500'
+                      : 'bg-slate-900 border-slate-700 hover:border-indigo-500',
+                  )}
+                >
+                  <span className="text-2xl flex-shrink-0">{g.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="font-display font-black text-slate-100 leading-tight">{g.school}</p>
+                      <span className="text-[10px] font-black text-indigo-300">Age {g.age}</span>
+                      {active && <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-500 text-white">SELECTED</span>}
+                    </div>
+                    <p className="text-xs text-slate-400 truncate">{g.tagline}</p>
+                  </div>
+                  <ChevronLeft className="w-4 h-4 text-slate-500 rotate-180 flex-shrink-0" />
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <p className="text-[10px] text-gray-300 text-center mt-6 font-medium tracking-wide">
         Aligned to South African CAPS curriculum &amp; NCF Birth-to-Four

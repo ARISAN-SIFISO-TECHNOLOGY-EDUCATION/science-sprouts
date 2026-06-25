@@ -28,6 +28,7 @@ import NavBar, { Tab } from './components/NavBar';
 import About        from './components/About';
 import Progress     from './components/Progress';
 import HomeLanding  from './components/HomeLanding';
+import ScienceAcademy from './components/ScienceAcademy';
 
 // ── Activity imports (lazy) ─────────────────────────────────────────────────
 // Each activity is code-split with React.lazy so the phone only downloads an
@@ -878,6 +879,10 @@ const BAND_UI: Record<Band, {
 // (`activeAct`) and the first-run band picker are full-screen takeovers with no nav.
 
 const BAND_CHOSEN_KEY = 'bandExplicitlyChosen';
+// The teen Science Academy (ages 13–17) selection. Kept separate from the kids'
+// `profile.selectedBand` (3–12) so the kids' Band union and its typed records
+// stay untouched. `null`/absent = the learner is in the kids' tier.
+const SCIENCE_AGE_KEY = 'sprouts-science-age';
 
 // ── Suspense fallback while a lazy activity loads ──────────────────────────────
 // Shown only for the brief moment a code-split activity is fetched (instant
@@ -909,12 +914,16 @@ export default function App() {
   const [selectedObjective, setSelectedObjective] = useState<string | null>(null);
   const [showDashboard, setShowDashboard]   = useState(false);
   const [aboutView, setAboutView]           = useState<'about' | 'privacy'>('about');
+  // Teen Science Academy selection (13–17); null = kids' tier.
+  const [teenAge, setTeenAge]               = useState<number | null>(null);
 
   // Load profile from IndexedDB
   useEffect(() => {
     getProfile().then(p => {
       setProfile(p);
       setBandChosen(!!localStorage.getItem(BAND_CHOSEN_KEY));
+      const savedTeen = Number(localStorage.getItem(SCIENCE_AGE_KEY));
+      if (savedTeen >= 13 && savedTeen <= 17) setTeenAge(savedTeen);
       setLoading(false);
     });
   }, []);
@@ -943,9 +952,23 @@ export default function App() {
     await saveProfile(updated);
     setProfile(updated);
     localStorage.setItem(BAND_CHOSEN_KEY, '1');
+    localStorage.removeItem(SCIENCE_AGE_KEY);   // leaving the teen tier
+    setTeenAge(null);
     setBandChosen(true);
     setSelectedObjective(null);  // return to topic list for new band
     setHomeStarted(true);        // jump straight into the chosen age's topics
+    setTab('home');
+  }
+
+  // Teen Science Academy (13–17). Tracked separately from the kids' band so the
+  // kids' Band union and its typed records stay untouched.
+  function handleTeenSelect(age: number) {
+    localStorage.setItem(SCIENCE_AGE_KEY, String(age));
+    localStorage.setItem(BAND_CHOSEN_KEY, '1');
+    setTeenAge(age);
+    setBandChosen(true);
+    setSelectedObjective(null);
+    setHomeStarted(true);
     setTab('home');
   }
 
@@ -1022,7 +1045,14 @@ export default function App() {
   // ── First run — force band selection (full screen, no nav) ──────────────────
 
   if (!bandChosen) {
-    return <BandSelector currentBand={profile.selectedBand} onSelect={handleBandSelect} />;
+    return (
+      <BandSelector
+        currentBand={profile.selectedBand}
+        onSelect={handleBandSelect}
+        onSelectTeen={handleTeenSelect}
+        currentTeenAge={teenAge}
+      />
+    );
   }
 
   // ── Activity — full-screen takeover, no nav ─────────────────────────────────
@@ -1039,6 +1069,39 @@ export default function App() {
         </Suspense>
       );
     }
+  }
+
+  // ── Teen Science Academy (13–17) — dark tier, its own surface ───────────────
+  // Short-circuits the kids' bright shell entirely. Keeps the NavBar so teens
+  // can switch age (Ages), read About, etc.
+  if (teenAge !== null) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <main className="relative min-h-screen max-w-lg mx-auto bg-slate-950 shadow-xl overflow-x-hidden">
+          <AnimatePresence mode="wait">
+            {tab === 'ages' ? (
+              <BandSelector
+                key="teen-ages"
+                currentBand={profile.selectedBand}
+                currentTeenAge={teenAge}
+                onSelect={handleBandSelect}
+                onSelectTeen={handleTeenSelect}
+              />
+            ) : tab === 'about' ? (
+              <About key="teen-about" view={aboutView} onShowPrivacy={openPrivacy} onBackToAbout={() => setAboutView('about')} />
+            ) : (
+              <ScienceAcademy key={`academy-${teenAge}`} age={teenAge} onChangeAge={() => navigate('ages')} />
+            )}
+          </AnimatePresence>
+        </main>
+        <NavBar active={tab} onNavigate={navigate} />
+        <AnimatePresence>
+          {showDashboard && (
+            <Dashboard profile={profile} onUpdate={setProfile} onClose={() => setShowDashboard(false)} />
+          )}
+        </AnimatePresence>
+      </div>
+    );
   }
 
   // ── Shell — persistent nav wraps every tab; activities/first-run are takeovers ─
@@ -1069,7 +1132,15 @@ export default function App() {
   // ── Ages / Progress / About tabs ────────────────────────────────────────────
 
   if (tab === 'ages')
-    return shell(<BandSelector key="ages" currentBand={band} onSelect={handleBandSelect} />);
+    return shell(
+      <BandSelector
+        key="ages"
+        currentBand={band}
+        currentTeenAge={teenAge}
+        onSelect={handleBandSelect}
+        onSelectTeen={handleTeenSelect}
+      />,
+    );
 
   if (tab === 'progress')
     return shell(<Progress key="progress" profile={profile} onBrowse={() => navigate('home')} />);
