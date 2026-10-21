@@ -13,7 +13,7 @@ mkdirSync(OUT, { recursive: true });
 
 const APP_URL = 'http://localhost:3001';
 const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const VIEWPORT = { width: 393, height: 698 }; // ~9:16 phone; ×2 DSR → 786×1396 PNG
+const VIEWPORT = { width: 540, height: 960 }; // 9:16; ×2 DSR → 1080×1920 PNG (phone + tablet eligible)
 
 const errors = [];
 
